@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2ecea565bc7f6f6257835bd810ac27e1cdbbb75dd8d4166994f0ab266d954e56
+-- hash: 70dcd5275b2788cf7bb17fac643ddf3cc353e4463c24c782493147301e940a8d
 
 name:           ex06-edit-distance
 version:        0.1.0.0
@@ -21,10 +21,12 @@ extra-source-files:
 
 executable ex06-edit-distance
   main-is: Main.hs
+  ghc-options: -Wall -Werror
   hs-source-dirs:
       src
   build-depends:
       base >=4.7 && <5
+    , text
   other-modules:
       Paths_ex06_edit_distance
   default-language: Haskell2010
