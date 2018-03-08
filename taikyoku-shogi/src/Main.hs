@@ -50,10 +50,11 @@ instance IsString JapaneseName where
 data EnglishName = EnglishName
   { name :: Maybe Text
   , weapon :: Maybe Weapon
+  , movement :: Maybe Movement
   } deriving (Eq, Show, Generic)
 
 mkEnglishName :: Text -> EnglishName
-mkEnglishName x = EnglishName (Just x) Nothing
+mkEnglishName x = EnglishName (Just x) Nothing Nothing
 
 data Weapon
   = Sword
@@ -63,6 +64,14 @@ data Weapon
 
 parseWeapon :: Text -> Maybe Weapon
 parseWeapon = readMay . T.unpack
+
+data Movement
+  = Running
+  | Dashing
+  deriving (Eq, Show, Generic, Read)
+
+parseMovement :: Text -> Maybe Movement
+parseMovement = readMay . T.unpack
 
 instance IsString EnglishName where
   fromString s = mkEnglishName (T.pack s)
@@ -85,14 +94,14 @@ renderTable = T.unlines . map renderPromotion
 renderPromotion :: Promotion -> Text
 renderPromotion (Promotion {..}) =
   sformat
-    ((r 20 ' ' %. st) % " => " % (r 20 ' ' %. st))
+    ((r 35 ' ' %. st) % " => " % (r 20 ' ' %. st))
     (renderPair from)
     (renderPair to)
 
 renderPair :: NamePair -> Text
 renderPair (NPair {..}) =
   sformat
-    ((r 9 ' ' %. st) % " " % (r 18 ' ' %. st))
+    ((r 9 ' ' %. st) % " " % (r 30 ' ' %. st))
     (renderJpName jpName)
     (renderEnName enName)
 
@@ -100,9 +109,13 @@ renderJpName :: JapaneseName -> Text
 renderJpName JapaneseName {..} = renderName name
 
 renderEnName :: EnglishName -> Text
-renderEnName EnglishName {..} = features <> " " <> renderName name
+renderEnName EnglishName {..} = features <> renderName name
   where
-    features = T.concat (List.intersperse " " (catMaybes [fmap sh weapon]))
+    features =
+      if features' == ""
+        then ""
+        else features' <> " "
+    features' = T.concat (List.intersperse " " (catMaybes [fmap sh weapon, fmap sh movement]))
     sh x = "[" <> tshow x <> "]"
 
 renderName :: IsString p => Maybe p -> p
@@ -136,7 +149,7 @@ initialTable =
   ]
   where
     jpNone = JapaneseName Nothing
-    enNone = EnglishName Nothing Nothing
+    enNone = EnglishName Nothing Nothing Nothing
 
 data Rule = Rule
   { name :: Text
@@ -220,7 +233,10 @@ ruleParseFeatures = map parsePromotion
     parseEN en@EnglishName {name = Nothing, ..} = en
     parseEN en@EnglishName {name = Just n, ..} =
       let wrds = T.words n
-      in en {weapon = listToMaybe (catMaybes (map parseWeapon wrds))}
+      in en
+         { weapon = listToMaybe (catMaybes (map parseWeapon wrds))
+         , movement = listToMaybe (catMaybes (map parseMovement wrds))
+         }
 
 -- TODO: optimize concatenation of diffs
 solve :: Table -> (Table, [Text])
