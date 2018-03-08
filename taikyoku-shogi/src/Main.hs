@@ -1,9 +1,12 @@
 {-# LANGUAGE DuplicateRecordFields #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards #-}
+{-# LANGUAGE TypeApplications #-}
+{-# LANGUAGE DataKinds #-}
 
 module Main where
 
+import Data.Foldable (foldl')
 import Data.Semigroup
 import Data.String (IsString(..))
 import Data.Text (Text)
@@ -37,33 +40,36 @@ data Promotion = Promotion
   , to :: NamePair
   } deriving (Eq, Show)
 
-type PromotionTable = [Promotion]
+type Table = [Promotion]
 
-renderPromotionTable :: PromotionTable -> Text
-renderPromotionTable = T.unlines . map renderLine
-  where
-    renderLine :: Promotion -> Text
-    renderLine (Promotion {..}) =
-      sformat
-        ((r 20 ' ' %. st) % " => " % (r 20 ' ' %. st))
-        (renderPair from)
-        (renderPair to)
-    renderPair :: NamePair -> Text
-    renderPair (NPair {..}) =
-      sformat
-        ((r 9 ' ' %. st) % " " % (r 18 ' ' %. st))
-        (renderMJpName jpName)
-        (renderMEnName enName)
-    renderMJpName Nothing = "_____"
-    renderMJpName (Just (JapaneseName {..})) = name
-    renderMEnName Nothing = "_____"
-    renderMEnName (Just (EnglishName {..})) = name
+renderTable :: Table -> Text
+renderTable = T.unlines . map renderPromotion
+
+renderPromotion :: Promotion -> Text
+renderPromotion (Promotion {..}) =
+  sformat
+    ((r 20 ' ' %. st) % " => " % (r 20 ' ' %. st))
+    (renderPair from)
+    (renderPair to)
+
+renderPair :: NamePair -> Text
+renderPair (NPair {..}) =
+  sformat
+    ((r 9 ' ' %. st) % " " % (r 18 ' ' %. st))
+    (renderMJpName jpName)
+    (renderMEnName enName)
+
+renderMJpName Nothing = "_____"
+renderMJpName (Just (JapaneseName {..})) = name
+
+renderMEnName Nothing = "_____"
+renderMEnName (Just (EnglishName {..})) = name
 
 -- | Just to make things nicer to write
 instance IsString a => IsString (Maybe a) where
   fromString = Just . fromString
 
-initialTable :: PromotionTable
+initialTable :: Table
 initialTable =
   [ Promotion (NPair Nothing "Running Stag") (NPair "honroku" Nothing)
   , Promotion (NPair Nothing Nothing) (NPair "tōshō" "Sword General")
@@ -85,12 +91,65 @@ initialTable =
   , Promotion (NPair "sekishō" "Stone General") (NPair Nothing "White Elephant")
   ]
 
-solve :: PromotionTable -> PromotionTable
-solve = id
+data Rule = Rule
+  { name :: Text
+  , fn :: Table -> Table
+  }
+
+rules :: [Rule]
+rules = [Rule "Known translations" ruleKnownTranslations]
+
+ruleKnownTranslations :: Table -> Table
+ruleKnownTranslations tbl = tbl
+
+type Diff = [PairChange]
+
+data PairChange = PairChange
+  { from :: Promotion
+  , to :: Promotion
+  , rule :: Rule
+  }
+
+solve :: Table -> (Table, [Text])
+solve table =
+  let (table2, diffs2) = foldl' applyRule (table, []) rules
+  in case diffs2 of
+       [] -> (table2, [])
+       _ ->
+         let (table3, diffs3) = solve table2
+         in (table3, renderDiff diffs2 ++ diffs3)
+    -- TODO: optimize concatenation of diffs
+  where
+    applyRule :: (Table, Diff) -> Rule -> (Table, Diff)
+    applyRule (tbl, diff) (rule@Rule {..}) =
+      let tbl2 = fn tbl
+          diff2 = diffTable rule tbl tbl2
+      in (tbl2, diff ++ diff2)
+    diffTable :: Rule -> Table -> Table -> Diff
+    diffTable (rule@Rule {..}) tbl1 tbl2 =
+      let zipped = zip tbl1 tbl2
+          compared = map (uncurry (==)) zipped
+          indexed = zip [0 ..] compared
+          filtered = filter ((== False) . snd) indexed
+          indexes = map fst filtered
+          pairs = map (\i -> (tbl1 !! i, tbl2 !! i)) indexes
+          toPairChange (p1, p2) = PairChange {from = p1, to = p2, rule = rule}
+          diff = map toPairChange pairs
+      in diff
+    renderDiff :: Diff -> [Text]
+    renderDiff = concatMap renderChange
+    renderChange (PairChange {..}) =
+      [ sformat ("=> " % st % ":") (getField @"name" rule)
+      , renderPromotion from
+      , renderPromotion to
+      , ""
+      ]
 
 main :: IO ()
 main = do
-  T.putStrLn (renderPromotionTable initialTable)
+  T.putStrLn (renderTable initialTable)
   putStrLn ""
   putStrLn ""
-  T.putStrLn (renderPromotionTable (solve initialTable))
+  let (result, log) = solve initialTable
+  mapM T.putStrLn log
+  T.putStrLn (renderTable result)
