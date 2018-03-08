@@ -19,6 +19,7 @@ dependencies:
   - groom
   - generic-lens
   - lens
+  - safe
 
 executables:
   taikyoku-shogi:
