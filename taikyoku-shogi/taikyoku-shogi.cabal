@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5d263912d37ebe4d280d4a9ef0b01febb66a69330ddf5421f9b648b99a140a38
+-- hash: 03cf67964c47c389de377523f996a3edf544697a7cdf1444ae35f1c13074ebe6
 
 name:           taikyoku-shogi
 version:        0.1.0.0
@@ -26,7 +26,9 @@ executable taikyoku-shogi
   build-depends:
       base >=4.7 && <5
     , formatting
+    , generic-lens
     , groom
+    , lens
     , text
     , unordered-containers
   other-modules:

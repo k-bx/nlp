@@ -3,10 +3,14 @@
 {-# LANGUAGE RecordWildCards #-}
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE DataKinds #-}
+{-# LANGUAGE DeriveGeneric #-}
+{-# LANGUAGE ViewPatterns #-}
 
 module Main where
 
+import Control.Lens ((&), (.~), (^.))
 import Data.Foldable (foldl')
+import Data.Generics.Product (field)
 import qualified Data.HashMap.Strict as H
 import Data.HashMap.Strict (HashMap)
 import Data.Semigroup
@@ -18,6 +22,7 @@ import Data.Tuple (swap)
 import Debug.Trace
 import Formatting ((%), (%.), sformat)
 import Formatting.ShortFormatters (r, st)
+import GHC.Generics (Generic)
 import GHC.Records
 import GHC.Stack
 import Text.Groom (groom)
@@ -30,14 +35,14 @@ impossibleS b = error ("不可能！！！\n" ++ groom b)
 
 data JapaneseName = JapaneseName
   { name :: Text
-  } deriving (Eq, Show)
+  } deriving (Eq, Show, Generic)
 
 instance IsString JapaneseName where
   fromString = JapaneseName . T.pack
 
 data EnglishName = EnglishName
   { name :: Text
-  } deriving (Eq, Show)
+  } deriving (Eq, Show, Generic)
 
 instance IsString EnglishName where
   fromString = EnglishName . T.pack
@@ -45,12 +50,12 @@ instance IsString EnglishName where
 data NamePair = NPair
   { jpName :: Maybe JapaneseName
   , enName :: Maybe EnglishName
-  } deriving (Eq, Show)
+  } deriving (Eq, Show, Generic)
 
 data Promotion = Promotion
   { from :: NamePair
   , to :: NamePair
-  } deriving (Eq, Show)
+  } deriving (Eq, Show, Generic)
 
 type Table = [Promotion]
 
@@ -106,16 +111,17 @@ initialTable =
 data Rule = Rule
   { name :: Text
   , fn :: Table -> Table
-  }
+  } deriving (Generic)
 
 rules :: [Rule]
 rules = [Rule "Known translations" ruleKnownTranslations]
 
 ruleKnownTranslations :: Table -> Table
-ruleKnownTranslations tbl =
+ruleKnownTranslations tbl
   -- trace ">> ruleKnownTranslations" $
   -- trace (T.unpack (renderTable tbl)) $
   -- trace ">>" $
+ =
   let jpToEn :: [(Text, Text)]
       jpToEn = foldl' jpToEnF [] tbl
       jpToEnF :: [(Text, Text)] -> Promotion -> [(Text, Text)]
@@ -126,7 +132,7 @@ ruleKnownTranslations tbl =
           (Nothing, _) -> []
           (_, Nothing) -> []
           ((Just jpName), (Just enName)) ->
-            [(getField @"name" jpName, getField @"name" enName)]
+            [(jpName ^. field @"name", enName ^. field @"name")]
       jpToEnHm :: HashMap Text Text
       jpToEnHm = H.fromListWith failIfDifferent jpToEn
       failIfDifferent from to =
@@ -140,31 +146,28 @@ ruleKnownTranslations tbl =
       fillPromotion :: Promotion -> Promotion
       fillPromotion Promotion {..} = Promotion (fillNP from) (fillNP to)
       fillNP :: NamePair -> NamePair
-      fillNP np@NPair {..} =
-        case (jpName, enName) of
-          (Just jpNameJust, Just enNameJust) ->
-            if H.lookup (getField @"name" jpNameJust) jpToEnHm ==
-               Just (getField @"name" enNameJust)
-              then if H.lookup (getField @"name" enNameJust) enToJpHm ==
-                      Just (getField @"name" jpNameJust)
-                     then np
-                     else impossible
-              else impossible
-          (Just jpNameJust, Nothing) ->
-            np
-            { enName =
-                fmap
-                  EnglishName
-                  (H.lookup (getField @"name" jpNameJust) jpToEnHm)
-            }
-          (Nothing, Just enNameJust) ->
-            np
-            { jpName =
-                fmap
-                  JapaneseName
-                  (H.lookup (getField @"name" enNameJust) enToJpHm)
-            }
-          (_, _) -> np
+      fillNP np@NPair {..} = fillNP' np jpName enName
+      fillNP' np (Just jp) (Just en)
+        | isInBothDicts jp en = np
+      fillNP' np (Just jp) (Just en)
+        | otherwise = impossible
+      fillNP' np (Just jp) Nothing =
+        let newName = fmap EnglishName (H.lookup (jp ^. field @"name") jpToEnHm)
+        in np {enName = newName}
+      fillNP' np Nothing (Just en) =
+        let newName =
+              fmap JapaneseName (H.lookup (en ^. field @"name") enToJpHm)
+        in np {jpName = newName}
+      fillNP' np _ _ = np
+      isInBothDicts :: JapaneseName -> EnglishName -> Bool
+      isInBothDicts jp en = isInJpDict jp en && isInEnDict en jp
+      isInJpDict :: JapaneseName -> EnglishName -> Bool
+      isInJpDict jp en =
+        H.lookup (jp ^. field @"name") jpToEnHm == Just (en ^. field @"name")
+      isInEnDict :: EnglishName -> JapaneseName -> Bool
+      isInEnDict en jpNameJust =
+        H.lookup (en ^. field @"name") enToJpHm ==
+        Just (jpNameJust ^. field @"name")
       resTbl = map fillPromotion tbl
   in resTbl
 
@@ -205,9 +208,9 @@ solve table =
     renderDiff :: Diff -> [Text]
     renderDiff = concatMap renderChange
     renderChange (PairChange {..}) =
-      [ sformat ("=> " % st % ":") (getField @"name" rule)
-      , renderPromotion from
-      , renderPromotion to
+      [ sformat (" **RULE** " % st % ":") (rule ^. field @"name")
+      , "  " <> renderPromotion from
+      , "  " <> renderPromotion to
       , ""
       ]
 
