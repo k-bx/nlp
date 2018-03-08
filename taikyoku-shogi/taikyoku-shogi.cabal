@@ -1,0 +1,30 @@
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: bb1825231a224d7ed03fcd0397b1e2eb778682d57dfe62bb93e13e014b662854
+
+name:           taikyoku-shogi
+version:        0.1.0.0
+category:       Unclassified
+homepage:       https://github.com/k-bx/taikyoku-shogi#readme
+author:         Kostiantyn Rybnikov
+maintainer:     k-bx@k-bx.com
+copyright:      All Rights Reserved
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    README.md
+
+executable taikyoku-shogi
+  main-is: Main.hs
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  other-modules:
+      Paths_taikyoku_shogi
+  default-language: Haskell2010
