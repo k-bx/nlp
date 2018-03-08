@@ -8,6 +8,9 @@ import Data.Semigroup
 import Data.String (IsString(..))
 import Data.Text (Text)
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
+import Formatting ((%), (%.), sformat)
+import Formatting.ShortFormatters (r, st)
 import GHC.Records
 
 data JapaneseName = JapaneseName
@@ -39,9 +42,18 @@ type PromotionTable = [Promotion]
 renderPromotionTable :: PromotionTable -> Text
 renderPromotionTable = T.unlines . map renderLine
   where
-    renderLine (Promotion {..}) = renderPair from <> "\t =>\t " <> renderPair to
+    renderLine :: Promotion -> Text
+    renderLine (Promotion {..}) =
+      sformat
+        ((r 20 ' ' %. st) % " => " % (r 20 ' ' %. st))
+        (renderPair from)
+        (renderPair to)
+    renderPair :: NamePair -> Text
     renderPair (NPair {..}) =
-      renderMJpName jpName <> "\t" <> renderMEnName enName
+      sformat
+        ((r 9 ' ' %. st) % " " % (r 18 ' ' %. st))
+        (renderMJpName jpName)
+        (renderMEnName enName)
     renderMJpName Nothing = "_____"
     renderMJpName (Just (JapaneseName {..})) = name
     renderMEnName Nothing = "_____"
@@ -73,6 +85,12 @@ initialTable =
   , Promotion (NPair "sekishō" "Stone General") (NPair Nothing "White Elephant")
   ]
 
+solve :: PromotionTable -> PromotionTable
+solve = id
+
 main :: IO ()
 main = do
-  putStrLn "hello world"
+  T.putStrLn (renderPromotionTable initialTable)
+  putStrLn ""
+  putStrLn ""
+  T.putStrLn (renderPromotionTable (solve initialTable))
