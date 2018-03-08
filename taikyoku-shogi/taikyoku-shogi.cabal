@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4a3a699be35639b08432bd35195e6b4d65ee2ce73ab17563bb1799df68dc8ed3
+-- hash: 5d263912d37ebe4d280d4a9ef0b01febb66a69330ddf5421f9b648b99a140a38
 
 name:           taikyoku-shogi
 version:        0.1.0.0
@@ -26,7 +26,9 @@ executable taikyoku-shogi
   build-depends:
       base >=4.7 && <5
     , formatting
+    , groom
     , text
+    , unordered-containers
   other-modules:
       Paths_taikyoku_shogi
   default-language: Haskell2010
