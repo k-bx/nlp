@@ -23,7 +23,6 @@ import Debug.Trace
 import Formatting ((%), (%.), sformat)
 import Formatting.ShortFormatters (r, st)
 import GHC.Generics (Generic)
-import GHC.Records
 import GHC.Stack
 import Text.Groom (groom)
 
@@ -76,9 +75,11 @@ renderPair (NPair {..}) =
     (renderMJpName jpName)
     (renderMEnName enName)
 
+renderMJpName :: Maybe JapaneseName -> Text
 renderMJpName Nothing = "_____"
 renderMJpName (Just (JapaneseName {..})) = name
 
+renderMEnName :: Maybe EnglishName -> Text
 renderMEnName Nothing = "_____"
 renderMEnName (Just (EnglishName {..})) = name
 
@@ -131,8 +132,7 @@ ruleKnownTranslations tbl
         case (jpName, enName) of
           (Nothing, _) -> []
           (_, Nothing) -> []
-          ((Just jpName), (Just enName)) ->
-            [(jpName ^. field @"name", enName ^. field @"name")]
+          ((Just jp), (Just en)) -> [(jp ^. field @"name", en ^. field @"name")]
       jpToEnHm :: HashMap Text Text
       jpToEnHm = H.fromListWith failIfDifferent jpToEn
       failIfDifferent from to =
@@ -149,7 +149,7 @@ ruleKnownTranslations tbl
       fillNP np@NPair {..} = fillNP' np jpName enName
       fillNP' np (Just jp) (Just en)
         | isInBothDicts jp en = np
-      fillNP' np (Just jp) (Just en)
+      fillNP' _ (Just _) (Just _)
         | otherwise = impossible
       fillNP' np (Just jp) Nothing =
         let newName = fmap EnglishName (H.lookup (jp ^. field @"name") jpToEnHm)
@@ -190,10 +190,10 @@ solve table =
     -- TODO: optimize concatenation of diffs
   where
     applyRule :: (Table, Diff) -> Rule -> (Table, Diff)
-    applyRule (tbl, diff) (rule@Rule {..}) =
+    applyRule (tbl, diff1) (rule@Rule {..}) =
       let tbl2 = fn tbl
           diff2 = diffTable rule tbl tbl2
-      in (tbl2, diff ++ diff2)
+      in (tbl2, diff1 ++ diff2)
     diffTable :: Rule -> Table -> Table -> Diff
     diffTable (rule@Rule {..}) tbl1 tbl2 =
       let zipped = zip tbl1 tbl2
@@ -203,8 +203,8 @@ solve table =
           indexes = map fst filtered
           pairs = map (\i -> (tbl1 !! i, tbl2 !! i)) indexes
           toPairChange (p1, p2) = PairChange {from = p1, to = p2, rule = rule}
-          diff = map toPairChange pairs
-      in diff
+          diff1 = map toPairChange pairs
+      in diff1
     renderDiff :: Diff -> [Text]
     renderDiff = concatMap renderChange
     renderChange (PairChange {..}) =
@@ -218,6 +218,6 @@ main :: IO ()
 main = do
   T.putStrLn (renderTable initialTable)
   putStrLn ""
-  let (result, log) = solve initialTable
-  mapM T.putStrLn log
+  let (result, log1) = solve initialTable
+  mapM_ T.putStrLn log1
   T.putStrLn (renderTable result)
