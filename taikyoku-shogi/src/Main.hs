@@ -51,10 +51,11 @@ data EnglishName = EnglishName
   { name :: Maybe Text
   , weapon :: Maybe Weapon
   , movement :: Maybe Movement
+  , animal :: Maybe Animal
   } deriving (Eq, Show, Generic)
 
 mkEnglishName :: Text -> EnglishName
-mkEnglishName x = EnglishName (Just x) Nothing Nothing
+mkEnglishName x = EnglishName (Just x) Nothing Nothing Nothing
 
 data Weapon
   = Sword
@@ -72,6 +73,19 @@ data Movement
 
 parseMovement :: Text -> Maybe Movement
 parseMovement = readMay . T.unpack
+
+data Animal
+  = Horse
+  | Pig
+  | Ox
+  | Bear
+  | Elephant
+  | Wolf
+  | Stag
+  deriving (Eq, Show, Generic, Read)
+
+parseAnimal :: Text -> Maybe Animal
+parseAnimal = readMay . T.unpack
 
 instance IsString EnglishName where
   fromString s = mkEnglishName (T.pack s)
@@ -115,7 +129,11 @@ renderEnName EnglishName {..} = features <> renderName name
       if features' == ""
         then ""
         else features' <> " "
-    features' = T.concat (List.intersperse " " (catMaybes [fmap sh weapon, fmap sh movement]))
+    features' =
+      T.concat
+        (List.intersperse
+           " "
+           (catMaybes [fmap sh weapon, fmap sh movement, fmap sh animal]))
     sh x = "[" <> tshow x <> "]"
 
 renderName :: IsString p => Maybe p -> p
@@ -149,7 +167,7 @@ initialTable =
   ]
   where
     jpNone = JapaneseName Nothing
-    enNone = EnglishName Nothing Nothing Nothing
+    enNone = EnglishName Nothing Nothing Nothing Nothing
 
 data Rule = Rule
   { name :: Text
@@ -234,9 +252,11 @@ ruleParseFeatures = map parsePromotion
     parseEN en@EnglishName {name = Just n, ..} =
       let wrds = T.words n
       in en
-         { weapon = listToMaybe (catMaybes (map parseWeapon wrds))
-         , movement = listToMaybe (catMaybes (map parseMovement wrds))
+         { weapon = p wrds parseWeapon
+         , movement = p wrds parseMovement
+         , animal = p wrds parseAnimal
          }
+    p wrds f = listToMaybe (catMaybes (map f wrds))
 
 -- TODO: optimize concatenation of diffs
 solve :: Table -> (Table, [Text])
