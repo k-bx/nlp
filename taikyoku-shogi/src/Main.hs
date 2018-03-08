@@ -52,10 +52,14 @@ data EnglishName = EnglishName
   , weapon :: Maybe Weapon
   , movement :: Maybe Movement
   , animal :: Maybe Animal
+  , military :: Maybe Military
+  , material :: Maybe Material
+  , position :: Maybe Position
   } deriving (Eq, Show, Generic)
 
 mkEnglishName :: Text -> EnglishName
-mkEnglishName x = EnglishName (Just x) Nothing Nothing Nothing
+mkEnglishName x =
+  EnglishName (Just x) Nothing Nothing Nothing Nothing Nothing Nothing
 
 data Weapon
   = Sword
@@ -86,6 +90,35 @@ data Animal
 
 parseAnimal :: Text -> Maybe Animal
 parseAnimal = readMay . T.unpack
+
+data Military
+  = General
+  | Chariot
+  | Army
+  | Soldier
+  deriving (Eq, Show, Generic, Read)
+
+parseMilitary :: Text -> Maybe Military
+parseMilitary = readMay . T.unpack
+
+-- TODO: White is not a material but color, think about it
+data Material
+  = Wood
+  | Iron
+  | Stone
+  | White
+  deriving (Eq, Show, Generic, Read)
+
+parseMaterial :: Text -> Maybe Material
+parseMaterial = readMay . T.unpack
+
+data Position
+  = PLeft
+  | PRight
+  deriving (Eq, Show, Generic, Read)
+
+parsePosition :: Text -> Maybe Position
+parsePosition = readMay . T.unpack . ("P" <>)
 
 instance IsString EnglishName where
   fromString s = mkEnglishName (T.pack s)
@@ -133,7 +166,14 @@ renderEnName EnglishName {..} = features <> renderName name
       T.concat
         (List.intersperse
            " "
-           (catMaybes [fmap sh weapon, fmap sh movement, fmap sh animal]))
+           (catMaybes
+              [ fmap sh weapon
+              , fmap sh movement
+              , fmap sh animal
+              , fmap sh military
+              , fmap sh material
+              , fmap sh position
+              ]))
     sh x = "[" <> tshow x <> "]"
 
 renderName :: IsString p => Maybe p -> p
@@ -167,7 +207,7 @@ initialTable =
   ]
   where
     jpNone = JapaneseName Nothing
-    enNone = EnglishName Nothing Nothing Nothing Nothing
+    enNone = EnglishName Nothing Nothing Nothing Nothing Nothing Nothing Nothing
 
 data Rule = Rule
   { name :: Text
@@ -255,6 +295,9 @@ ruleParseFeatures = map parsePromotion
          { weapon = p wrds parseWeapon
          , movement = p wrds parseMovement
          , animal = p wrds parseAnimal
+         , military = p wrds parseMilitary
+         , material = p wrds parseMaterial
+         , position = p wrds parsePosition
          }
     p wrds f = listToMaybe (catMaybes (map f wrds))
 
