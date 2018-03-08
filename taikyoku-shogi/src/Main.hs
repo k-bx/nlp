@@ -5,19 +5,27 @@
 {-# LANGUAGE TypeApplications #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE DeriveGeneric #-}
-{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE FlexibleContexts #-}
 
+--{-# LANGUAGE FlexibleContexts #-}
+--{-# LANGUAGE ViewPatterns #-}
+--{-# LANGUAGE ScopedTypeVariables #-}
+--{-# LANGUAGE KindSignatures #-}
+--{-# LANGUAGE RankNTypes #-}
 module Main where
 
---import Control.Lens ((%~), (&), (.~), (^.), _Just)
---import Debug.Trace
-import Control.Lens ((^.))
+import Control.Applicative
+import Control.Lens (Lens'(..), (&), (.~), (^.))
 import Data.Foldable (foldl')
 import Data.Generics.Product (field)
 import qualified Data.HashMap.Strict as H
 import Data.HashMap.Strict (HashMap)
 import qualified Data.List as List
 import Data.Maybe (catMaybes, listToMaybe)
+
+--import Control.Lens ((%~), (&), (.~), (^.), _Just)
+--import Debug.Trace
+import Data.Proxy (Proxy(..))
 import Data.Semigroup
 import Data.String (IsString(..))
 import Data.Text (Text)
@@ -28,6 +36,7 @@ import Formatting ((%), (%.), sformat)
 import Formatting.ShortFormatters (r, st)
 import GHC.Generics (Generic)
 import GHC.Stack
+import GHC.TypeLits (Symbol)
 import Safe
 import Text.Groom (groom)
 
@@ -129,8 +138,8 @@ data NamePair = NPair
   } deriving (Eq, Show, Generic)
 
 data Promotion = Promotion
-  { from :: NamePair
-  , to :: NamePair
+  { base :: NamePair
+  , into :: NamePair
   } deriving (Eq, Show, Generic)
 
 type Table = [Promotion]
@@ -141,14 +150,14 @@ renderTable = T.unlines . map renderPromotion
 renderPromotion :: Promotion -> Text
 renderPromotion (Promotion {..}) =
   sformat
-    ((r 35 ' ' %. st) % " => " % (r 20 ' ' %. st))
-    (renderPair from)
-    (renderPair to)
+    ((r 40 ' ' %. st) % " => " % (r 20 ' ' %. st))
+    (renderPair base)
+    (renderPair into)
 
 renderPair :: NamePair -> Text
 renderPair (NPair {..}) =
   sformat
-    ((r 9 ' ' %. st) % " " % (r 30 ' ' %. st))
+    ((r 9 ' ' %. st) % " " % (r 40 ' ' %. st))
     (renderJpName jpName)
     (renderEnName enName)
 
@@ -226,6 +235,9 @@ rules :: [Rule]
 rules =
   [ Rule "Known translations" ruleKnownTranslations
   , Rule "Parse features" ruleParseFeatures
+  , Rule "Assume weapon stays" ruleAssumeWeaponStays
+  , Rule "Assume animal stays" ruleAssumeAnimalStays
+  , Rule "Assume Running -> Dashing" ruleAssumeRunningDashing
   ]
 
 ruleKnownTranslations :: Table -> Table
@@ -237,7 +249,7 @@ ruleKnownTranslations tbl
   let jpToEn :: [(Text, Text)]
       jpToEn = foldl' jpToEnF [] tbl
       jpToEnF :: [(Text, Text)] -> Promotion -> [(Text, Text)]
-      jpToEnF dict Promotion {..} = dict ++ getTrans from ++ getTrans to
+      jpToEnF dict Promotion {..} = dict ++ getTrans base ++ getTrans into
       getTrans :: NamePair -> [(Text, Text)]
       getTrans NPair {..} =
         case (jpName ^. field @"name", enName ^. field @"name") of
@@ -255,7 +267,7 @@ ruleKnownTranslations tbl
         let swapped = map swap jpToEn
         in H.fromListWith failIfDifferent swapped
       fillPromotion :: Promotion -> Promotion
-      fillPromotion Promotion {..} = Promotion (fillNP from) (fillNP to)
+      fillPromotion Promotion {..} = Promotion (fillNP base) (fillNP into)
       fillNP :: NamePair -> NamePair
       fillNP np@NPair {..} =
         fillNP' np (jpName ^. field @"name") (enName ^. field @"name")
@@ -285,22 +297,80 @@ ruleKnownTranslations tbl
 ruleParseFeatures :: Table -> Table
 ruleParseFeatures = map parsePromotion
   where
-    parsePromotion Promotion {..} = Promotion (parseNP from) (parseNP to)
+    parsePromotion Promotion {..} = Promotion (parseNP base) (parseNP into)
     parseNP NPair {..} = NPair (parseJP jpName) (parseEN enName)
     parseJP = id
     parseEN en@EnglishName {name = Nothing, ..} = en
     parseEN en@EnglishName {name = Just n, ..} =
       let wrds = T.words n
       in en
-         { weapon = p wrds parseWeapon
-         , movement = p wrds parseMovement
-         , animal = p wrds parseAnimal
-         , military = p wrds parseMilitary
-         , material = p wrds parseMaterial
-         , position = p wrds parsePosition
+         { weapon = weapon <|> p wrds parseWeapon
+         , movement = movement <|> p wrds parseMovement
+         , animal = animal <|> p wrds parseAnimal
+         , military = military <|> p wrds parseMilitary
+         , material = material <|> p wrds parseMaterial
+         , position = position <|> p wrds parsePosition
          }
     p wrds f = listToMaybe (catMaybes (map f wrds))
 
+-- | Based on 'Bow Soldier' -> 'Bow General'
+ruleAssumeWeaponStays :: Table -> Table
+ruleAssumeWeaponStays = map goPromotion
+  where
+    goPromotion = goFrom . goTo
+    goFrom p =
+      case (p ^. field @"base" . field @"enName" . field @"weapon") of
+        Just wpn ->
+          p & field @"into" . field @"enName" . field @"weapon" .~ Just wpn
+        Nothing -> p
+    goTo p =
+      case (p ^. field @"into" . field @"enName" . field @"weapon") of
+        Just wpn ->
+          p & field @"base" . field @"enName" . field @"weapon" .~ Just wpn
+        Nothing -> p
+
+-- | This rule cannot go from right to left becase while we see that
+-- Bear stays (Running Bear -> Dashing Bear), we also see that it's
+-- not working backwards (Stone General -> White Elephant)
+ruleAssumeAnimalStays :: Table -> Table
+ruleAssumeAnimalStays = map goPromotion
+  where
+    goPromotion = goFrom
+    goFrom p =
+      case (p ^. field @"base" . field @"enName" . field @"animal") of
+        Just wpn ->
+          p & field @"into" . field @"enName" . field @"animal" .~ Just wpn
+        Nothing -> p
+
+-- | 'Running Bear' -> 'Dashing Bear'
+ruleAssumeRunningDashing :: Table -> Table
+ruleAssumeRunningDashing = map goPromotion
+  where
+    goPromotion = goFrom . goTo
+    goFrom p =
+      case (p ^. field @"base" . field @"enName" . field @"movement") of
+        Just Running ->
+          p & field @"into" . field @"enName" . field @"movement" .~ Just Dashing
+        _ -> p
+    goTo p =
+      case (p ^. field @"into" . field @"enName" . field @"movement") of
+        Just Dashing ->
+          p & field @"base" . field @"enName" . field @"movement" .~ Just Running
+        _ -> p
+
+-- promotionTwoSidedFeatureStaysRule ::
+--      Lens' EnglishName a -> Promotion -> Promotion
+-- promotionTwoSidedFeatureStaysRule l = goFromTo . goToFrom
+--   where
+--     goFromTo p@Promotion {..} =
+--       case from ^. field @"enName" . l of
+--         Just wpn -> p & field @"to" . field @"enName" . l .~ Just wpn
+--         Nothing -> p
+--     goToFrom p@Promotion {..} =
+--       case to ^. field @"enName" . l of
+--         Just wpn ->
+--           p & field @"from" . field @"enName" . l .~ Just wpn
+--         Nothing -> p
 -- TODO: optimize concatenation of diffs
 solve :: Table -> (Table, [Text])
 solve table =
