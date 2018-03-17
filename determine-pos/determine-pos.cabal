@@ -1,0 +1,31 @@
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 0c5ea1bfe572da59d02f6c2d57f6ea8e865ea914aac0b4d5181356b5b44632b3
+
+name:           determine-pos
+version:        0.1.0.0
+category:       Unclassified
+homepage:       https://github.com/k-bx/determine-pos#readme
+author:         Kostiantyn Rybnikov
+maintainer:     k-bx@k-bx.com
+copyright:      All Rights Reserved
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    README.md
+
+executable determine-pos
+  main-is: Main.hs
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+    , chatter
+  other-modules:
+      Paths_determine_pos
+  default-language: Haskell2010

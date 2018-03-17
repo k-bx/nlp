@@ -1,0 +1,7 @@
+spacy==2.0.9
+keras==2.0.9
+plac
+cytoolz
+numpy
+thinc
+tensorflow
