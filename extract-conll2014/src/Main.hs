@@ -21,6 +21,7 @@ import Data.Text (Text)
 import Data.XML.Types (Event)
 import GHC.Generics (Generic)
 import Safe
+import System.Environment
 import Text.XML
 import Text.XML.Stream.Parse
 
@@ -63,6 +64,7 @@ parseMistake =
     endOff <- pread eo
     mistakeType <- fromMaybe "" <$> tagNoAttr "TYPE" content
     correction <- fromMaybe Nothing <$> tagNoAttr "CORRECTION" contentMaybe
+    _comment <- ignoreTreeContent "COMMENT"
     return (Mistake {..})
 
 pread :: (Read a, S.ConvString s, Monad m) => s -> m a
@@ -86,8 +88,8 @@ parseDoc =
     anns <- many parseAnnotation
     return (Doc nid anns)
 
-parseDocs :: MonadThrow m => ConduitT Event o m (Maybe [Doc])
-parseDocs = tagNoAttr "DOCUMENTS" $ many parseDoc
+-- parseDocs :: MonadThrow m => ConduitT Event o m (Maybe [Doc])
+-- parseDocs = tagNoAttr "DOCUMENTS" $ many parseDoc
 
 perTeacherMistakes :: [Doc] -> PerTeacherMistakes
 perTeacherMistakes docs = H.fromListWith (<>) (concatMap fromDoc docs)
@@ -102,17 +104,24 @@ perTeacherMistakes docs = H.fromListWith (<>) (concatMap fromDoc docs)
 
 main :: IO ()
 main = do
-  docs <-
-    runResourceT $
-    runConduit $
-    parseFile def "example.xml" .| force "documents required" parseDocs
-  let mistakes = perTeacherMistakes docs
-  -- putStrLn $ groom mistakes
-  let keys = H.keys mistakes
-  putStrLn $ "Found teachers: " <> show (length keys)
-  putStrLn $
-    "Found overall mistakes: " <> show (length (concatMap HS.toList mistakes))
-  let mistakesIntersection = fold (H.elems mistakes)
-  putStrLn $
-    "Mistake annotations which intersect upon all teachers: " ++
-    show (length mistakesIntersection)
+  args <- getArgs
+  case args of
+    [fpath] -> do
+      docs <-
+        runResourceT $
+        runConduit $ parseFile def fpath .| force "documents required" (fmap Just (many parseDoc))
+      print (length docs)
+      let mistakes = perTeacherMistakes docs
+      -- putStrLn $ groom mistakes
+      let keys = H.keys mistakes
+      putStrLn $ "Found teachers: " <> show (length keys)
+      putStrLn $
+        "Found overall mistakes: " <>
+        show (length (concatMap HS.toList mistakes))
+      let mistakesIntersection = fold (H.elems mistakes)
+      putStrLn $
+        "Mistake annotations which intersect upon all teachers: " ++
+        show (length mistakesIntersection)
+    _ ->
+      putStrLn
+        "Usage: stack exec -- extract-conll2014 /path/to/official-2014.1.sgml"

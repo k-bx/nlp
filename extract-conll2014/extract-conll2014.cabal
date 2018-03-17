@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 25890803e3e45dcd7124e61261dfad4e36948e0f662aea38fca98ea2fd704d2a
+-- hash: 2258fb639cb0f69632228552939d89e6997ef06a0869ffa332a40236db0c707c
 
 name:           extract-conll2014
 version:        0.1.0.0
@@ -19,7 +19,7 @@ cabal-version:  >= 1.10
 extra-source-files:
     README.md
 
-executable conduit-xml-example
+executable extract-conll2014
   main-is: Main.hs
   hs-source-dirs:
       src
