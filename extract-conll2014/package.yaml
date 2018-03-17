@@ -1,0 +1,22 @@
+name:                extract-conll2014
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/k-bx/conduit-xml-example#readme
+license:             BSD3
+author:              Kostiantyn Rybnikov
+maintainer:          k-bx@k-bx.com
+copyright:           Kostiantyn Rybnikov
+category:            Web
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - raw-strings-qq
+  - xml-conduit
+
+executables:
+  conduit-xml-example:
+    source-dirs:      src
+    main:             Main.hs
