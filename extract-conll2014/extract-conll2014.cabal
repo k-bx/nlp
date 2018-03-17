@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fe0aa1cd048d7126281bc6d2048517b927f9d06e0a03b68de4cfbd963879d428
+-- hash: 25890803e3e45dcd7124e61261dfad4e36948e0f662aea38fca98ea2fd704d2a
 
 name:           extract-conll2014
 version:        0.1.0.0
@@ -23,12 +23,18 @@ executable conduit-xml-example
   main-is: Main.hs
   hs-source-dirs:
       src
+  ghc-options: -Wall
   build-depends:
       base >=4.7 && <5
     , conduit
+    , groom
+    , hashable
     , raw-strings-qq
     , resourcet
+    , safe
+    , string-class
     , text
+    , unordered-containers
     , xml-conduit
     , xml-types
   other-modules:

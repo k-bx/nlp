@@ -13,14 +13,20 @@ extra-source-files:
 
 dependencies:
   - base >= 4.7 && < 5
+  - conduit
+  - groom
+  - hashable
   - raw-strings-qq
+  - resourcet
+  - safe
+  - string-class
   - text
   - xml-conduit
-  - resourcet
-  - conduit
   - xml-types
+  - unordered-containers
 
 executables:
   conduit-xml-example:
     source-dirs:      src
     main:             Main.hs
+    ghc-options: -Wall
