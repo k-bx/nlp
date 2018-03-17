@@ -14,7 +14,11 @@ extra-source-files:
 dependencies:
   - base >= 4.7 && < 5
   - raw-strings-qq
+  - text
   - xml-conduit
+  - resourcet
+  - conduit
+  - xml-types
 
 executables:
   conduit-xml-example:
