@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fb93e20ee910baba81746c3b8a08c4f4de2cc1d74a270bc27d6541b8d172a18f
+-- hash: d4088b7844ac65f4ba7e26e25b6315e07c0713669edd58ca794eeab3ed7ad574
 
 name:           extract-synonyms
 version:        0.1.0.0
@@ -29,6 +29,7 @@ executable extract-synonyms
     , conduit
     , data-default
     , groom
+    , haddock-library
     , hashable
     , pandoc
     , raw-strings-qq

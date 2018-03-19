@@ -17,6 +17,7 @@ dependencies:
   - data-default
   - groom
   - hashable
+  - haddock-library
   - pandoc
   - raw-strings-qq
   - resourcet
