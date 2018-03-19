@@ -1,0 +1,27 @@
+name:                lviv-forum-scraper
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/k-bx/lviv-forum-scraper#readme
+license:             BSD3
+author:              Kostiantyn Rybnikov
+maintainer:          k-bx@k-bx.com
+copyright:           All Rights Reserved
+category:            Unclassified
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - scalpel-core
+  - file-embed
+  - regex
+  - text
+  - groom
+  - string-class
+
+executables:
+  lviv-forum-scraper:
+    source-dirs:      src
+    main:             Main.hs
+    ghc-options: -Wall

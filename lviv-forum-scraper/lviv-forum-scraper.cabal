@@ -1,0 +1,37 @@
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 41cd188443c0ba8d9ea198fe6c93ad12d9e7e87cd001427a64349a9f2661e7af
+
+name:           lviv-forum-scraper
+version:        0.1.0.0
+category:       Unclassified
+homepage:       https://github.com/k-bx/lviv-forum-scraper#readme
+author:         Kostiantyn Rybnikov
+maintainer:     k-bx@k-bx.com
+copyright:      All Rights Reserved
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    README.md
+
+executable lviv-forum-scraper
+  main-is: Main.hs
+  hs-source-dirs:
+      src
+  ghc-options: -Wall
+  build-depends:
+      base >=4.7 && <5
+    , file-embed
+    , groom
+    , regex
+    , scalpel-core
+    , string-class
+    , text
+  other-modules:
+      Paths_lviv_forum_scraper
+  default-language: Haskell2010
