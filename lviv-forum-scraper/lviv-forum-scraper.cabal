@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 41cd188443c0ba8d9ea198fe6c93ad12d9e7e87cd001427a64349a9f2661e7af
+-- hash: 0f8b3edaff497dda3597ce85ff9159e4c5490edb4064f96ca9fdfc80a78f374f
 
 name:           lviv-forum-scraper
 version:        0.1.0.0
@@ -25,13 +25,20 @@ executable lviv-forum-scraper
       src
   ghc-options: -Wall
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
+    , bytestring
+    , data-default
+    , directory
     , file-embed
     , groom
+    , http-client
+    , lens
     , regex
     , scalpel-core
     , string-class
     , text
+    , wreq
   other-modules:
       Paths_lviv_forum_scraper
   default-language: Haskell2010

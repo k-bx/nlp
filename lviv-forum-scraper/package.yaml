@@ -12,13 +12,20 @@ extra-source-files:
 - README.md
 
 dependencies:
+  - aeson
   - base >= 4.7 && < 5
-  - scalpel-core
+  - bytestring
+  - data-default
+  - directory
   - file-embed
-  - regex
-  - text
   - groom
+  - http-client
+  - lens
+  - regex
+  - scalpel-core
   - string-class
+  - text
+  - wreq
 
 executables:
   lviv-forum-scraper:
