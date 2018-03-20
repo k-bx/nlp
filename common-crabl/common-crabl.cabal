@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3a9e58543788115413ba8569d67a2de1d5c0199a8eef1117d6a1b2234f9fc68a
+-- hash: 2094d3957a16630eeb1196fcaee26945acf5bb523f62747d85dded351dc65315
 
 name:           common-crabl
 version:        0.1.0.0
@@ -23,10 +23,22 @@ executable common-crabl
   main-is: Main.hs
   hs-source-dirs:
       src
+  ghc-options: -Wall -funbox-strict-fields
   build-depends:
       base >=4.7 && <5
     , bytestring
+    , groom
+    , lens
+    , monoidal-containers
+    , network-uri
+    , pipes
+    , pipes-bytestring
+    , pipes-zlib
+    , safe-exceptions
+    , string-class
     , text
+    , transformers
+    , unordered-containers
     , warc
   other-modules:
       Paths_common_crabl

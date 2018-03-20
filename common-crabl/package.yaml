@@ -14,10 +14,22 @@ extra-source-files:
 dependencies:
   - base >= 4.7 && < 5
   - bytestring
+  - groom
+  - lens
+  - monoidal-containers
+  - network-uri
+  - pipes
+  - pipes-bytestring
+  - pipes-zlib
+  - safe-exceptions
+  - string-class
   - text
+  - transformers
+  - unordered-containers
   - warc
 
 executables:
   common-crabl:
     source-dirs:      src
     main:             Main.hs
+    ghc-options: -Wall -funbox-strict-fields
