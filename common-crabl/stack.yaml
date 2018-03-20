@@ -1,0 +1,8 @@
+resolver: lts-11.1
+packages:
+- .
+extra-deps:
+- warc-1.0.3
+- free-4.12.4
+- lens-4.15.4
+- pipes-zlib-0.4.4.1
