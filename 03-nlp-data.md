@@ -18,7 +18,19 @@ Please see [[lviv-forum-scraper/README.md]]
 
 **Write a query to collect all relations from dbpedia for every individual person listed in it - requires SPARQL**
 
-TODO
+```
+SELECT DISTINCT ?needle ?has ?of ?person 
+WHERE {
+  {?person a foaf:Person; 
+   ?of ?needle}
+  UNION
+  {?person a foaf:Person.
+   ?needle ?has ?person}
+  FILTER (?needle IN (dbr:Richard_Dawkins, dbr:Ricky_Gervais))
+}
+```
+
+Result: https://goo.gl/Ae7Z6s
 
 **Download and process an arbitrary file from Common Crawl**
 
