@@ -14,6 +14,7 @@ extra-source-files:
 dependencies:
   - base >= 4.7 && < 5
   - bytestring
+  - cld2
   - groom
   - lens
   - monoidal-containers
@@ -21,6 +22,7 @@ dependencies:
   - pipes
   - pipes-bytestring
   - pipes-zlib
+  - regex
   - safe-exceptions
   - string-class
   - text

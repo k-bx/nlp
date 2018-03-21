@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 2094d3957a16630eeb1196fcaee26945acf5bb523f62747d85dded351dc65315
+-- hash: 5bb7eda8b421f12e4d2c572813252771fe8c1be73a1269ebb5b0bd2ccb3ee956
 
 name:           common-crabl
 version:        0.1.0.0
@@ -27,6 +27,7 @@ executable common-crabl
   build-depends:
       base >=4.7 && <5
     , bytestring
+    , cld2
     , groom
     , lens
     , monoidal-containers
@@ -34,6 +35,7 @@ executable common-crabl
     , pipes
     , pipes-bytestring
     , pipes-zlib
+    , regex
     , safe-exceptions
     , string-class
     , text
