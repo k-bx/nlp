@@ -6,7 +6,9 @@ stack build
 stack exec lviv-forum-scraper -- data/cache
 ```
 
-Example output upon first run can be seen: https://gist.github.com/k-bx/eaae8ec341503d632869263692297995
+Example output upon first run can be seen (there's a lot since I print
+out textual version of downloaded content):
+https://gist.github.com/k-bx/eaae8ec341503d632869263692297995
 
 ```
 $ stack build && stack exec lviv-forum-scraper ./data/cache/
@@ -45,3 +47,5 @@ Received a result:
  "forums/filosofija-ta-moral.88/page-6",
  "forums/filosofija-ta-moral.88/page-22"]
 ```
+
+Results will be stored in `data/cache/`.
