@@ -22,7 +22,6 @@ dependencies:
   - pipes
   - pipes-bytestring
   - pipes-zlib
-  - regex
   - safe-exceptions
   - string-class
   - text

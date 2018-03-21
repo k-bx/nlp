@@ -25,6 +25,7 @@ import Network.URI
 import qualified Pipes as P
 import Pipes.ByteString (fromHandle)
 import qualified Pipes.GZip as PGZip
+import System.Environment
 import System.IO
 import Text.CLD2
 import Text.Groom
@@ -93,7 +94,8 @@ iterFunc Env {..} Record {..} = do
       let lines' = T.lines t
           (headers, body) = List.span headerOrEmpty lines'
       in (mapMaybe parseHeader headers, T.unlines body)
-    headerOrEmpty t = T.strip t == "" || ":" `T.isInfixOf` t || "HTTP" `T.isInfixOf` t
+    headerOrEmpty t =
+      T.strip t == "" || ":" `T.isInfixOf` t || "HTTP" `T.isInfixOf` t
     parseHeader headerLine =
       case T.strip headerLine of
         "" -> Nothing
@@ -119,19 +121,25 @@ getTopN n mhm =
 
 main :: IO ()
 main = do
-  let crawlFile =
-        "/home/kb/Downloads/commoncrawl/CC-MAIN-20180221222354-20180222002354-00249.warc.gz"
-  -- let crawlFile =
-  --       "/home/kb/Downloads/commoncrawl/CC-MAIN-20180221222354-20180222002354-00249.warc"
-  withFile crawlFile ReadMode $ \h -> do
-    env <- Env <$> newIORef mempty <*> newIORef mempty
-    _ <- iterRecords (iterFunc env) (parseWarc (decompressAll (fromHandle h)))
-    -- _ <- iterRecords (iterFunc env) (parseWarc (fromHandle h))
-    doms <- readIORef (domains env)
-    -- putStrLn $ groom $ doms
-    putStrLn "Top 10 domains:"
-    putStrLn $ groom $ getTopN 10 doms
-    putStrLn "Top 10 used languages:"
-    languages <- readIORef (lang env)
-    putStrLn $ groom $ getTopN 10 languages
-    return ()
+  args <- getArgs
+  case args of
+    [crawlFile]
+      -- let crawlFile =
+      --       "/home/kb/Downloads/commoncrawl/CC-MAIN-20180221222354-20180222002354-00249.warc.gz"
+     -> do
+      withFile crawlFile ReadMode $ \h -> do
+        env <- Env <$> newIORef mempty <*> newIORef mempty
+        _ <-
+          iterRecords (iterFunc env) (parseWarc (decompressAll (fromHandle h)))
+        -- _ <- iterRecords (iterFunc env) (parseWarc (fromHandle h))
+        doms <- readIORef (domains env)
+        -- putStrLn $ groom $ doms
+        putStrLn "Top 10 domains:"
+        putStrLn $ groom $ getTopN 10 doms
+        putStrLn "Top 10 used languages:"
+        languages <- readIORef (lang env)
+        putStrLn $ groom $ getTopN 10 languages
+        return ()
+    _ ->
+      putStrLn
+        "Usage: stack build && stack exec common-crabl -- /path/to/some.warc.gz"
