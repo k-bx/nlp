@@ -76,7 +76,6 @@ iterFunc Env {..} Record {..} = do
         False -> return r
         True -> do
           let (htmlHeaders, htmlBody) = getHtmlBody text
-          -- case text
           let hints =
                 defaultHints
                 { hintContentLanguage =
@@ -131,9 +130,7 @@ main = do
         env <- Env <$> newIORef mempty <*> newIORef mempty
         _ <-
           iterRecords (iterFunc env) (parseWarc (decompressAll (fromHandle h)))
-        -- _ <- iterRecords (iterFunc env) (parseWarc (fromHandle h))
         doms <- readIORef (domains env)
-        -- putStrLn $ groom $ doms
         putStrLn "Top 10 domains:"
         putStrLn $ groom $ getTopN 10 doms
         putStrLn "Top 10 used languages:"
