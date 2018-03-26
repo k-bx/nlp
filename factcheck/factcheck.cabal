@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 8843327413090df5f13323aa7c11c87ddc49420c26e368327aacd51448ad96d4
+-- hash: 9b87cc2bf8a671815795b08886803ed7230ac27932d2a557106b559e8c661fcb
 
 name:           factcheck
 version:        0.1.0.0
@@ -23,13 +23,24 @@ executable factcheck
   main-is: Main.hs
   hs-source-dirs:
       src
+  ghc-options: -Wall
   build-depends:
-      base >=4.7 && <5
+      aeson
+    , base >=4.7 && <5
     , bytestring
     , containers
     , corenlp-parser
+    , data-default
+    , groom
+    , http-client
+    , lens
+    , pcre-heavy
+    , safe
+    , scalpel-core
+    , string-class
     , text
     , unordered-containers
+    , wreq
   other-modules:
       Paths_factcheck
   default-language: Haskell2010
