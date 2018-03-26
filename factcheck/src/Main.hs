@@ -29,6 +29,9 @@ parseBooks = do
     let mpubYear = mRes & headMay <&> snd >>= headMay <&> T.unpack >>= readMay
     return Book {..}
 
+-- useful command:
+-- curl 'https://en.wikipedia.org/w/api.php?action=query&titles=Sam_Harris&prop=revisions&rvprop=content&format=json' | jq '. | .query | .pages | ."2400008" | .revisions | .[0] | ."*"'
+
 main :: IO ()
 main = do
   t <- T.readFile "data/goodreads_samharris.html"
