@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 9b87cc2bf8a671815795b08886803ed7230ac27932d2a557106b559e8c661fcb
+-- hash: 74c3b9587325821a909feea65883b91aeb1986bd25d96e9979806c2c54233310
 
 name:           factcheck
 version:        0.1.0.0
@@ -34,6 +34,8 @@ executable factcheck
     , groom
     , http-client
     , lens
+    , lens-aeson
+    , pandoc
     , pcre-heavy
     , safe
     , scalpel-core

@@ -4,3 +4,9 @@ packages:
 extra-deps:
 - corenlp-parser-0.3.0.1
 - rocksdb-haskell-1.0.1
+- haddock-library-1.4.3
+# - git: https://github.com/st3ll1s/haddock.git
+#   commit: b29547eb7feb757e1dadb03fbedd506c3cdaba3c
+#   subdirs:
+#   - ./haddock-library
+# - pandoc-2.1.2

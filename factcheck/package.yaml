@@ -21,6 +21,8 @@ dependencies:
   - groom
   - http-client
   - lens
+  - lens-aeson
+  - pandoc
   - pcre-heavy
   - safe
   - scalpel-core
