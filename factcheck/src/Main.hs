@@ -17,21 +17,17 @@ import Text.Regex.PCRE.Heavy
 
 data Book = Book
   { title :: Text
-  , pubYear :: Int
+  , mpubYear :: Maybe Int
   } deriving (Show, Eq)
 
 parseBooks :: Scraper Text [Book]
 parseBooks = do
-  mTitleAndYears <-
-    chroots ("tr" @: ["itemtype" @= "http://schema.org/Book"]) $ do
-      title <- chroot ("a" @: [hasClass "bookTitle"]) (text "span")
-      pubYearRaw <- text $ "td" @: ["width" @= "100%"]
-      let mRes = scan [re|published[^0-9]*([0-9]+)|] pubYearRaw
-      let mpubYear = mRes & headMay <&> snd >>= headMay <&> T.unpack >>= readMay
-      case mpubYear of
-        Nothing -> return Nothing
-        Just pubYear -> return (Just (title, pubYear))
-  forM (catMaybes mTitleAndYears) $ \(title, pubYear) -> return Book {..}
+  chroots ("tr" @: ["itemtype" @= "http://schema.org/Book"]) $ do
+    title <- chroot ("a" @: [hasClass "bookTitle"]) (text "span")
+    pubYearRaw <- text $ "td" @: ["width" @= "100%"]
+    let mRes = scan [re|published[^0-9]*([0-9]+)|] pubYearRaw
+    let mpubYear = mRes & headMay <&> snd >>= headMay <&> T.unpack >>= readMay
+    return Book {..}
 
 main :: IO ()
 main = do
