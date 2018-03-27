@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 74c3b9587325821a909feea65883b91aeb1986bd25d96e9979806c2c54233310
+-- hash: 93797a0b21aabb48bbe0730b32a3af31dff63a40ea4be36d0e29fd011ffe2705
 
 name:           factcheck
 version:        0.1.0.0
@@ -23,7 +23,7 @@ executable factcheck
   main-is: Main.hs
   hs-source-dirs:
       src
-  ghc-options: -Wall
+  ghc-options: -Wall -threaded
   build-depends:
       aeson
     , base >=4.7 && <5
@@ -31,6 +31,7 @@ executable factcheck
     , containers
     , corenlp-parser
     , data-default
+    , formatting
     , groom
     , http-client
     , lens

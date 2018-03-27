@@ -18,6 +18,7 @@ dependencies:
   - containers
   - corenlp-parser
   - data-default
+  - formatting
   - groom
   - http-client
   - lens
@@ -35,4 +36,4 @@ executables:
   factcheck:
     source-dirs:      src
     main:             Main.hs
-    ghc-options: -Wall
+    ghc-options: -Wall -threaded
