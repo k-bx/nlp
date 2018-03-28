@@ -18,9 +18,8 @@ import qualified Data.Text as T
 import Data.Text (Text)
 import qualified Data.Text.IO as T
 import Data.Tree
-import Debug.Trace
 import Formatting
-import Formatting.ShortFormatters (sh)
+import Formatting.ShortFormatters (sh, st)
 import NLP.CoreNLP
 import qualified Network.Wreq as W
 import Safe
@@ -62,15 +61,21 @@ downloadWikiBody = do
       "https://en.wikipedia.org/w/api.php?action=query&titles=Sam_Harris&prop=revisions&rvprop=content&format=json"
   return $ fromMaybe "" $ getWikiBody (r ^. W.responseBody . to S.toText)
 
+sentToText :: Sentence -> Text
+sentToText sent = T.intercalate " " (map originalText (tokens sent))
+
 -- | Title claimed in the text
 type ClaimedTitle = Text
 
 type ClaimedYear = Int
 
-data Claim =
-  BookParenthsYear ClaimedTitle
-                   ClaimedYear -- ^ things like `The End of Faith (2004)`
-                   Book
+data Claim
+  -- | things like `The End of Faith (2004)`
+  = BookParenthsYear ClaimedYear
+                     Book
+  -- | things like `He published a long-form essay _ Lying _ in 2011`
+  | HePublishedIn ClaimedYear
+                  Book
   deriving (Show, Eq)
 
 data SentClaim = SentClaim
@@ -85,55 +90,101 @@ factCheck docs books = mapM_ factCheckDoc docs
     factCheckDoc ParsedDocument {..} = do
       let sentClaims = map (extractFacts books) (sentences doc)
       forM_ (catMaybes sentClaims) $ \SentClaim {..} -> do
-        forM_ scClaims $ \case
-          BookParenthsYear _claimedTitle claimedYear b@Book {..} -> do
+        forM_ (List.nub scClaims) $ \case
+          BookParenthsYear y b@Book {..} -> do
+            putStrLn "[BookParenthsYear]"
             case mpubYear of
               Just pubYear
-                | pubYear == claimedYear ->
-                  T.putStrLn (correctClaim b scSentence)
+                | pubYear == y -> T.putStrLn (correctClaim b scSentence)
                 | otherwise -> T.putStrLn (incorrectClaim b scSentence)
               Nothing -> T.putStrLn (uncheckableClaim b scSentence)
+            putStrLn ""
+          HePublishedIn y b@Book {..} -> do
+            putStrLn "[HePublishedIn]"
+            case mpubYear of
+              Just pubYear
+                | pubYear == y -> T.putStrLn (correctClaim b scSentence)
+                | otherwise -> T.putStrLn (incorrectClaim b scSentence)
+              Nothing -> T.putStrLn (uncheckableClaim b scSentence)
+            putStrLn ""
     correctClaim b s =
       sformat
-        ("Correct claim! Book: " %sh % ", sentence: " %sh)
+        ("Correct claim! Book: " %sh % "\nSentence: \n" %st)
         b
         (sentToText s)
     incorrectClaim b s =
-      sformat ("A mis-claim! Book: " %sh % ", sentence: " %sh) b (sentToText s)
+      sformat
+        ("A mis-claim! Book: " %sh % "\nSentence: \n" %st)
+        b
+        (sentToText s)
     uncheckableClaim b s =
       sformat
-        ("Not enough data to check the claim! Book: " %sh % ", sentence: " %sh)
+        ("Not enough data to check the claim! Book: " %sh % "\nSentence: \n" %st)
         b
         (sentToText s)
 
--- | ☝️ The list Monad is used for non-determinism
 extractFacts :: [Book] -> Sentence -> Maybe SentClaim
 extractFacts books s@Sentence {..} =
   case claims of
     [] -> Nothing
     _ -> Just (SentClaim s claims)
   where
+    deps = enhancedPlusPlusDependencies
     claims :: [Claim]
-    claims = concat [bookParenthsYears]
+    claims = concat [bookParenthsYears, hePublishedIn]
+    -- | This rule works rather with a list of words in a sentence
     bookParenthsYears = do
       b <- books
       bookTitle <- possibleTitles b
-      let titleWords = T.words bookTitle
-      titlePos <- subListPos titleWords (map originalText tokens)
+      let titleWords = splitTitle bookTitle
+      toks <- possibleTokens
+      titlePos <- subListPos titleWords toks
       let yearPos = titlePos + length titleWords
       year <- yearAt yearPos <|> yearAt (yearPos + 1) <|> yearAt (yearPos + 2)
-      return (BookParenthsYear bookTitle year b)
+      return (BookParenthsYear year b)
+    -- | This rule works with a dependency tree. While more complex
+    -- constructs like recursively following the comma are possible,
+    -- it is quite hard to develop that as a homework, so I'm leaving
+    -- this exercise for future. Multi-word titles are also possible
+    -- to be dealt with, but would probably need to extend the data
+    -- structures to leave a connection between parsed dependencies
+    -- and original sentence, so that it's easy to compare them in a
+    -- strict order.
+    hePublishedIn = do
+      publ <- deps
+      guard (T.toLower (dependentGloss publ) == "published")
+      heDep <- depChildren publ
+      guard (T.toLower (dependentGloss heDep) == "he")
+      dobj <- depChildren publ
+      guard (dep dobj == "dobj")
+      book <- depChildren dobj
+      bookCandidate <- books
+      bookCandidateTitle <- possibleTitles bookCandidate
+      guard (bookCandidateTitle == dependentGloss book)
+      in_ <- deps
+      guard (governor in_ == dependent book)
+      guard (dep in_ == "nmod:in")
+      yearInt <- maybeToList (readMay (T.unpack (dependentGloss in_)))
+      return (HePublishedIn yearInt bookCandidate)
+    depChildren x = filter (\child -> governor child == dependent x) deps
     -- | When the book is called "Waking Up: A Guide to Spirituality
     -- Without Religion" we use "Waking Up" as well
     possibleTitles :: Book -> [Text]
     possibleTitles Book {..} =
-      title : maybeToList (headMay (T.splitOn ":" title))
+      title : T.filter (\x -> not (x `elem` (":.!?:" :: String))) title :
+      maybeToList (headMay (T.splitOn ":" title))
+    possibleTokens =
+      let ts = map originalText tokens
+      in [ts, filter (\x -> not (x `elem` [":"])) ts]
     yearAt :: Int -> [ClaimedYear]
     yearAt i = do
       w <- maybeToList (fmap originalText (tokens `atMay` i))
       maybeToList (readMay (T.unpack w))
+    splitTitle = T.words
 
 -- | Finds all sublist positions in a list
+--
+-- TODO: make this specialized to text and a bit more fuzzy in future
 subListPos :: Eq a => [a] -> [a] -> [Int]
 subListPos needle xs =
   mapMaybe
@@ -152,18 +203,20 @@ sentToTree Sentence {..} =
     go :: [Dependency] -> Int -> Dependency -> Tree String
     go deps currDepth dep' =
       let childDeps =
-            if currDepth >= 5
+            if currDepth >= 9
               then []
               else filter (\x -> dependent dep' == governor x) deps
           subForest = map (go deps (currDepth + 1)) childDeps
-      in Node (T.unpack (dep dep' <> " - " <> dependentGloss dep')) subForest
-
-sentToText :: Sentence -> Text
-sentToText sent = T.intercalate " " (map originalText (tokens sent))
+      in Node
+           (T.unpack
+              (dep dep' <> " - " <> dependentGloss dep' <> " (gov=" <>
+               governorGloss dep' <>
+               ")"))
+           subForest
 
 showDocTree :: ParsedDocument -> IO ()
 showDocTree ParsedDocument {..} = do
-  forM_ (take 1 (sentences doc)) $ \sent -> do
+  forM_ (sentences doc) $ \sent -> do
     let tree = sentToTree sent
     let s = drawTree tree
     T.putStrLn $ sentToText sent
@@ -174,11 +227,11 @@ main = do
   args <- getArgs
   case args of
     [corenlp, cache] -> do
-      t <- T.readFile "data/goodreads_samharris.html"
-      --t <- downloadGoodreads
+      t <- downloadGoodreads
+      -- t <- T.readFile "data/goodreads_samharris.html"
       let books = scrapeStringLike t parseBooks
-      -- mwikiBody <- downloadWikiBody
-      mwikiBody <- getWikiBody <$> T.readFile "data/wiki_api_response.json"
+      mwikiBody <- Just <$> downloadWikiBody
+      -- mwikiBody <- getWikiBody <$> T.readFile "data/wiki_api_response.json"
       let wikiBody = fromMaybe (error "failed to get wiki body") mwikiBody
       let wikiTxt =
             (either
@@ -187,13 +240,12 @@ main = do
                (runPure
                   (do mr <- readMediaWiki def wikiBody
                       writePlain def {writerWrapText = WrapNone} mr)))
+      let wikiTxtLines = T.lines wikiTxt
       docs <-
         launchCoreNLP
           corenlp
           def {numWorkers = 3, cacheDb = Just cache, chunkSize = 50}
-          (T.lines wikiTxt)
-      -- mapM_ showDocTree docs
-      -- putStrLn $ groom $ docs
+          wikiTxtLines
       factCheck docs (fromMaybe [] books)
       return ()
     _ ->
