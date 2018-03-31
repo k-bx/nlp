@@ -1,0 +1,30 @@
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: d854817fac73f75e2f2b30d89f5c33c4896bea1d88ce1a706ca08914c6cf1f0d
+
+name:           sms-spam
+version:        0.1.0.0
+category:       Web
+homepage:       https://github.com/k-bx/sms-spam#readme
+author:         Kostiantyn Rybnikov
+maintainer:     k-bx@k-bx.com
+copyright:      Kostiantyn Rybnikov
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    README.md
+
+executable sms-spam
+  main-is: Main.hs
+  hs-source-dirs:
+      src
+  build-depends:
+      base >=4.7 && <5
+  other-modules:
+      Paths_sms_spam
+  default-language: Haskell2010
