@@ -1,0 +1,9 @@
+resolver: lts-11.2
+packages:
+- .
+extra-deps:
+- git: https://github.com/commercialhaskell/rio.git
+  commit: c3d6b3cf26381766b1d71f12c991d6bbff2f0c66
+  subdirs:
+  - ./rio
+  - ./rio-orphans
