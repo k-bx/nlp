@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3d9ec710cbbd850c950865ec8778d038d2b7511fd03d2255569fcef94aabc6e8
+-- hash: e1cf6fa1ab0cd883034fc16ec902b84c5879575b66ddfab12f6bc7bc3ad61e12
 
 name:           rozetka
 version:        0.1.0.0
@@ -23,7 +23,8 @@ executable rozetka
   main-is: Main.hs
   hs-source-dirs:
       src
-  default-extensions: NoImplicitPrelude OverloadedStrings RecordWildCards TemplateHaskell
+  default-extensions: NoImplicitPrelude OverloadedStrings RecordWildCards TemplateHaskell TypeApplications
+  ghc-options: -Wall
   build-depends:
       base >=4.7 && <5
     , optparse-simple

@@ -25,3 +25,5 @@ executables:
       - OverloadedStrings
       - RecordWildCards
       - TemplateHaskell
+      - TypeApplications
+    ghc-options: -Wall

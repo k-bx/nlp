@@ -2,7 +2,6 @@ module Main where
 
 import RIO
 import Options.Applicative.Simple
-import qualified Prelude as Prelude
 
 data App = App
   { appLogFunc :: !LogFunc
@@ -11,10 +10,12 @@ data App = App
 instance HasLogFunc App where
   logFuncL = lens appLogFunc (\x y -> x {appLogFunc = y})
 
+app :: RIO App ()
+app = logDebug $ display @Text "hello world"
+
 main :: IO ()
 main = do
-  (verbose,()) <- simpleOptions "0.1.0.0" "rozetka domashka" "rozetka review extractor" (flag () () (long "verbose")) empty
-  Prelude.print verbose
-  -- lo <- logOptionsHandle stdout (verbose::Bool)
-  -- withLogFunc lo $ \appLogFunc ->
-  --   runRIO App {..} $ do logDebug $ display "hello world"
+  (verbose,()) <- simpleOptions "0.1.0.0" "rozetka reviews" "rozetka review extractor" (flag False True (long "verbose")) empty
+  lo <- logOptionsHandle stdout verbose
+  withLogFunc lo $ \appLogFunc ->
+    runRIO App {..} $ do app
