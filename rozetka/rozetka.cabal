@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: f07325aa5e9e747254f315dc5df6268c404dc791553225ef2fe6aba0d8907aa2
+-- hash: ce37489df167646dbc7b0267ff86781f4c72c8f51dcd34f2951b9242da7a5c11
 
 name:           rozetka
 version:        0.1.0.0
@@ -28,8 +28,11 @@ executable rozetka
   build-depends:
       aeson
     , base >=4.7 && <5
+    , lens-aeson
     , optparse-simple
     , rio
+    , scalpel-core
+    , string-class
     , text
     , wreq
   other-modules:
