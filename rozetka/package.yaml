@@ -12,9 +12,15 @@ extra-source-files:
 - README.md
 
 dependencies:
+  - aeson
   - base >= 4.7 && < 5
   - rio
   - optparse-simple
+  - scalpel-core
+  - string-class
+  - text
+  - lens-aeson
+  - wreq
 
 executables:
   rozetka:
@@ -25,3 +31,6 @@ executables:
       - OverloadedStrings
       - RecordWildCards
       - TemplateHaskell
+      - TypeApplications
+      - DeriveGeneric
+    ghc-options: -Wall
