@@ -3,19 +3,21 @@ module Main where
 import qualified Data.Aeson as J
 import qualified Data.String.Class as S
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import qualified Network.Wreq as W
 import Options.Applicative.Simple
 import qualified Prelude
 import RIO
 import qualified RIO.HashMap as Hash
+import Safe
 import Text.HTML.Scalpel.Core
-import qualified Data.Text.IO as T
 
 jsonOpts :: J.Options
 jsonOpts = J.defaultOptions {J.fieldLabelModifier = J.camelTo2 '_'}
 
 data App = App
   { appLogFunc :: !LogFunc
+  , appWreqOpts :: W.Options
   }
 
 instance HasLogFunc App where
@@ -55,8 +57,9 @@ getPageData catId pageId = do
         show pageId <>
         "&lang=ua"
   logDebug $ display $ "Downloading: " <> tshow url
-  r <- liftIO $ W.asJSON =<< W.get url
-  threadDelay 1000000
+  wreqOpts <- asks appWreqOpts
+  r <- liftIO $ W.asJSON =<< W.getWith wreqOpts url
+  threadDelay 500000
   return (r ^. W.responseBody)
 
 getProductIds :: CategoryId -> RIO App [ProductId]
@@ -73,7 +76,7 @@ parseComments =
   chroots ("article" @: [hasClass "pp-review-i"]) $ do
     cScore <-
       fmap
-        (Prelude.read . T.unpack)
+        (readDef 0 . T.unpack)
         (attr "content" ("span" @: [hasClass "g-rating-stars-i"]))
     cTextRaw <- text ("div" @: [hasClass "pp-review-text-i"])
     let cText = T.strip cTextRaw
@@ -83,7 +86,7 @@ testParseComments01 :: IO ()
 testParseComments01 = do
   t <- readFileUtf8 "data/comments_multi_page.html"
   let (Just coms) = scrapeStringLike t parseComments
-  forM_ coms $ \Comment{..} -> do
+  forM_ coms $ \Comment {..} -> do
     Prelude.putStrLn $ "Rating: " <> show cScore
     T.putStrLn $ "Comment: \n" <> cText
 
@@ -91,7 +94,7 @@ parseNumCommentPages :: Scraper Text Int
 parseNumCommentPages = do
   pageNumTexts <-
     chroots ("li" @: [hasClass "paginator-catalog-l-i"]) (text "span")
-  let pageNums = map (Prelude.read . S.toString) pageNumTexts
+  let pageNums = map (readDef 1 . S.toString) pageNumTexts
   case pageNums of
     [] -> return 1
     _ -> return (Prelude.last pageNums)
@@ -110,8 +113,9 @@ getComments productId page = do
         show page <>
         "/"
   logDebug $ display $ "Downloading: " <> tshow url
-  r <- liftIO $ W.get url
-  threadDelay 1000000
+  wreqOpts <- asks appWreqOpts
+  r <- liftIO $ W.getWith wreqOpts url
+  threadDelay 500000
   let comPages =
         fromMaybe 1 $
         scrapeStringLike
@@ -125,17 +129,12 @@ getComments productId page = do
     else do
       comsRest <- getComments productId (page + 1)
       return (comsCurrPage ++ comsRest)
-  -- forM [comPages
-  -- comsRest <-
-  --   concat <$>
-  --   if comPages <= 2
-  --     then return []
-  --     else (forM ([3 .. comPages]) (getComments productId))
-  -- return (comsp1 <> comsRest)
 
 app :: RIO App ()
 app = do
-  let catId = 4637799 :: CategoryId
+  let catId = 4634865 :: CategoryId -- men's sneakers
+  -- let catId = 2349092 :: CategoryId -- men's underwear
+  -- let catId = 4637799 :: CategoryId -- jeans
   logDebug $ display $ "Grabbing the category id: " <> tshow catId
   productIds <- getProductIds catId
   prodWithComms <-
@@ -156,4 +155,5 @@ main = do
       (flag True False (long "no-verbose"))
       empty
   lo <- logOptionsHandle stdout verbose
-  withLogFunc lo $ \appLogFunc -> runRIO App {..} $ do app
+  W.withManager $ \appWreqOpts ->
+    withLogFunc lo $ \appLogFunc -> runRIO App {..} $ do app

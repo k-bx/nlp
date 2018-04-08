@@ -15,7 +15,10 @@ dependencies:
   - aeson
   - base >= 4.7 && < 5
   - rio
+  - http-client
+  - lens
   - optparse-simple
+  - safe
   - scalpel-core
   - string-class
   - text
@@ -33,4 +36,5 @@ executables:
       - TemplateHaskell
       - TypeApplications
       - DeriveGeneric
-    ghc-options: -Wall
+      - Strict
+    ghc-options: -Wall -O -funbox-strict-fields

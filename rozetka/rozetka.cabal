@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ce37489df167646dbc7b0267ff86781f4c72c8f51dcd34f2951b9242da7a5c11
+-- hash: 8b6399780ddbe790b3000927e34f035add39f6fb90148ac0baaa641d7ac0a762
 
 name:           rozetka
 version:        0.1.0.0
@@ -23,14 +23,17 @@ executable rozetka
   main-is: Main.hs
   hs-source-dirs:
       src
-  default-extensions: NoImplicitPrelude OverloadedStrings RecordWildCards TemplateHaskell TypeApplications DeriveGeneric
-  ghc-options: -Wall
+  default-extensions: NoImplicitPrelude OverloadedStrings RecordWildCards TemplateHaskell TypeApplications DeriveGeneric Strict
+  ghc-options: -Wall -O -funbox-strict-fields
   build-depends:
       aeson
     , base >=4.7 && <5
+    , http-client
+    , lens
     , lens-aeson
     , optparse-simple
     , rio
+    , safe
     , scalpel-core
     , string-class
     , text
