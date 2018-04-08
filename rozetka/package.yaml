@@ -25,6 +25,8 @@ dependencies:
   - text
   - lens-aeson
   - wreq
+  - naiveml
+  - hashable
 
 executables:
   rozetka:

@@ -1,11 +1,21 @@
+{-# LANGUAGE DeriveAnyClass #-}
+
 module Main where
 
 import qualified Data.Aeson as J
+import Data.Hashable
 import Data.Maybe (fromJust)
 import qualified Data.String.Class as S
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
+import NaiveML.MultinomialNaiveBayes
+  ( Document(..)
+  , Env
+  , buildEnv
+  , transformedWeightNormalizedComplementNaiveBayes
+  )
 import qualified Network.Wreq as W
+import Numeric (showGFloat)
 import Options.Applicative.Simple
 import qualified Prelude
 import RIO
@@ -146,9 +156,10 @@ getComments productId page = do
 
 downloadCategory :: RIO App ()
 downloadCategory = do
-  let catId = 4634865 :: CategoryId -- men's sneakers
-    -- let catId = 2349092 :: CategoryId -- men's underwear
-    -- let catId = 4637799 :: CategoryId -- jeans
+  let catId = 4634713 :: CategoryId -- women's sneakers
+  -- let catId = 4634865 :: CategoryId -- men's sneakers
+  -- let catId = 2349092 :: CategoryId -- men's underwear
+  -- let catId = 4637799 :: CategoryId -- jeans
   logDebug $ display $ "Grabbing the category id: " <> tshow catId
   productIds <- getProductIds catId
   prodWithComms <-
@@ -168,22 +179,103 @@ getUkrainian pwc = concatMap f pwc
         then Just com
         else Nothing
 
+dlength :: [a] -> Double
+dlength = fromIntegral . length
+
+data Sentiment
+  = Positive
+  | Negative
+  | Neutral
+  deriving (Show, Eq, Generic, Hashable)
+
+scoreToSentiment :: Int -> Sentiment
+scoreToSentiment x
+  | x < 3 = Negative
+scoreToSentiment x
+  | x > 3 = Positive
+scoreToSentiment _
+  | otherwise = Neutral
+
+commentToDoc :: Comment -> Document Sentiment Text
+commentToDoc Comment {..} =
+  let docClasses = [scoreToSentiment cScore]
+      docWords = T.words cText
+  in Document {..}
+
+validate :: Env Sentiment Text -> Comment -> Either Comment Comment
+validate env comment =
+  let sentiment =
+        transformedWeightNormalizedComplementNaiveBayes
+          env
+          (T.words (cText comment))
+  in if sentiment == scoreToSentiment (cScore comment)
+       then Right comment
+       else Left comment
+
+tshowd :: RealFloat a => a -> Text
+tshowd x = S.toText $ showGFloat (Just 4) x ""
+
+extractTones :: RIO App [(Text, Int)]
+extractTones = do
+  logDebug "Reading tone-dict-uk-auto.tsv"
+  t <- readFileUtf8 "/home/kb/workspace/tone-dict-uk/tone-dict-uk-auto.tsv"
+  let autoTones = getTones t
+  logDebug "Reading tone-dict-uk-manual.tsv"
+  t2 <- readFileUtf8 "/home/kb/workspace/tone-dict-uk/tone-dict-uk-manual.tsv"
+  let manualTones = getTones t2
+  return (autoTones ++ manualTones)
+  where
+    getTones :: Text -> [(Text, Int)]
+    getTones t = mapMaybe getTone (T.lines t)
+    getTone t =
+      case T.splitOn "\t" t of
+        (w:v:_) ->
+          case readMay (S.toString v) of
+            Just i -> Just (w, i)
+            Nothing -> Nothing
+        _ -> Nothing
+
 processComments :: RIO App ()
 processComments = do
   commentsFile <- readFileUtf8 "data/comments_sneakers.json"
   let prodWithComms :: [(ProductId, [Comment])]
       prodWithComms = fromJust (J.decode (S.fromText commentsFile))
       ukrainian = getUkrainian prodWithComms
-      withScore = filter (\c -> cScore c > 0) ukrainian
+      comments = filter (\c -> cScore c > 0) ukrainian
   logDebug $ display $ "Number of ukrainian comments with score: " <>
-    tshow (length withScore)
+    tshow (length comments)
+  writeFileUtf8 "data/comments_ukrainian.json" (S.toText (J.encode comments))
+  let commentsTestLen = round (dlength comments * 0.8)
+  let commentsTest = take commentsTestLen comments
+  let commentsValidate = drop commentsTestLen comments
+  let docsTest = map commentToDoc commentsTest
+  let env = buildEnv docsTest
+  let (_validateIncorrect, validateCorrect) =
+        partitionEithers (map (validate env) commentsValidate)
+  let accuracy = dlength validateCorrect / dlength commentsValidate
+  logDebug $ display $ "Accuracy: " <> tshowd accuracy
+  logDebug "Adding the tones now"
+  tones <- extractTones
+  let toneDocs = map (\(t, i) -> Document [scoreToSentiment (i + 2)] [t]) tones
+  let env2 = buildEnv (docsTest ++ toneDocs)
+  let (_validateIncorrect2, validateCorrect2) =
+        partitionEithers (map (validate env2) commentsValidate)
+  let accuracy2 = dlength validateCorrect2 / dlength commentsValidate
+  logDebug $ display $ "Accuracy: " <> tshowd accuracy2
   return ()
 
 app :: RIO App ()
 app
-  -- downloadCategory
  = do
+  downloadCategory
   processComments
+
+runDef :: RIO App a -> IO a
+runDef f = do
+  let verbose = True
+  lo <- logOptionsHandle stdout verbose
+  W.withManager $ \appWreqOpts ->
+    withLogFunc lo $ \appLogFunc -> runRIO App {..} $ f
 
 main :: IO ()
 main = do

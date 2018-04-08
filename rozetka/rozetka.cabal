@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 3c8c6a0ff178b7740b96f51126171a75acbe280c55cb303945a513abacad7fa1
+-- hash: d9de5208484f2c0d787b389a45cf2d792b53a816898980d40c3e84c5729af194
 
 name:           rozetka
 version:        0.1.0.0
@@ -29,9 +29,11 @@ executable rozetka
       aeson
     , base >=4.7 && <5
     , cld2
+    , hashable
     , http-client
     , lens
     , lens-aeson
+    , naiveml
     , optparse-simple
     , rio
     , safe
