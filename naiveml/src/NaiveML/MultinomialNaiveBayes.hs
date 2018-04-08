@@ -14,6 +14,7 @@ module NaiveML.MultinomialNaiveBayes
   , animalsExample
   , tfidf
   , Document(..)
+  , Env
   ) where
 
 import Control.Newtype
