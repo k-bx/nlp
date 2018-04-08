@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fe7c5646a7d24e934b3d09e44dd5c300d4ba79b8c66a542a376a3c7c23ac3747
+-- hash: f1b2793c8a5e88fa9ddfafb67c85451ed7b3701e9f6d69636cb71b71e86e3dfc
 
 name:           naiveml
 version:        0.1.0.0
@@ -26,9 +26,11 @@ library
   build-depends:
       aeson
     , base >=4.7 && <5
+    , hashable
     , newtype
     , string-class
     , text
+    , unordered-containers
   exposed-modules:
       NaiveML.MultinomialNaiveBayes
   other-modules:
