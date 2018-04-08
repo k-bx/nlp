@@ -74,17 +74,26 @@ getProductIds catId = do
 parseComments :: Scraper Text [Comment]
 parseComments =
   chroots ("article" @: [hasClass "pp-review-i"]) $ do
-    cScore <-
+    cScoreMay1 <-
       fmap
-        (readDef 0 . T.unpack)
+        (readDef (fail "couldn't parse rating") . T.unpack)
         (attr "content" ("span" @: [hasClass "g-rating-stars-i"]))
+    cScoreMay2 <-
+      fmap fromStyle (attr "style" ("span" @: [hasClass "g-rating-stars-i"]))
     cTextRaw <- text ("div" @: [hasClass "pp-review-text-i"])
     let cText = T.strip cTextRaw
+    let cScore = fromMaybe 0 (cScoreMay1 <|> cScoreMay2)
     return Comment {..}
+  where
+    fromStyle t =
+      fmap
+        (`div` 20)
+        (readMay (S.toString (T.dropEnd 1 (T.drop (T.length "width:") t))))
 
 testParseComments01 :: IO ()
 testParseComments01 = do
-  t <- readFileUtf8 "data/comments_multi_page.html"
+  t <- readFileUtf8 "data/comments_sprite_score.html"
+  -- t <- readFileUtf8 "data/comments_multi_page.html"
   let (Just coms) = scrapeStringLike t parseComments
   forM_ coms $ \Comment {..} -> do
     Prelude.putStrLn $ "Rating: " <> show cScore

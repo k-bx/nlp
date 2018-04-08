@@ -1,0 +1,3998 @@
+	<div>
+		<script>
+	(function () {
+		var tpl = '<div class=\"popup-css popup-user-media\"> <a href=\"#\" class=\"popup-close\" name=\"close\"><img width=\"37\" height=\"37\" src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" alt=\"&times;\" class=\"popup-close-medium-icon sprite\"><\/a> <div name=\"content\"> <div class=\"user-media clearfix\"> <div class=\"user-media-col-right\" id=\"catalog_item${options.goods_id}\" data-location=\"commentPopup\"> <div class=\"user-media-title\"> ${options.title} <\/div> <div class=\"user-media-price-wrap {if options.sell_status == \'hidden\'}unavailable{else}${options.sell_status}{\/if}\"> {if parseInt(options.price_uah) > 0} <div name=\"price\" class=\"g-price\"> {if options.sell_status != \"archive\"} <div class=\"g-price-uah\"> ${options.price_uah.toString().toPriceFormat()} <span class=\"g-price-uah-sign\">${options.unit}<\/span> <\/div> {if options.sell_status == \"unavailable\" || options.sell_status == \"waiting_for_supply\" || options.sell_status == \"out_of_stock\" || options.sell_status == \"hidden\"} <div name=\"lightbox_to_waitlist\" class=\"inline\"><\/div> {else} <div class=\"lightbox-g-buy-btn\" name=\"buy_lightbox\"><\/div> {\/if} {else} <div class=\"g-price-uah\">Знято з виробництва<\/div> {\/if} <\/div> {\/if} <\/div> <div class=\"user-media-comments\" name=\"comment\"><\/div> <\/div> <div class=\"user-media-col-left\"> <a class=\"user-media-to-gallery-link sprite-side novisited\" name=\"show_gallery\" href=\"#\">Перейти до галереї<\/a> <div class=\"slider\" name=\"controls\"> <a href=\"#\" class=\"sprite-side slider-al user-media-slider-al\" data-direction=\"left\" name=\"control\">&lt;<\/a> <a href=\"#\" class=\"sprite-side slider-ar user-media-slider-ar\" data-direction=\"right\" name=\"control\">&gt;<\/a> <div class=\"slider-inner user-media-slider-inner\"> <div class=\"user-media-slider-i-wrap clearfix\" name=\"elems-container\" style=\"height: 56px;\"> {for img in data} <div class=\"user-media-slider-i\"> <a class=\"pp-review-media-link user-media-slider-i-link{if img.presentation_type && img.presentation_type == \'video\'} video sprite-side{\/if}\" name=\"scroll-element\" href=\"${img.original.src}\" {if img.presentation_type} data-type=\"${img.presentation_type}\"{\/if} ><\/a> <\/div> {\/for} <\/div> <\/div> <\/div> <figure class=\"user-media-main-img-wrap\"> <div class=\"user-media-main-img-al\"> <a href=\"#\" class=\"big-slider-link\" id=\"scroll-left\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"22\" height=\"66\" alt=\"&lt;\" class=\"sprite big-slider-link-img\"> <\/a> <\/div> <div class=\"user-media-main-img-ar\"> <a href=\"#\" class=\"big-slider-link\" id=\"scroll-right\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"22\" height=\"66\" alt=\"&gt;\" class=\"sprite big-slider-link-img\"> <\/a> <\/div> <div class=\"user-media-main-img responsive-img\" name=\"image\"><\/div> <\/figure> <\/div> <\/div> <\/div> <\/div>',
+			options = {
+				title: 'Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)',
+				goods_id: '17851776',
+				sell_status: 'available',
+				price_uah: '249',
+				unit: 'грн',
+				max_height: 532,
+				max_width: 675,
+				cutcontent: false,
+				fixheight: false,
+				fixwidth: false,
+				scroller: {
+					vector: 'horizontal',
+					inject_controls: false
+				},
+				rightScroll: 'scroll-right',
+				leftScroll: 'scroll-left',
+				scroller_enable: true,
+				tpl: {
+					all_attachments: '<div class=\"pp-review-media-all-heading\"> {if hasImages()}Фотографії{if hasVideo()} і відео{\/if}{else if hasVideo()}Відео{\/if} покупців <\/div> {for attachment in getAllAttachmentsPreview()} <div class=\"pp-review-media-i\"> <a class=\"pp-review-media-link responsive-img{if attachment.presentation_type && attachment.presentation_type == \'video\'} video sprite-side{\/if}\" href=\"${attachment.original.src}\"> <img src=\"${attachment.preview.src}\" width=\"${attachment.preview.w}\" height=\"${attachment.preview.h}\"\/> <\/a> <\/div> {\/for} {if data.length > options.all_attachments_count} <div class=\"pp-review-media-i\"> <a class=\"pp-review-media-all-more-link novisited\" href=\"#\" name=\"more\"> <span class=\"xhr\">Ще<\/span> <\/a> <\/div> {\/if}',
+					comment: '<div name=\"comment_vote\"> <div name=\"reply_form\" id=\"comments_tools_${id}\"> <div class=\"require\" name=\"msg\"><\/div> <div name=\"comment_block\"> <div class=\"clearfix pp-review-i-b\"> <div class=\"pp-review-date\"> <time class=\"pp-review-date-text\"> ${created} <\/time> <a href=\"${href}\" class=\"pp-review-i-link\" name=\"single_comment\" id=\"${id}\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"18\" height=\"18\" alt=\"#2502630\" title=\"Посилання на коментар\" class=\"sprite pp-review-i-link-icon\"> <\/a> <\/div> <div class=\"pp-review-author\"> <span class=\"pp-review-author-name\" itemprop=\"author\"> ${user_title} <\/span> <\/div> <\/div> {if from_buyer} <span class=\"sprite-side pp-review-buyer-note user-media-buyer-note\">Уже купив<\/span> {\/if} {if mark && !marks.length} <div class=\"user-media-g-rating\"> <span class=\"sprite g-rating-stars\"> <span class=\"sprite g-rating-stars-i\" content=\"${mark}\" style=\"width:${mark * 20}%\"><\/span> <\/span> <\/div> {\/if} {if marks.length || questions.length} <div class=\"clearfix user-media-spec\"> {if marks.length} <div class=\"user-media-spec-rating\"> {for mark in marks} <div class=\"user-media-spec-rating-b clearfix\"> <div class=\"user-media-spec-rating-b-i\"> ${mark.title} <\/div> <div class=\"clearfix\"> <span class=\"sprite g-rating-stars\"> <span class=\"sprite g-rating-stars-i\" style=\"width:${mark.value * 20}%\"><\/span> <\/span> <\/div> <\/div> {\/for} <\/div> {\/if} {if questions.length} <aside class=\"user-media-spec-lines\"> {for question in questions} <div class=\"detail-review-aside-i{if question.disabled} disabled{\/if}\"> <div class=\"detail-review-aside-i-title\"> ${question.title} <\/div> <div class=\"detail-review-custom-rating\"> <div class=\"detail-review-custom-rating-i\"> <div class=\"detail-review-custom-rate-line\">&nbsp;<\/div> <div class=\"detail-review-custom-rate-by-user\"> <div class=\"detail-review-custom-rate-by-user-points\"> {for value in question.values} <div class=\"detail-review-custom-rate-by-user-points-i\"> <span class=\"detail-review-custom-rate-by-user-point{if value.active} active{\/if}\">&nbsp;<\/span> <\/div> {\/for} <\/div> <\/div> <div class=\"detail-review-custom-rating-i-rate-text\"> {var length = question.values.length} {for value in question.values} {if value.title} <div class=\"detail-review-custom-rating-i-rate-title{if value.active} active{\/if}\" {if value_index == (length - 1)} style=\"text-align:right;\"{elseif value_index != 0} style=\"text-align:center;\"{\/if} > ${value.title} <\/div> {\/if} {\/for} <\/div> <\/div> <\/div> <\/div> {\/for} <\/aside> {\/if} <\/div> {\/if} <div class=\"pp-review-text-i\"> ${text} <\/div> {if dignity} <div class=\"pp-review-text-i\"> <span class=\"bold\">Переваги:<\/span>&nbsp;${dignity} <\/div> {\/if} {if shortcomings} <div class=\"pp-review-text-i\"> <span class=\"bold\">Недоліки:<\/span>&nbsp;${shortcomings} <\/div> {\/if} <div class=\"pp-review-tools-wrap\"> <div class=\"pp-review-tools\"> <div class=\"pp-review-tools-i\"> <ul class=\"inline m-tabs\" name=\"tabs-menu\"> <li class=\"m-tabs-i\"> <a href=\"#\" class=\"novisited m-tabs-link\" data-bind=\"form\" name=\"add\" id=\"${id}\" onclick=\"document.fireEvent(\'commentAddReply\')\"> <span class=\"sprite-side pp-review-reply-add\"> <span class=\"xhr\"> Відповісти <\/span> <\/span> <\/a> <\/li> <\/ul> <\/div> <div class=\"pp-review-tools-i\" name=\"comment_id\" id=\"${id}\"> <span class=\"pp-review-vote\" name=\"positive_block\"> <a href=\"#\" class=\"pp-review-vote-positive\" name=\"positive_vote\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"17\" height=\"17\" alt=\"Корисний відгук\" title=\"Корисний відгук\" class=\"sprite pp-review-vote-icon\">&nbsp;<span class=\"pp-review-vote-count\" name=\"count\">{if positive > 0}${positive}{\/if}<\/span> <\/a> <\/span> <span class=\"pp-review-vote\" name=\"negative_block\"> <a href=\"#\" class=\"pp-review-vote-negative\" name=\"negative_vote\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"17\" height=\"17\" alt=\"Некорисний відгук\" title=\"Некорисний відгук\" class=\"sprite pp-review-vote-icon\">&nbsp;<span class=\"pp-review-vote-count\" name=\"count\">{if negative > 0}${negative}{\/if}<\/span> <\/a> <\/span> <\/div> <div class=\"pp-review-tools-i\"> <a href=\"#\" class=\"pp-review-complaint\" name=\"complaint_button\" record_to_complaint_id=\"${id}\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"20\" height=\"17\" alt=\"Поскаржитися на відгук\" title=\"Поскаржитися на відгук\" class=\"sprite pp-review-complaint-icon\"> <\/a> <\/div> <\/div> <\/div> <div class=\"pp-comments-replies add-user-comments-replies\" name=\"replies\"> {if replies.length} {for reply in replies} <div class=\"pp-comments-answer\" name=\"reply\"> <div class=\"pp-replies\" name=\"reply\"> <div class=\"clearfix\"> <div class=\"pp-replies-date\"> <time class=\"pp-replies-date-text\">${reply.created}<\/time> <\/div> <div class=\"pp-replies-author\"> <span class=\"pp-replies-author-name\" itemprop=\"author\">${reply.user_title}<\/span> <\/div> <\/div> <div class=\"pp-replies-text\" itemprop=\"description\"> ${reply.text} <\/div> <div class=\"aligned-right\"> <a href=\"#\" class=\"pp-replies-complaint\" name=\"complaint_button\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"20\" height=\"17\" alt=\"Поскаржитися на відгук\" title=\"Поскаржитися на відгук\" class=\"sprite pp-replies-complaint-icon\"> <\/a> <\/div> <\/div> <\/div> {\/for} {\/if} <\/div> <\/div> <div data-bind=\"form\" name=\"tab-content\" class=\"hidden\"> <div class=\"user-media-comments-form\" name=\"form\"> <a href=\"#\" class=\"add-user-media-close\" name=\"cancel\"> <img width=\"20\" height=\"20\" src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" alt=\"&times;\" class=\"popup-close-icon-small sprite\"> <\/a> <form method=\"post\" action=\"\/cgi-bin\/form.php\"> <div name=\"replies_msg\"><\/div> <div class=\"clearfix pp-reply-f-i\"> <div class=\"pp-reply-f-i-title-vert\"> Ваше повідомлення <\/div> <textarea class=\"input-textarea input-textarea-wide pp-reply-f-textarea\" name=\"text\" _required=\"required\" data-title=\"Ваше повідомлення\" ><\/textarea> <\/div> <div class=\"clearfix pp-reply-f-i\"> <div class=\"pp-reply-f-i-title-vert\"> Ім\'я <\/div> <input type=\"text\" class=\"input-text pp-reply-f-input-text\" name=\"name\" data-title=\"Ваше ім\'я\" _pattern=\"^[\\`\\&#039;\\&quot;\\(\\)A-Za-zА-Яа-яіїёєІЇЁЄ\\d\\.\\s_-]{2,50}$\" > <\/div> <div class=\"clearfix pp-reply-f-i\"> <div class=\"pp-reply-f-i-title-vert hidden\" name=\"email_title\"> Ел.&nbsp;пошта <\/div> <div class=\"pp-reply-f-i-title-vert\" name=\"login_title\"> Ел.&nbsp;пошта або телефон <\/div> <input type=\"text\" class=\"input-text pp-reply-f-input-text\" name=\"login\" _required=\"required\" data-title=\"Ел.&nbsp;пошта або телефон\" _pattern=\"^.+@.+\\..+$|^\\s*((\\+?\\s*(\\(\\s*)?3)?[\\s-]*(\\(\\s*)?8[\\s-]*)?(\\(\\s*)?0[\\s-\\(]*[1-9][\\s-]*\\d(\\s*\\))?([\\s-]*\\d){7}\\s*$\" > <div class=\"user-media-comments-hint hidden\" name=\"email_hint_block\"><\/div> <\/div> <div class=\"user-media-comments-auth\" name=\"auth_blocks\"><\/div> <div class=\"pp-reply-f-btn-wrap\" name=\"submit_form_btn_block\"> <span class=\"btn-link btn-link-gray pp-reply-f-btn\"> <button type=\"submit\" class=\"btn-link-i\" data-title=\"Додати\">Додати<\/button> <\/span> <\/div> <input type=\"hidden\" name=\"goods_id\" value=\"${goods_id}\"> <input type=\"hidden\" name=\"parent_comment_id\" value=\"${id}\"> <\/form> <div name=\"signup_confirm_block\" class=\"pp-reply-f-confirm hidden\"><\/div> <div class=\"pp-comments-i-answer-form-i-help\"> Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href=\"http:\/\/rozetka.com.ua\/ua\/news-articles-promotions\/news\/kommentarii_otzivy.html\" target=\"_blank\" class=\"novisited\">нашими правилами!<\/a> <\/div> <\/div> <\/div> <\/div> <\/div>',
+					gallery: {
+						popup: '<div class=\"popup-css popup-user-media\"> <a href=\"#\" class=\"popup-close\" name=\"close\"><img width=\"37\" height=\"37\" src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" alt=\"&times;\" class=\"popup-close-medium-icon sprite\"><\/a> <div name=\"content\"><\/div> <\/div>',
+						content: '<div class=\"user-media-all\" id=\"catalog_item${options.goods_id}\"> <header class=\"lightbox-header user-media-all-header clearfix {if options.sell_status == \'hidden\'}unavailable{else}${options.sell_status}{\/if}\"> <h2 class=\"lightbox-header-title\">{if _has_images}Фотографії{if _has_video} і відео{\/if}{else if _has_video}Відео{\/if} користувачів із відгуків ${options.title}<\/h2> <div name=\"price\" class=\"g-price\"> {if options.sell_status != \"archive\"} <div class=\"g-price-uah\"> ${options.price_uah.toString().toPriceFormat()} <span class=\"g-price-uah-sign\">${options.unit}<\/span> <\/div> {if options.sell_status == \"unavailable\" || options.sell_status == \"waiting_for_supply\" || options.sell_status == \"out_of_stock\" || options.sell_status == \"hidden\"} <div name=\"lightbox_to_waitlist\" class=\"inline\"><\/div> {else} <div class=\"lightbox-g-buy-btn\" name=\"buy_lightbox\"><\/div> {\/if} {else} <div class=\"g-price-uah\">Знято з виробництва<\/div> {\/if} <\/div> <\/header> <section class=\"user-media-all-main clearfix\"> {for attachment in data} <figure class=\"user-media-all-image\"> <a href=\"${attachment.original.src}\" class=\"user-media-all-image-i{if attachment.presentation_type && attachment.presentation_type == \'video\'} video sprite-side{\/if}\"> <img src=\"${attachment.original.src}\" height=\"${attachment.original.h}\" width=\"${attachment.original.w}\" \/> <\/a> <\/figure> {\/for} <\/section> <\/div>'
+					}
+				}
+			};
+
+				if (window['CommentsLightBox'] == undefined) {
+			window.CommentsLightBox = new CommentsLightBox_class(tpl).setOptions(options);
+
+							window.CommentsLightBox.addData([{"comment_id":20968248,"original":{"w":"2292","h":"2985","src":"https:\/\/i2.rozetka.ua\/goods_comments\/892\/892353.jpg"},"big":{"w":"408","h":"532","src":"https:\/\/i2.rozetka.ua\/goods_comments\/892\/892360.jpg"},"preview":{"w":"196","h":"256","src":"https:\/\/i2.rozetka.ua\/goods_comments\/892\/892381.jpg"}},{"comment_id":20968248,"original":{"w":"4160","h":"3120","src":"https:\/\/i1.rozetka.ua\/goods_comments\/892\/892430.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i1.rozetka.ua\/goods_comments\/892\/892444.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i2.rozetka.ua\/goods_comments\/892\/892451.jpg"}},{"comment_id":20968248,"original":{"w":"4160","h":"3120","src":"https:\/\/i2.rozetka.ua\/goods_comments\/892\/892465.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i1.rozetka.ua\/goods_comments\/892\/892472.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i2.rozetka.ua\/goods_comments\/892\/892479.jpg"}},{"comment_id":20968248,"original":{"w":"3120","h":"4160","src":"https:\/\/i1.rozetka.ua\/goods_comments\/892\/892493.jpg"},"big":{"w":"398","h":"532","src":"https:\/\/i1.rozetka.ua\/goods_comments\/892\/892500.jpg"},"preview":{"w":"192","h":"256","src":"https:\/\/i1.rozetka.ua\/goods_comments\/892\/892507.jpg"}}]);
+				window.CommentsLightBox.addCommentData({"id":20968248,"goods_id":"17851764","user_title":"Сергей Власюк","created":"3 жовтня 2017","href":"#tab=comments;id=20968248","from_buyer":true,"mark":5,"text":"В общем покупкой доволен, удобные при ходьбе. По весу средний вариант. Идеально для сухой осени, в них тепло и комфортно. Понравилось легкость ухода за ними. Подробнее смотрите #МойЛук","dignity":"цена дизайн","shortcomings":"не летние кросовки","positive":"0","negative":"0","replies":[],"marks":[{"title":"Общее впечатление","value":5},{"title":"Стиль","value":4},{"title":"Комфорт","value":5}],"questions":[{"title":"Соответствие размеру","disabled":false,"values":[{"title":"Меньше","active":false},{"title":"","active":false},{"title":"Точно","active":true},{"title":"","active":false},{"title":"Больше","active":false}]},{"title":"Соответствие ширине","disabled":false,"values":[{"title":"Уже","active":false},{"title":"Отлично","active":true},{"title":"Шире","active":false}]},{"title":"Соответствие высоте","disabled":false,"values":[{"title":"Низкий","active":false},{"title":"Средний","active":true},{"title":"Высокий","active":false}]}]});
+							window.CommentsLightBox.addData([{"comment_id":21075719,"original":{"w":"1280","h":"960","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917441.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917448.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917455.jpg"}},{"comment_id":21075719,"original":{"w":"1280","h":"960","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917469.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917476.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917483.jpg"}},{"comment_id":21075719,"original":{"w":"1280","h":"960","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917497.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917504.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917511.jpg"}}]);
+				window.CommentsLightBox.addCommentData({"id":21075719,"goods_id":"17851782","user_title":"Денис Забара","created":"8 жовтня 2017","href":"#tab=comments;id=21075719","from_buyer":true,"mark":4,"text":"Дуже задоволений покупкою)) Дякую магазину розетка))","dignity":"Зручні,досить м'які, чудово сидять на нозі","shortcomings":"поки що не помітив","positive":"0","negative":"0","replies":[],"marks":[{"title":"Общее впечатление","value":5},{"title":"Стиль","value":4},{"title":"Комфорт","value":4}],"questions":[{"title":"Соответствие размеру","disabled":false,"values":[{"title":"Меньше","active":false},{"title":"","active":false},{"title":"Точно","active":true},{"title":"","active":false},{"title":"Больше","active":false}]},{"title":"Соответствие ширине","disabled":false,"values":[{"title":"Уже","active":false},{"title":"Отлично","active":true},{"title":"Шире","active":false}]},{"title":"Соответствие высоте","disabled":false,"values":[{"title":"Низкий","active":false},{"title":"Средний","active":true},{"title":"Высокий","active":false}]}]});
+							window.CommentsLightBox.addData([{"comment_id":26988576,"original":{"w":"4128","h":"2322","src":"https:\/\/i2.rozetka.ua\/goods_comments\/2272\/2272576.jpg"},"big":{"w":"675","h":"379","src":"https:\/\/i1.rozetka.ua\/goods_comments\/2272\/2272584.jpg"},"preview":{"w":"256","h":"144","src":"https:\/\/i2.rozetka.ua\/goods_comments\/2272\/2272592.jpg"}}]);
+				window.CommentsLightBox.addCommentData({"id":26988576,"goods_id":"17851776","user_title":"Богдан Балема","created":"27 березня 2018","href":"#tab=comments;id=26988576","from_buyer":false,"mark":5,"text":"Можна брати. Устілка норм. Підошва трохи  стрьомна (із середини). А так - ок","dignity":"","shortcomings":"","positive":"0","negative":"0","replies":[],"marks":[],"questions":[{"title":"Соответствие размеру","disabled":true,"values":[{"title":"Меньше","active":false},{"title":"","active":false},{"title":"Точно","active":false},{"title":"","active":false},{"title":"Больше","active":false}]},{"title":"Соответствие ширине","disabled":true,"values":[{"title":"Уже","active":false},{"title":"Отлично","active":false},{"title":"Шире","active":false}]},{"title":"Соответствие высоте","disabled":true,"values":[{"title":"Низкий","active":false},{"title":"Средний","active":false},{"title":"Высокий","active":false}]}]});
+			
+
+			if (!App.getService('CommentsLightBox')) {
+				App.addService('CommentsLightBox', window['CommentsLightBox']);
+			}
+		}
+		
+	})()
+</script>
+		
+					
+			<span itemprop="aggregateRating" itemscope="" itemtype="http://schema.org/AggregateRating" class="hidden">
+	<meta itemprop="ratingValue" content="5">
+	<meta itemprop="worstRating" content="1">
+	<meta itemprop="bestRating" content="5">
+	<meta itemprop="ratingCount" content="1">
+	<meta itemprop="reviewCount" content="12">
+</span>
+				<a name="add_comment"></a>
+		<div class="clearfix" name="comments_container">
+							<div class="pp-tab pp-tab-with-aside multiple-comment">
+
+	<div class="pp-tab-aside-wrap">
+	<div name="sticky-element" class="inline pp-tab-aside-container"></div>
+	<script>
+		(function () {
+	var options = {
+		method: 'get',
+		use_language: true,
+		evalScripts : true
+	};
+	
+	new Ajax('https://rozetka.com.ua/ua/products/action=getDeliveryBlockHorizontal;goods_id=17851776/', options)
+		.request();
+})();
+		(function () {
+			new RozetkaStickyElement_class($('tab_content'));
+		})();
+	</script>
+</div>
+
+	<div class="pp-tab-with-aside-b">
+					<header class="pp-review-heading">
+				<div class="pp-review-add">
+					<span class="btn-link btn-link-gray">
+						<a href="#comment_form" class="btn-link-i" onclick="document.fireEvent('writeReview');">
+							<span class="pp-review-add-text">Написати відгук</span>
+							<img src="https://i.rozetka.ua/design/_.gif" width="20" height="20" alt="_" class="sprite pp-review-add-icon">
+						</a>
+					</span>
+
+					<div class="pp-review-sort-view">
+						<div class="pp-comments-sort" name="drop_parent">
+	<span class="pp-comments-sort-title">Сортування</span>
+	<a href="#" class="sprite-side pp-comments-sort-box" name="drop_link">
+		<span class="pp-comments-sort-box-type">За датою</span>
+	</a>
+	<div class="sort-popup popup-dropdown" name="drop_menu">
+		<ul class="sort-view-l" id="sorts">
+							<li class="sort-view-l-i" name="date">
+																		<span class="sort-view-l-i-link active sprite-side">За датою</span>
+															</li>
+							<li class="sort-view-l-i" name="helpful">
+																		<a class="sort-view-l-i-link novisited sprite-side"
+							   name="active-element"
+							   href="/ua/dago_2000000114477/p17851776/sort=helpful;tab=comments/"
+							   onclick="document.fireEvent('sortReview', {extend_event: [{name: 'eventContent', value:'helpful'}]});"
+							>Найкорисніші</a>
+															</li>
+							<li class="sort-view-l-i" name="from_buyer">
+																		<a class="sort-view-l-i-link novisited sprite-side"
+							   name="active-element"
+							   href="/ua/dago_2000000114477/p17851776/sort=from_buyer;tab=comments/"
+							   onclick="document.fireEvent('sortReview', {extend_event: [{name: 'eventContent', value:'from_buyer'}]});"
+							>Від тих, хто купив цей товар</a>
+															</li>
+			
+		</ul>
+	</div>
+	<script>
+		
+		(function () {
+			var comments_sort_menu = new RozetkaSortDropDownMenu();
+			comments_sort_menu.setOptions({stop_events: false});
+			comments_sort_menu.run();
+		})();
+		
+	</script>
+
+	
+</div>
+
+					</div>
+				</div>
+
+																	<p class="pp-review-heading-title">
+					Відгуки покупців&nbsp;Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)&nbsp;<span name="count_comments" class="pp-review-heading-title-inner"
+						>12
+					</span>
+				</p>
+			</header>
+		
+		<div class="pp-review-media-all clearfix" name="users_attachments"></div>
+
+		<div id="reviews_container_parent">
+			
+											<div class="pp-review" id="comments" name="reviews_container">
+												
+				
+<article class="pp-review-i" name="27331136">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						вчора
+					</time>
+					<meta itemprop="datePublished" content="2018-4-07" />
+
+					
+
+											<a href="#tab=comments;id=27331136" class="pp-review-i-link" name="single_comment" id="27331136">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#27331136" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author">
+		<span class="pp-review-author-name" itemprop="author">
+			Владислав Догойда</span
+		>	</div>
+
+
+													<div class="user-rating">
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Общее впечатление
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Стиль
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Комфорт
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+						
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							Когда появится 44 размер?
+						</div>
+					
+																					</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_27331136">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="27331136"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="27331136">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="27331136">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="27331136">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="27055744">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						29 березня 2018
+					</time>
+					<meta itemprop="datePublished" content="2018-3-29" />
+
+					
+
+											<a href="#tab=comments;id=27055744" class="pp-review-i-link" name="single_comment" id="27055744">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#27055744" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			Константин Захаров</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+													<div class="user-rating">
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Общее впечатление
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Стиль
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:80%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Комфорт
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+						
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							В общем покупкой доволен, удобные при ходьбе.
+						</div>
+					
+																										<div class="pp-review-text-i">
+									<span class="bold">Переваги:</span>&nbsp;Понравились. Хорошо сидят на ноге
+								</div>
+																																		<div class="pp-review-text-i">
+									<span class="bold">Недоліки:</span>&nbsp;Не заметил
+								</div>
+																	</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_27055744">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="27055744"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="27055744">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="27055744">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="27055744">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="26988576">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						27 березня 2018
+					</time>
+					<meta itemprop="datePublished" content="2018-3-27" />
+
+					
+
+											<a href="#tab=comments;id=26988576" class="pp-review-i-link" name="single_comment" id="26988576">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#26988576" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author">
+		<span class="pp-review-author-name" itemprop="author">
+			Богдан Балема</span
+		>	</div>
+
+
+													<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="hidden">
+						<meta itemprop="worstRating" content="1" />
+						<meta itemprop="bestRating" content="5" />
+						<meta itemprop="ratingValue" content="5" />
+					</div>
+
+					<div class="g-rating-b">
+						<span class="sprite g-rating-stars">
+							<span class="sprite g-rating-stars-i" content="5" style="width:100%"></span>
+						</span>
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							Можна брати. Устілка норм. Підошва трохи  стрьомна (із середини). А так - ок
+						</div>
+					
+																					</div>
+
+																	<div class="pp-review-media clearfix pp-review-text">
+
+													<div class="pp-review-media-i">
+								<a class="pp-review-media-link responsive-img" href="https://i2.rozetka.ua/goods_comments/2272/2272576.jpg">
+									<img src="https://i2.rozetka.ua/goods_comments/2272/2272592.jpg" width="256" height="144"/>
+								</a>
+							</div>
+						
+
+						
+					</div>
+					<script>
+						CommentsLightBox.addData([{"comment_id":26988576,"original":{"w":"4128","h":"2322","src":"https:\/\/i2.rozetka.ua\/goods_comments\/2272\/2272576.jpg"},"big":{"w":"675","h":"379","src":"https:\/\/i1.rozetka.ua\/goods_comments\/2272\/2272584.jpg"},"preview":{"w":"256","h":"144","src":"https:\/\/i2.rozetka.ua\/goods_comments\/2272\/2272592.jpg"}}]);
+						CommentsLightBox.addCommentData({"id":26988576,"goods_id":"17851776","user_title":"Богдан Балема","created":"27 березня 2018","href":"#tab=comments;id=26988576","from_buyer":false,"mark":5,"text":"Можна брати. Устілка норм. Підошва трохи  стрьомна (із середини). А так - ок","dignity":"","shortcomings":"","positive":"0","negative":"0","replies":[],"marks":[],"questions":[{"title":"Соответствие размеру","disabled":true,"values":[{"title":"Меньше","active":false},{"title":"","active":false},{"title":"Точно","active":false},{"title":"","active":false},{"title":"Больше","active":false}]},{"title":"Соответствие ширине","disabled":true,"values":[{"title":"Уже","active":false},{"title":"Отлично","active":false},{"title":"Шире","active":false}]},{"title":"Соответствие высоте","disabled":true,"values":[{"title":"Низкий","active":false},{"title":"Средний","active":false},{"title":"Высокий","active":false}]}]});
+					</script>
+				
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_26988576">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="26988576"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="26988576">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="26988576">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="26988576">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="25872655">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						22 лютого 2018
+					</time>
+					<meta itemprop="datePublished" content="2018-2-22" />
+
+					
+
+											<a href="#tab=comments;id=25872655" class="pp-review-i-link" name="single_comment" id="25872655">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#25872655" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			Дмитрий</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+								
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							берите
+						</div>
+					
+																										<div class="pp-review-text-i">
+									<span class="bold">Переваги:</span>&nbsp;за такие деньги отличные!
+								</div>
+																																		<div class="pp-review-text-i">
+									<span class="bold">Недоліки:</span>&nbsp;подошва хоть и не легкая, но тонкая, скорее всего она первая и сноситься.
+								</div>
+																	</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_25872655">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="25872655"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="25872655">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="25872655">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="25872655">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="25650783">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						15 лютого 2018
+					</time>
+					<meta itemprop="datePublished" content="2018-2-15" />
+
+					
+
+											<a href="#tab=comments;id=25650783" class="pp-review-i-link" name="single_comment" id="25650783">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#25650783" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			Даниил</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+													<div class="user-rating">
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Общее впечатление
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:80%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Стиль
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Комфорт
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+						
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							Брал для тренажерного зала. Мягкие, удобные, хорошо "сидят" на стопе.<br />
+Единственное - тяжеловаты.
+						</div>
+					
+																										<div class="pp-review-text-i">
+									<span class="bold">Переваги:</span>&nbsp;Мягкие, удобные, хорошо "сидят" на стопе
+								</div>
+																																		<div class="pp-review-text-i">
+									<span class="bold">Недоліки:</span>&nbsp;немного тяжеловаты
+								</div>
+																	</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_25650783">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="25650783"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="25650783">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="25650783">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="25650783">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="24718799">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						21 січня 2018
+					</time>
+					<meta itemprop="datePublished" content="2018-1-21" />
+
+					
+
+											<a href="#tab=comments;id=24718799" class="pp-review-i-link" name="single_comment" id="24718799">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#24718799" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			irzhur9</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+													<div class="user-rating">
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Общее впечатление
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Стиль
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+						
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							Отлично сидят на ноге с высоким подъёмом. За такую цену с промокодом - потрясающе.Брали для спортзала, и пригодится на тёплую сухую погоду на улицу. Тяжеловатая подошва, мощная.
+						</div>
+					
+																					</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_24718799">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="24718799"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="24718799">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="24718799">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="24718799">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="24626911">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						19 січня 2018
+					</time>
+					<meta itemprop="datePublished" content="2018-1-19" />
+
+					
+
+											<a href="#tab=comments;id=24626911" class="pp-review-i-link" name="single_comment" id="24626911">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#24626911" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			Елена Цюх</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+													<div class="user-rating">
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Общее впечатление
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:80%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Стиль
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:80%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Комфорт
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+						
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							Задоволені  покупкою, так як брали по акції, то можна сказати, що  якість перевищує ціну.
+						</div>
+					
+																										<div class="pp-review-text-i">
+									<span class="bold">Переваги:</span>&nbsp;Зручні, дешеві.
+								</div>
+																																		<div class="pp-review-text-i">
+									<span class="bold">Недоліки:</span>&nbsp;Не дуже легкі за рахунок підошви.
+								</div>
+																	</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_24626911">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="24626911"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="24626911">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="24626911">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="24626911">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="22970425">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						6 грудня 2017
+					</time>
+					<meta itemprop="datePublished" content="2017-12-06" />
+
+					
+
+											<a href="#tab=comments;id=22970425" class="pp-review-i-link" name="single_comment" id="22970425">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#22970425" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			Владислав Бруква</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+													<div class="user-rating">
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Общее впечатление
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Стиль
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:80%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Комфорт
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+						
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							Отлично.
+						</div>
+					
+																					</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_22970425">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="22970425"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="22970425">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="22970425">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="22970425">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="21086009">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						8 жовтня 2017
+					</time>
+					<meta itemprop="datePublished" content="2017-10-08" />
+
+					
+
+											<a href="#tab=comments;id=21086009" class="pp-review-i-link" name="single_comment" id="21086009">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#21086009" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			Сергей Беспалов</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+													<div itemprop="reviewRating" itemscope itemtype="http://schema.org/Rating" class="hidden">
+						<meta itemprop="worstRating" content="1" />
+						<meta itemprop="bestRating" content="5" />
+						<meta itemprop="ratingValue" content="4" />
+					</div>
+
+					<div class="g-rating-b">
+						<span class="sprite g-rating-stars">
+							<span class="sprite g-rating-stars-i" content="4" style="width:80%"></span>
+						</span>
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i disabled">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							У меня в зависимости от обуви 39-40, подошёл размер 41
+						</div>
+					
+																										<div class="pp-review-text-i">
+									<span class="bold">Переваги:</span>&nbsp;Легкие, мягкие
+								</div>
+																							</div>
+
+												
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_21086009">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="21086009"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="21086009">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="21086009">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="21086009">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+												
+				
+<article class="pp-review-i" name="21075719">
+	<div name="comment_vote">
+				<div itemprop="review" itemscope itemtype="http://schema.org/Review" class="pp-review-inner rated">
+			<meta itemprop="name" content="Кросівки Dago 9004/2 42 27.3 см Сині (2000000114477_1)" />
+			<div class="require" name="msg"></div>
+
+						
+						<div class="clearfix pp-review-i-b">
+				<div class="pp-review-date">
+					<time class="pp-review-date-text">
+						8 жовтня 2017
+					</time>
+					<meta itemprop="datePublished" content="2017-10-08" />
+
+					
+
+											<a href="#tab=comments;id=21075719" class="pp-review-i-link" name="single_comment" id="21075719">
+							<img src="https://i.rozetka.ua/design/_.gif" width="18" height="18" alt="#21075719" title="Посилання на коментар" class="sprite pp-review-i-link-icon"/>
+						</a>
+									</div>
+
+				
+	<div class="pp-review-author pp-buyer-note">
+		<span class="pp-review-author-name" itemprop="author">
+			Денис Забара</span
+		><span class="sprite-side pp-review-buyer-note">Уже купив</span>	</div>
+
+
+													<div class="user-rating">
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Общее впечатление
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:100%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Стиль
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:80%"></span>
+									</span>
+								</div>
+							</div>
+													<div class="user-rating-b">
+								<div class="user-rating-b-i">
+									Комфорт
+								</div>
+								<div class="user-rating-b-i">
+									<span class="sprite g-rating-stars">
+										<span class="sprite g-rating-stars-i" style="width:80%"></span>
+									</span>
+								</div>
+							</div>
+						
+					</div>
+				
+				
+							</div>
+
+						<div class="clearfix pp-review-i-b has-spec-questions">
+									<aside class="detail-review-aside">
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие размеру
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Меньше
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Точно
+														</div>
+																																																																													<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Больше
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие ширине
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Уже
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Отлично
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Шире
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						                                                        							<div class="detail-review-aside-i">
+								<div class="detail-review-aside-i-title">
+									Соответствие высоте
+								</div>
+								<div class="detail-review-custom-rating">
+									<div class="detail-review-custom-rating-i">
+										<div class="detail-review-custom-rate-line">&nbsp;</div>
+										<div class="detail-review-custom-rate-by-user">
+											<div class="detail-review-custom-rate-by-user-points">
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point active">&nbsp;</span>
+													</div>
+																									<div class="detail-review-custom-rate-by-user-points-i">
+														<span class="detail-review-custom-rate-by-user-point">&nbsp;</span>
+													</div>
+												
+											</div>
+										</div>
+																					<div class="detail-review-custom-rating-i-rate-text">
+																																							<div class="detail-review-custom-rating-i-rate-title" style="">
+															Низкий
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title active" style="text-align:center;">
+															Средний
+														</div>
+																																																				<div class="detail-review-custom-rating-i-rate-title" style="text-align:right;">
+															Высокий
+														</div>
+																									
+											</div>
+																			</div>
+								</div>
+							</div>
+						
+					</aside>
+				
+								<div class="pp-review-text">
+																<div class="pp-review-text-i">
+							Дуже задоволений покупкою)) Дякую магазину розетка))
+						</div>
+					
+																										<div class="pp-review-text-i">
+									<span class="bold">Переваги:</span>&nbsp;Зручні,досить м'які, чудово сидять на нозі
+								</div>
+																																		<div class="pp-review-text-i">
+									<span class="bold">Недоліки:</span>&nbsp;поки що не помітив
+								</div>
+																	</div>
+
+																	<div class="pp-review-media clearfix pp-review-text">
+
+													<div class="pp-review-media-i">
+								<a class="pp-review-media-link responsive-img" href="https://i2.rozetka.ua/goods_comments/917/917441.jpg">
+									<img src="https://i1.rozetka.ua/goods_comments/917/917455.jpg" width="256" height="192"/>
+								</a>
+							</div>
+													<div class="pp-review-media-i">
+								<a class="pp-review-media-link responsive-img" href="https://i2.rozetka.ua/goods_comments/917/917469.jpg">
+									<img src="https://i1.rozetka.ua/goods_comments/917/917483.jpg" width="256" height="192"/>
+								</a>
+							</div>
+													<div class="pp-review-media-i">
+								<a class="pp-review-media-link responsive-img" href="https://i2.rozetka.ua/goods_comments/917/917497.jpg">
+									<img src="https://i1.rozetka.ua/goods_comments/917/917511.jpg" width="256" height="192"/>
+								</a>
+							</div>
+						
+
+						
+					</div>
+					<script>
+						CommentsLightBox.addData([{"comment_id":21075719,"original":{"w":"1280","h":"960","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917441.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917448.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917455.jpg"}},{"comment_id":21075719,"original":{"w":"1280","h":"960","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917469.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917476.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917483.jpg"}},{"comment_id":21075719,"original":{"w":"1280","h":"960","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917497.jpg"},"big":{"w":"675","h":"506","src":"https:\/\/i2.rozetka.ua\/goods_comments\/917\/917504.jpg"},"preview":{"w":"256","h":"192","src":"https:\/\/i1.rozetka.ua\/goods_comments\/917\/917511.jpg"}}]);
+						CommentsLightBox.addCommentData({"id":21075719,"goods_id":"17851782","user_title":"Денис Забара","created":"8 жовтня 2017","href":"#tab=comments;id=21075719","from_buyer":true,"mark":4,"text":"Дуже задоволений покупкою)) Дякую магазину розетка))","dignity":"Зручні,досить м'які, чудово сидять на нозі","shortcomings":"поки що не помітив","positive":"0","negative":"0","replies":[],"marks":[{"title":"Общее впечатление","value":5},{"title":"Стиль","value":4},{"title":"Комфорт","value":4}],"questions":[{"title":"Соответствие размеру","disabled":false,"values":[{"title":"Меньше","active":false},{"title":"","active":false},{"title":"Точно","active":true},{"title":"","active":false},{"title":"Больше","active":false}]},{"title":"Соответствие ширине","disabled":false,"values":[{"title":"Уже","active":false},{"title":"Отлично","active":true},{"title":"Шире","active":false}]},{"title":"Соответствие высоте","disabled":false,"values":[{"title":"Низкий","active":false},{"title":"Средний","active":true},{"title":"Высокий","active":false}]}]});
+					</script>
+				
+				<div class="pp-review-tools-wrap" name="reply_form" id="comments_tools_21075719">
+					<div class="pp-review-tools">
+						<div class="pp-review-tools-i">
+							<ul class="inline m-tabs" name="tabs-menu">
+								<li class="m-tabs-i">
+									<a href="#" class="novisited m-tabs-link"
+									   data-bind="form"
+									   name="add"
+									   onclick="document.fireEvent('commentAddReply')"
+									   id="21075719"
+									>
+										<span class="sprite-side pp-review-reply-add">
+											<span class="xhr">
+												Відповісти
+											</span>
+										</span>
+									</a>
+								</li>
+
+															</ul>
+						</div>
+
+													<div class="pp-review-tools-i" name="comment_id" id="21075719">
+								<span class="pp-review-vote" name="positive_block">
+									<a href="#" class="pp-review-vote-positive" name="positive_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Корисний відгук" title="Корисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+								<span class="pp-review-vote" name="negative_block">
+									<a href="#" class="pp-review-vote-negative" name="negative_vote">
+										<img src="https://i.rozetka.ua/design/_.gif" width="17" height="17" alt="Некорисний відгук" title="Некорисний відгук"
+											 class="sprite pp-review-vote-icon"
+										>&nbsp;<span class="pp-review-vote-count" name="count"
+											>										</span>
+									</a>
+								</span>
+							</div>
+						
+						<div class="pp-review-tools-i">
+							<a href="#" class="pp-review-complaint" name="complaint_button" record_to_complaint_id="21075719">
+								<img src="https://i.rozetka.ua/design/_.gif" width="20" height="17" alt="Поскаржитися на відгук" title="Поскаржитися на відгук" class="sprite pp-review-complaint-icon">
+							</a>
+						</div>
+					</div>
+
+					<div data-bind="form" name="tab-content" class="hidden">
+						<div name="form" class="pp-reply-f">
+	<form  method="post" action="/cgi-bin/form.php" data-collect_errors="1" data-title="Ответ на комментарий">
+		<div name="replies_msg"></div>
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ваше повідомлення
+			</div>
+			<textarea class="input-textarea input-textarea-wide pp-reply-f-textarea"
+				  name="text"
+				  _required="required"
+				  data-title="Ваше повідомлення"
+				  autofocus			></textarea>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert">
+				Ім&#039;я
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="name"
+					   data-title="Ваше ім&#039;я"
+					   _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$"
+				>
+			</div>
+		</div>
+
+		<div class="clearfix pp-reply-f-i">
+			<div class="pp-reply-f-i-title-vert hidden" name="email_title">
+				Ел.&nbsp;пошта
+			</div>
+			<div class="pp-reply-f-i-title-vert" name="login_title">
+				Ел.&nbsp;пошта або телефон
+			</div>
+
+			<div class="pp-reply-f-i-field">
+				<input type="text"
+					   class="input-text pp-reply-f-input-text"
+					   name="login"
+					   _required="required"
+					   data-title="Ел.&nbsp;пошта або телефон"
+					   _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$"
+				>
+
+				<div class="pp-reply-f-hint hidden" name="email_hint_block"></div>
+
+			</div>
+		</div>
+
+		<div class="pp-reply-f-auth" name="auth_blocks"></div>
+
+		<div class="pp-reply-f-btn-wrap" name="submit_form_btn_block">
+			<span class="btn-link btn-link-gray pp-reply-f-btn">
+				<button type="submit" class="btn-link-i" data-title="Додати">Додати</button>
+			</span>
+
+			<a href="#" class="novisited xhr pp-reply-f-link" name="cancel">Скасувати</a>
+		</div>
+
+		<input type="hidden" name="goods_id" value="17851776">
+		<input type="hidden" name="parent_comment_id" value="21075719">
+	</form>
+
+	<div name="signup_confirm_block" class="hidden"></div>
+
+		<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+</div>
+
+					</div>
+
+									</div>
+				<div name="voting"></div>
+			</div>
+		</div>
+
+					<div class="flex" name="replies">
+	</div>
+			</div>
+	</article>
+					
+				</div>
+			
+			
+												
+
+	
+		
+	
+			<div class="pp-comments-paginator-more preloader-trigger" href="#" name="more_reviews">
+			<a class="novisited g-i-more-link" href="#">
+				<img src="https://i.rozetka.ua/design/_.gif" alt="Завантаження" width="82" height="82" class="preloader-animation-small">
+				<span class="g-i-more-link-text" name="button_text">Показати ще</span>
+			</a>
+		</div>
+	
+	<nav class="paginator-comments" role="navigation">
+		<ul class="clearfix inline" name="paginator">
+																							
+							<li class="paginator-catalog-l-i active" id="page 1">
+											<span class="novisited paginator-catalog-l-link">1</span>
+									</li>
+							<li class="paginator-catalog-l-i" id="page 2">
+											<span class="paginator-catalog-l-i-active hidden">2</span>
+						<a href="https://rozetka.com.ua/ua/dago_2000000114477/p17851776/comments/page=2/" class="novisited paginator-catalog-l-link" onclick="document.fireEvent('pageNumberClick',{extend_event:[{name:'eventContext',value:'2'}]});">2</a>
+									</li>
+			
+		</ul>
+	</nav>
+
+	<script>
+		var params = {
+			tab: 'comments'
+		};
+							params['sort'] = 'date';
+		
+		new RozetkaEndlessScroll_class($('reviews_container_parent'), 'https://rozetka.com.ua/ua/dago_2000000114477/p17851776/comments/')
+			.setOptions({
+				content_selector: '[name=reviews_container]',
+				more_button_selector: '[name=more_reviews]',
+				total_pages:2,
+				current_page:1,
+				additional_params: params,
+				paginator: {
+					options: {
+						sort: 'date',
+						default_sort_name: 'date',
+						use_current_location_hash: false,
+					},
+					enabled: true
+				}
+			})
+			.init();
+	</script>
+
+
+			<div id="new_comment_msg" name="app-message"></div>
+
+			<div class="pp-comments-form pp-tab-comments" id="comment_form">
+				
+
+<article class="flex detail-add-review" name="switcher_block" id="comment_form">
+	<header class="detail-add-review-tabs">
+		<ul class="clearfix" name="additional_fields">
+			<li class="grid-col-half detail-add-review-tabs-i active">Відгук про&nbsp;товар</li>
+			<li class="grid-col-half detail-add-review-tabs-i">
+				<a href="#"
+				   class="novisited detail-add-review-tabs-link"
+				   name="hide_additional"
+				   onclick="document.fireEvent('briefComment');"
+				>Стислий коментар</a>
+			</li>
+		</ul>
+		<ul class="clearfix hidden" name="default_fields">
+			<li class="grid-col-half detail-add-review-tabs-i">
+				<a href="#" class="novisited detail-add-review-tabs-link" name="show_additional">Відгук про&nbsp;товар</a>
+			</li>
+			<li class="grid-col-half detail-add-review-tabs-i active">Стислий коментар</li>
+		</ul>
+	</header>
+	<form class="detail-add-review-f" id="new_comment" action="/cgi-bin/form.php" data-collect_errors="1">
+		<div class="clearfix f-i" name="additional_fields">
+			
+										 
+				<div class="clearfix pp-comment-add-review-rating-l">
+					 
+					 
+					 
+
+											
+						<div class="pp-comment-add-review-rating-b">
+							<div class="pp-comment-add-review-rating-row block-with-title-first">
+																																			<div class="pp-comment-add-review-rating-i">
+											<div class="pp-comment-add-review-rating-i-title">Общее впечатление</div>
+										</div>
+
+										
+																																													<div class="pp-comment-add-review-rating-i">
+											<div class="pp-comment-add-review-rating-i-title">Стиль</div>
+										</div>
+
+										
+																																													<div class="pp-comment-add-review-rating-i">
+											<div class="pp-comment-add-review-rating-i-title">Комфорт</div>
+										</div>
+
+																															
+																										
+							</div>
+
+							<div class="pp-comment-add-review-rating-row">
+																									
+										<div class="pp-comment-add-review-rating-i" name="rating_block">
+											<div class="pp-comment-add-review-rating-i-title block-with-title-second">Общее впечатление</div>
+											<div class="pp-comment-add-review-stars">
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="1"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="2"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="3"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="4"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="5"></div>
+											</div>
+											<input type="hidden" name="27" data-title="Общее впечатление" disabled="disabled" />
+										</div>
+
+										
+																																			
+										<div class="pp-comment-add-review-rating-i" name="rating_block">
+											<div class="pp-comment-add-review-rating-i-title block-with-title-second">Стиль</div>
+											<div class="pp-comment-add-review-stars">
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="1"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="2"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="3"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="4"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="5"></div>
+											</div>
+											<input type="hidden" name="22" data-title="Стиль" disabled="disabled" />
+										</div>
+
+										
+																																			
+										<div class="pp-comment-add-review-rating-i" name="rating_block">
+											<div class="pp-comment-add-review-rating-i-title block-with-title-second">Комфорт</div>
+											<div class="pp-comment-add-review-stars">
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="1"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="2"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="3"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="4"></div>
+												<div class="sprite pp-comment-add-review-stars-i" name="point" data-value="5"></div>
+											</div>
+											<input type="hidden" name="17" data-title="Комфорт" disabled="disabled" />
+										</div>
+
+																															
+																										
+							</div>
+						</div>
+
+											
+				</div>
+			
+			
+			 
+
+			
+				<div class="clearfix pp-comment-add-review-rating-l">
+
+					 
+					 
+					 
+
+					
+						
+						<div class="pp-comment-add-review-rating-b">
+							<div class="pp-comment-add-review-rating-row block-with-title-first">
+																																			<div class="pp-comment-add-review-rating-i">
+											<div class="pp-comment-add-review-rating-i-title">Соответствие размеру</div>
+										</div>
+
+										
+																																													<div class="pp-comment-add-review-rating-i">
+											<div class="pp-comment-add-review-rating-i-title">Соответствие ширине</div>
+										</div>
+
+										
+																																													<div class="pp-comment-add-review-rating-i">
+											<div class="pp-comment-add-review-rating-i-title">Соответствие высоте</div>
+										</div>
+
+																															
+																										
+							</div>
+
+							<div class="pp-comment-add-review-rating-row">
+																									
+										<div class="pp-comment-add-review-rating-i" name="select_block">
+											<div class="pp-comment-add-review-rating-i-title block-with-title-second">
+												<div class="pp-comment-add-review-rating-i-title-inner">Соответствие размеру</div>
+											</div>
+											<div class="pos-fix pp-comment-add-review-rating-container">
+												<span class="sprite-side pp-comments-sort-box pp-comments-sort-box-sort" name="drop_link">
+													<span class="lightgray pp-comments-sort-box-sort-title">Виберіть варіант</span>
+												</span>
+												<div class="pp-comments-drop-l hidden" name="drop_block">
+													<div class="popup-dropdown pp-comments-sort-b">
+														<ul class="pp-comments-sort-box-sort-l">
+																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие размеру"
+																		   data-question-value="Соответствует полностью"
+																		   data-value="12">Соответствует полностью</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие размеру"
+																		   data-question-value="Больше на половину размера"
+																		   data-value="7">Больше на половину размера</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие размеру"
+																		   data-question-value="Меньше на половину размера"
+																		   data-value="17">Меньше на половину размера</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие размеру"
+																		   data-question-value="Больше на один размер"
+																		   data-value="2">Больше на один размер</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие размеру"
+																		   data-question-value="Меньше на размер"
+																		   data-value="22">Меньше на размер</a>
+																	</li>
+																															
+														</ul>
+													</div>
+												</div>
+												<input type="hidden" name="2" data-title="Соответствие размеру" disabled="disabled">
+											</div>
+										</div>
+
+										
+																																			
+										<div class="pp-comment-add-review-rating-i" name="select_block">
+											<div class="pp-comment-add-review-rating-i-title block-with-title-second">
+												<div class="pp-comment-add-review-rating-i-title-inner">Соответствие ширине</div>
+											</div>
+											<div class="pos-fix pp-comment-add-review-rating-container">
+												<span class="sprite-side pp-comments-sort-box pp-comments-sort-box-sort" name="drop_link">
+													<span class="lightgray pp-comments-sort-box-sort-title">Виберіть варіант</span>
+												</span>
+												<div class="pp-comments-drop-l hidden" name="drop_block">
+													<div class="popup-dropdown pp-comments-sort-b">
+														<ul class="pp-comments-sort-box-sort-l">
+																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие ширине"
+																		   data-question-value="Средняя ширина"
+																		   data-value="37">Средняя ширина</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие ширине"
+																		   data-question-value="Для широкой ноги"
+																		   data-value="27">Для широкой ноги</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие ширине"
+																		   data-question-value="Для узкой ноги"
+																		   data-value="32">Для узкой ноги</a>
+																	</li>
+																															
+														</ul>
+													</div>
+												</div>
+												<input type="hidden" name="7" data-title="Соответствие ширине" disabled="disabled">
+											</div>
+										</div>
+
+										
+																																			
+										<div class="pp-comment-add-review-rating-i" name="select_block">
+											<div class="pp-comment-add-review-rating-i-title block-with-title-second">
+												<div class="pp-comment-add-review-rating-i-title-inner">Соответствие высоте</div>
+											</div>
+											<div class="pos-fix pp-comment-add-review-rating-container">
+												<span class="sprite-side pp-comments-sort-box pp-comments-sort-box-sort" name="drop_link">
+													<span class="lightgray pp-comments-sort-box-sort-title">Виберіть варіант</span>
+												</span>
+												<div class="pp-comments-drop-l hidden" name="drop_block">
+													<div class="popup-dropdown pp-comments-sort-b">
+														<ul class="pp-comments-sort-box-sort-l">
+																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие высоте"
+																		   data-question-value="Универсальный подъем"
+																		   data-value="52">Универсальный подъем</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие высоте"
+																		   data-question-value="Высокий подъем"
+																		   data-value="42">Высокий подъем</a>
+																	</li>
+																																																																<li class="pp-comments-sort-box-l-i">
+																		<a href="#"
+																		   class="novisited sprite-side pp-comments-sort-box-l-i-link"
+																		   name="drop_element"
+																		   data-question-title="Соответствие высоте"
+																		   data-question-value="Низкий подъем"
+																		   data-value="47">Низкий подъем</a>
+																	</li>
+																															
+														</ul>
+													</div>
+												</div>
+												<input type="hidden" name="12" data-title="Соответствие высоте" disabled="disabled">
+											</div>
+										</div>
+
+																															
+																										
+							</div>
+						</div>
+
+											
+				</div>
+					</div>
+		<div name="additional_fields">
+			<div class="clearfix pp-comments-f-i-indent">
+				<div class="detail-add-review-f-i-title-vert">Переваги</div>
+				<input
+						name="dignity"
+						class="input-textarea input-textarea-wide pp-comments-addictional-textarea"
+						data-title="Переваги"
+				>
+			</div>
+			<div class="clearfix pp-comments-f-i-indent">
+				<div class="detail-add-review-f-i-title-vert">Недоліки</div>
+				<input name="shortcomings" class="input-textarea input-textarea-wide pp-comments-addictional-textarea" data-title="Недоліки">
+			</div>
+		</div>
+		<div class="clearfix pp-comments-f-i-indent">
+			<div id="hint_comment_element" class="detail-add-review-f-i-hint float-rt"></div>
+			<div class="detail-add-review-f-i-title-vert">Коментар</div>
+			<textarea
+					name="text"
+					_required="required"
+					max_length="35000"
+					id="comment_element"
+					min_chars_left_for_hint="1000"
+					class="input-textarea input-textarea-wide detail-add-review-input-textarea"
+					data-title="Коментар"
+			></textarea>
+		</div>
+
+							<div class="clearfix pp-comments-f-i-indent">
+
+				<div name="empty_collection" class="hidden">
+					<div class="pp-comments-add-content-button">
+						<span class="btn-link btn-link-gray detail-add-photo sprite-side">
+							<button id="add_user_photo" class="btn-link-i"><span class="xhr">Фото</span></button>
+						</span>
+											</div>
+					<div class="pp-comments-add-content-button add-video">
+						<span class="btn-link btn-link-gray detail-add-video sprite-side">
+							<button id="add_user_video" class="btn-link-i"><span class="xhr">Відео</span></button>
+						</span>
+											</div>
+										
+
+					
+					<div class="pp-comments-add-content-caption sprite-side ">
+						Додайте фото та відео до свого відгуку, щоб він став ще цікавішим
+					</div>
+									</div>
+
+				<div name="form_collection" class="hidden"></div>
+
+			</div>
+		
+		<div class="clearfix pp-comments-f-i-indent">
+			<div class="detail-add-review-f-i-title-vert">Ваше ім&#039;я</div>
+				<input type="text" name="name" class="input-text input-text-wide" _pattern="^[\`\&#039;\&quot;\(\)A-Za-zА-Яа-яіїёєІЇЁЄ\d\.\s_-]{2,50}$" data-title="Ваше ім&#039;я">
+		</div>
+		<div class="clearfix pp-comments-f-i-indent">
+			<div name="login_block">
+				<div class="detail-add-review-f-i-title-vert">Ел.&nbsp;пошта або телефон</div>
+				<input type="text" name="login" class="input-text input-text-wide" _pattern="^.+@.+\..+$|^\s*((\+?\s*(\(\s*)?3)?[\s-]*(\(\s*)?8[\s-]*)?(\(\s*)?0[\s-\(]*[1-9][\s-]*\d(\s*\))?([\s-]*\d){7}\s*$" _required="required" data-title="Ел.&nbsp;пошта або телефон">
+			</div>
+			<div name="email_block">
+				<div class="detail-add-review-f-i-title-vert">Ел.&nbsp;пошта</div>
+				<input type="text" name="login" class="input-text input-text-wide" _pattern="^.+@.+\..+$" _required="required" disabled="disabled" data-title="Ел.&nbsp;пошта">
+			</div>
+			<input type="hidden" name="popup_source" value="comment" />
+			<div name="email_hint_block" class="hidden"></div>
+		</div>
+		<div class="clearfix detail-add-review-f-i">
+			<label class="input-check-label">
+				<input class="hidden input-check"
+					type="checkbox"
+					name="subscribed_on_replies"
+					id="review_checkbox"
+					data-title="Повідомляти про&nbsp;відповіді ел.&nbsp;поштою"
+					onchange="document.fireEvent('emailNotification');"
+				/>
+				<img class="sprite input-check-icon" width="26" height="23" src="https://i.rozetka.ua/design/_.gif" alt="_" />
+				<span class="input-check-note">Повідомляти про&nbsp;відповіді ел.&nbsp;поштою</span>
+			</label>
+		</div>
+		<div class="detail-add-review-f-i-field" name="auth_blocks"></div>
+		<div class="aligned-right clearfix f-i" name="add_comment_btn_block">
+						<span class="btn-link btn-link-gray detail-add-review-submit">
+				<input type="submit" name="submit" value="Залишити відгук" class="btn-link-i" id="detail-tab-reviews-add-submit" data-title="Залишити відгук">
+			</span>
+		</div>
+		<input type="hidden" name="goods_id" value="17851776">
+	</form>
+	<div class="detail-add-review-double-auth">
+		<div name="signup_confirm_block" class="hidden"></div>
+			<div class="pp-comments-i-answer-form-i-help">
+		Важливо! Для того, щоб Ваш відгук або коментар пройшов модерацію і&nbsp;був опублікований, ознайомтеся, будь ласка, з&nbsp;<a href="http://rozetka.com.ua/ua/news-articles-promotions/news/kommentarii_otzivy.html" target="_blank" class="novisited">нашими правилами!</a>
+	</div>
+
+	</div>
+</article>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+					</div>
+
+		<script>
+
+					
+
+
+comments_form = new RozetkaComments_class(
+	'https://rozetka.com.ua/ua/comments/',
+	'https://rozetka.com.ua/ua/',
+	{
+		rating_values: ['', 'жахливо', 'погано', 'посередньо', 'добре', 'відмінно'],
+		selectors: {
+			'submit': 'input[name=submit]',
+					},
+		'text': {
+			'comment': 'Залишити відгук',
+			'review': 'Залишити відгук'
+		},
+		comment: {
+			tpl: '<div name=\"app-message\"><\/div> {var is_unapproved = (status == \"unapproved\" || status == \"wait_for_files\")} {var is_activated = (status == \"auto_activated\")} {if from_buyer} {var long_name_limit = 35} {else} {var long_name_limit = 44} {\/if} {if show} <div class=\"pp-review-i\"> <div class=\"pp-review-inner{if is_unapproved} frozen{\/if}\" name=\"comment_vote\"> <div class=\"require\" name=\"msg\"><\/div> <div class=\"clearfix pp-review-i-b {if name && name.length > long_name_limit} pp-review-long-name{\/if}\"> <div class=\"pp-review-date\"> <time class=\"pp-review-date-text\"> сьогодні <\/time> {if is_activated} <a href=\"https:\/\/rozetka.com.ua\/ua\/dago_2000000114477\/p17851776\/comments\/#tab=comments;id=${id}\" class=\"pp-review-i-link\" name=\"single_comment\" id=\"${id}\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"18\" height=\"18\" alt=\"_\" title=\"Посилання на коментар\" class=\"sprite pp-review-i-link-icon\"\/> <\/a> {\/if} <\/div> {if name} <div class=\"pp-review-author{if from_buyer} pp-buyer-note{\/if}\"> <span class=\"pp-review-author-name\" itemprop=\"author\"> ${name}<\/span >{if from_buyer}<span class=\"sprite-side pp-review-buyer-note\">Уже купив<\/span>{\/if} <\/div> {\/if} {if defined(\"questions\") && questions.Integer} <div class=\"user-rating\"> {for item in questions.Integer} <div class=\"user-rating-b\"> <div class=\"user-rating-b-i\"> ${item.title} <\/div> <div class=\"user-rating-b-i\"> <span class=\"sprite g-rating-stars\"> <span class=\"sprite g-rating-stars-i\" style=\"width:${item.value*20}%\"><\/span> <\/span> <\/div> <\/div> {\/for} <\/div> {elseif mark > 0} <div class=\"g-rating-b\"> <span class=\"sprite g-rating-stars\"> <span class=\"sprite g-rating-stars-i\" style=\"width:${mark*20}%\"><\/span> <\/span> <\/div> {\/if} <\/div> {var has_special_questions = (defined(\"questions\") && questions.ComboBox)} <div class=\"clearfix pp-review-i-b{if has_special_questions} has-spec-questions{\/if}\"> {if has_special_questions} <aside class=\"detail-review-aside\"> {for item in questions.ComboBox} <div class=\"detail-review-aside-i{if !item.value} disabled{\/if}\"> <div class=\"detail-review-aside-i-title\"> ${item.title} <\/div> <div class=\"detail-review-custom-rating\"> <div class=\"detail-review-custom-rating-i\"> <div class=\"detail-review-custom-rate-line\">&nbsp;<\/div> <div class=\"detail-review-custom-rate-by-user\"> <div class=\"detail-review-custom-rate-by-user-points\"> {for value in item.values} <div class=\"detail-review-custom-rate-by-user-points-i\"> <span class=\"detail-review-custom-rate-by-user-point{if value.name == item.value} active{\/if}\">&nbsp;<\/span> <\/div> {\/for} <\/div> <\/div> <div class=\"detail-review-custom-rating-i-rate-text\"> {for value in item.values} {if value.title} <div class=\"detail-review-custom-rating-i-rate-title{if value.name == item.value} active{\/if}\" style=\"{if value_index == (item.values.length - 1)}text-align:right;{elseif value_index != 0}text-align:center;{\/if}\"> ${value.title} <\/div> {\/if} {\/for} <\/div> <\/div> <\/div> <\/div> {\/for} <\/aside> {\/if} <div class=\"pp-review-text\"> <div class=\"pp-review-text-i\"> ${text} <\/div> {if dignity} <div class=\"pp-review-text-i\"> <span class=\"bold\">Переваги:<\/span>&nbsp;${dignity} <\/div> {\/if} {if shortcomings} <div class=\"pp-review-text-i\"> <span class=\"bold\">Недоліки:<\/span>&nbsp;${shortcomings} <\/div> {\/if} <\/div> {if attachments} <div class=\"pp-review-media clearfix{if has_special_questions} pp-review-text{\/if}\"> {for image in attachments.images} <div class=\"pp-review-media-i pp-review-media-preview\"> <a class=\"pp-review-media-link{if image.rotate != 90 && image.rotate != 270} responsive-img{\/if}\" href=\"${image.src}\" onclick=\"return false;\"> <img src=\"${image.src}\" name=\"check_width\" data-image_key=\"${image.key}\"{if image.rotate} class=\"rotate-${image.rotate}\"{\/if}\/> <\/a> <\/div> {\/for} {for video in attachments.video} <div class=\"pp-review-media-i\"> <a class=\"pp-review-media-link responsive-img video sprite-side\" href=\"${video.src}\" onclick=\"return false;\"> <img src=\"${video.src}\"\/> <\/a> <\/div> {\/for} <\/div> {\/if} <\/div> <\/div> <\/div> {\/if}'
+		},
+		goods_id: 17851776,
+		attachments_controller_options: {
+			goods_id: 17851776,
+			max_count: 15,
+			max_size: 15728640,
+			tpl: {
+				popup: '<div class=\"popup-css popup-add-user-media\"> <div name=\"content\"><\/div> <\/div>',
+				content: '<header class=\"add-user-media-tabs\"> <ul class=\"clearfix\"> <li class=\"grid-col-half add-user-media-tabs-i\"> <a href=\"#\" class=\"novisited detail-add-review-tabs-link\" name=\"images_tab\">Фотографії<\/a> <\/li> <li class=\"grid-col-half add-user-media-tabs-i\"> <a href=\"#\" class=\"novisited detail-add-review-tabs-link\" name=\"videos_tab\">Відео<\/a> <\/li> <\/ul> <\/header> <section class=\"\"> <div name=\"images_block\" class=\"add-user-media-main hidden\"> <div class=\"add-user-media-select-files\" name=\"add_image_block\"> <h4 class=\"add-user-media-heading\">Перетягніть сюди фотографії<\/h4> <div class=\"add-user-media-subheading\">або натисніть<\/div> <div class=\"add-user-media-select-files-btn\"> <form> <input type=\"file\" class=\"promo-add-photo-hidden add-user-media-file-input\" name=\"add_file\"\/> <\/form> <span class=\"btn-link btn-link-gray add-user-media-add-btn-link\"> <button class=\"btn-link-i\">Обрати файли<\/button> <\/span> <\/div> <div class=\"add-user-media-caption\"> Додавайте зображення у форматах .jpg, .gif, .png, розмір файлу до 5 МБ <\/div> <\/div> <div class=\"add-user-media-image-wrap clearfix hidden{if is_touch} touch{\/if}\" name=\"images_collection\"><\/div> <div class=\"add-user-media-upload-image-error hidden\" name=\"error_block\"><\/div> <\/div> <div name=\"videos_block\" class=\"add-user-media-main\"> <div name=\"add_video_block\"> <div class=\"add-user-media-video-input-wrap clearfix\"> <div class=\"add-user-media-video-input-caption\"> Вставте посилання на YouTube-відео <\/div> <div class=\"add-user-media-video-input sprite-side\"> <input class=\"input-text\" type=\"text\" name=\"video_input\" tabindex=\"1\"\/> <\/div> <\/div> <div class=\"add-user-media-video-caption-wrap\" name=\"right_link_block\"> <div class=\"add-user-media-video-caption\"> Якщо посилання правильне, то тут ви побачите попередній перегляд відео <\/div> <\/div> <\/div> <div class=\"add-user-media-video-progress hidden\" name=\"preloader_block\"> <img src=\"https:\/\/i.rozetka.ua\/design\/ajax.gif\" alt=\"Завантаження\"\/> <span class=\"add-user-media-progress-description\"> Завантаження відео за посиланням <\/span> <div class=\"add-user-media-video-progress-caption\"> <div class=\"add-user-media-video-caption\"> Зачекайте, будь ласка, це може зайняти кілька секунд <\/div> <\/div> <\/div> <div class=\"add-user-media-upload-video-error hidden\" name=\"video_error_block\"><\/div> <div class=\"add-user-media-video-container clearfix\" name=\"video_collection\"><\/div> <\/div> <\/section> <footer class=\"add-user-media-footer\"> <span class=\"btn-link btn-link-gray add-user-media-ok-btn-link\"> <button class=\"btn-link-i\" name=\"close\">OK<\/button> <\/span> <\/footer>',
+				collection: '{for item in items} <div class=\"pp-review-media-i pp-review-media-preview\"> <a class=\"pp-review-media-link{if item.rotate != 90 && item.rotate != 270} responsive-img{\/if}{if !item.file} sprite-side\" data-key=\"videos\"{else}\" data-key=\"images\"{\/if} href=\"#\" name=\"active_item\"> <img src=\"${item.src}\" alt=\"photo\" name=\"check_width\" data-image_key=\"${item.key}\" {if item.rotate} class=\"rotate-${item.rotate}\"{\/if}\/> <\/a> <\/div> {\/for} <div class=\"float-lt\"> <div class=\"pp-review-media-i\"> <span class=\"btn-link btn-link-gray detail-add-photo-small sprite-side\"> <button class=\"btn-link-i\" name=\"active_item\" data-key=\"images\">&nbsp;<\/button> <\/span> <\/div> <div class=\"pp-review-media-i\"> <span class=\"btn-link btn-link-gray detail-add-video-small sprite-side\"> <button class=\"btn-link-i\" name=\"active_item\" data-key=\"videos\">&nbsp;<\/button> <\/span> <\/div> <\/div>'
+			},
+			options_by_attachment_type: {
+				images: {
+					goods_id: 17851776,
+					tpl: {
+						error: '<div class=\"sprite-side message code5\"> {if count_error} Максимальна кількість завантажуваних зображень - ${max} <a href=\"#\" class=\"message-close-link\" name=\"try_again\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"24\" height=\"24\" alt=\"\" class=\"sprite message-close-link-img\"> <\/a> {else} Завантажене зображення(${names}) не відповідає заданому формату. Додавайте файли в форматах .jpg, .png, .gif c розміром до 5 МБ <a href=\"#\" class=\"add-user-media-try-again-link novisited\" name=\"try_again\">Спробуйте ще раз<\/a> {\/if} <\/div>',
+						collection: '{for image in items} <figure class=\"add-user-media-image\" data-name=\"item_container_${image.key}\"> <div class=\"responsive-img add-user-media-image-i\"> <img class=\"centering-img{if image.rotate} rotate-${image.rotate}{\/if}\" src=\"${image.src}\" name=\"${image.key}\" \/> <\/div> {if options.allow_rotate} <div class=\"add-user-media-tools clearfix\"> <a href=\"#\" class=\"add-user-media-tools-i\" name=\"rotate\" data-direction=\"anticlockwise\" data-image_key=\"${image.key}\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"22\" height=\"22\" alt=\"&#8634;\" class=\"media-rotate-icon sprite\" \/> <\/a> <a href=\"#\" class=\"add-user-media-tools-i\" name=\"rotate\" data-direction=\"clockwise\" data-image_key=\"${image.key}\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"22\" height=\"22\" alt=\"&#8635;\" class=\"media-rotate-icon flip-hor sprite\" \/> <\/a> <a href=\"#\" class=\"add-user-media-tools-i\" name=\"delete_image\" data-image_key=\"${image.key}\"> <img src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" width=\"20\" height=\"20\" alt=\"&times;\" class=\"media-remove-icon sprite\" \/> <\/a> <\/div> {else} <a href=\"#\" class=\"add-user-media-close\" name=\"delete_image\" data-image_key=\"${image.key}\"> <img width=\"20\" height=\"20\" src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" alt=\"&times;\" class=\"popup-close-icon-small sprite\"> <\/a> {\/if} <\/figure> {\/for} <figure class=\"add-user-media-image add-more\"> <form> <input type=\"file\" class=\"promo-add-photo-hidden add-user-media-image-more\" name=\"add_collection_file\"\/> <\/form> <div class=\"add-user-media-more-icon-wrap\"> <div class=\"add-user-media-more-icon sprite-side\">&nbsp;<\/div> <\/div> <span class=\"add-user-media-image-more-text\">Завантажити ще<\/span> <span class=\"add-user-media-image-more-caption\">або перетягніть сюди файли<\/span> <\/figure>'
+					},
+					allow_rotate: parseInt('1'),
+					pattern: /.*(\.jpg|\.jpeg|\.png|\.gif)$/i,
+					max_items_count: 10
+				},
+				videos: {
+					goods_id: 17851776,
+					tpl: {
+						error: '<div class=\"sprite-side message code5\"> {if code == 404} Відео не знайдено. Перевірте введене посилання {elseif code == 401} Доступ до відео обмежений. Перевірте введене посилання {else} Помилка на сервері. Повідомте, будь ласка, про&nbsp;це адміністратору. {\/if} <\/div>',
+						collection: '{for video in items} <div class=\"add-user-media-video\" data-name=\"item_container_${video.id}\"> <figure class=\"add-user-media-video-img responsive-img\"> <a href=\"#\" target=\"_blank\" onclick=\"return false;\"> <img class=\"centering-img\" src=\"${video.src}\" width=\"${video.w}\" height=\"${video.h}\" alt=\"${video.title}\" \/> <\/a> <\/figure> <div class=\"add-user-media-video-name\"> <div class=\"add-user-media-video-title\"> <a href=\"#\" target=\"_blank\" class=\"add-user-media-preview-video-title-link novisited\" onclick=\"return false;\"> ${video.title} <\/a> <\/div> <\/div> <a href=\"#\" class=\"add-user-media-close\" name=\"delete_video\" data-youtube_id=\"${video.id}\"> <img width=\"20\" height=\"20\" src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" alt=\"&times;\" class=\"popup-close-icon-small sprite\"> <\/a> <\/div> {\/for} <div class=\"add-user-media-video\" data-name=\"one_more_video\"> <a class=\"add-user-media-video-more-link novisited\" href=\"#\"> <div class=\"add-user-media-video-more-link-i\"> <div class=\"add-user-media-more-icon float-lt sprite-side\">&nbsp;<\/div> <span class=\"add-user-media-video-more-text\">Завантажити ще відео<\/span> <\/div> <\/a> <\/div>'
+					},
+					pattern: /^.*(?:(?:youtu\.be\/|v\/|vi\/|u\/\w\/|embed\/)|(?:(?:watch)?\?v(?:i)?=|\&v(?:i)?=))([^#\&\?]*).*/
+				}
+			}
+		}
+	}
+);
+
+new UTAForms_class(
+	comments_form,
+	{
+		timingCategory: 'Forms',
+		eventForm: 'Comment'
+	}
+);
+		
+			
+			replies = new RozetkaReplies_class()
+			.setOptions({
+			classes_options: {
+				replies: {
+					tpl: '{var is_unapproved = (status == \"unapproved\")} {var is_activated = (status == \"auto_activated\")} {if show} <div class=\"{if is_unapproved}frozen{\/if}\"> <div class=\"clearfix\"> <div class=\"pp-replies-date\"> <time class=\"pp-replies-date-text\">сьогодні<\/time> <\/div> {if name} <div class=\"pp-replies-author{if from_buyer} pp-buyer-note{\/if}\"> <span class=\"pp-replies-author-name\"> ${name}<\/span >{if from_buyer}<span class=\"sprite-side pp-replies-buyer-note\">Уже купив<\/span>{\/if} <\/div> {\/if} <\/div> <div class=\"pp-replies-text\"> ${text} <\/div> <\/div> {\/if}',
+					classes: {
+						article: 'pp-comments-answer',
+						div: 'pp-comments-replies'
+					}
+				}
+			}
+			}).run('https://rozetka.com.ua/ua/comments/');
+
+		
+			var options = {
+			popup_tpl : '<div class=\"popup-css detail-complaint\"> <a href=\"#\" class=\"popup-close\" name=\"close\"><img width=\"18\" height=\"18\" src=\"https:\/\/i.rozetka.ua\/design\/_.gif\" alt=\"&times;\" class=\"popup-close-medium-icon sprite\"><\/a> <div name=\"content\"><\/div> <\/div>',
+			onResponseDone : function () {rozetkaEvents.trackEvent('Product page', 'comments/complaint/add', '17851776', null, 'FALSE');}
+		};
+			var complaint = new RozetkaComplaints_class([{"title":"\u043d\u0435\u0446\u0435\u043d\u0437\u0443\u0440\u043d\u0430\u044f \u043b\u0435\u043a\u0441\u0438\u043a\u0430, \u043e\u0441\u043a\u043e\u0440\u0431\u043b\u0435\u043d\u0438\u0435 \u0438\u043b\u0438 \u0430\u0433\u0440\u0435\u0441\u0441\u0438\u044f","id":1},{"title":"\u044f\u0432\u043d\u0430\u044f \u0440\u0435\u043a\u043b\u0430\u043c\u0430 (\u0441\u043f\u0430\u043c)","id":3},{"title":"\u0441\u0441\u044b\u043b\u043a\u0438 \u043d\u0430 \u043d\u0435\u0437\u0430\u043a\u043e\u043d\u043d\u044b\u0435 \u0441\u0430\u0439\u0442\u044b \u0438 \u043f\u0440\u043e\u0433\u0440\u0430\u043c\u043c\u044b","id":2},{"title":"\u043d\u0435 \u043e\u0442\u043d\u043e\u0441\u0438\u0442\u0441\u044f \u043a \u043e\u0431\u0441\u0443\u0436\u0434\u0430\u0435\u043c\u043e\u0439 \u0442\u0435\u043c\u0435","id":4},{"title":"\u0434\u0440\u0443\u0433\u0430\u044f \u043f\u0440\u0438\u0447\u0438\u043d\u0430","id":5}], 'https://rozetka.com.ua/ua/comments/', AuthController, options);
+
+			new ElementRating_class();
+			new ElementSelect_class().init(document.body);
+			CommentsLightBox.refresh();
+		</script>
+
+		<script>
+				var vote_options = {
+		vote_values: {
+		},
+		selectors: {
+			buttons: {
+				positive: {
+					button: 'a[name=positive_vote]',
+					block: 'span[name=positive_block]'
+				},
+				negative: {
+					button: 'a[name=negative_vote]',
+					block: 'span[name=negative_block]'
+				}
+			}
+		},
+		button_class: RozetkaCommentsVotingButton_class
+	};
+
+	var options = {
+		voting_record_selector:'div[name=comment_vote]',
+		elem_with_id: 'div[name=comment_id]',
+		get_reviewed_ajax_action: 'getReviewedComments',
+		popup_class: RozetkaAuthorizationVotingPopup_class,
+		section_title: 'Чоловічі кросівки',
+		voting_record_class: RozetkaVotingRecord_class,
+		auth_blocks_options: {
+			_auth_blocks_options: {
+				blocks_type: 'votingPopup',
+				fire_block_opening: false
+			},
+			vote_location: 'commentVote',
+			auth_type: 'votingPopup'
+		}
+	};
+
+			vote_options.vote_values['positive'] = '1';
+			vote_options.vote_values['negative'] = '2';
+	
+
+	options['voting_record_options'] = vote_options;
+	voting = new RozetkaVoting_class(17851776, 'https://rozetka.com.ua/ua/comments/');
+	voting.setOptions(options);
+	voting.getRecords(vote_options);
+
+		</script>
+	</div>
+
