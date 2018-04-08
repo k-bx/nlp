@@ -13,6 +13,7 @@ module NaiveML.MultinomialNaiveBayes
   , buildEnv
   , animalsExample
   , tfidf
+  , Document(..)
   ) where
 
 import Control.Newtype
