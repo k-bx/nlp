@@ -7,3 +7,4 @@ extra-deps:
   subdirs:
   - ./rio
   - ./rio-orphans
+- cld2-0.1.1.1

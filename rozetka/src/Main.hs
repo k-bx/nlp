@@ -1,6 +1,7 @@
 module Main where
 
 import qualified Data.Aeson as J
+import Data.Maybe (fromJust)
 import qualified Data.String.Class as S
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
@@ -10,6 +11,7 @@ import qualified Prelude
 import RIO
 import qualified RIO.HashMap as Hash
 import Safe
+import Text.CLD2 (Language(Cld2Language_UKRAINIAN), detectLanguageSimple)
 import Text.HTML.Scalpel.Core
 
 jsonOpts :: J.Options
@@ -47,6 +49,9 @@ data Comment = Comment
 
 instance J.ToJSON Comment where
   toJSON = J.genericToJSON jsonOpts
+
+instance J.FromJSON Comment where
+  parseJSON = J.genericParseJSON jsonOpts
 
 getPageData :: CategoryId -> PageId -> RIO App PageData
 getPageData catId pageId = do
@@ -139,11 +144,11 @@ getComments productId page = do
       comsRest <- getComments productId (page + 1)
       return (comsCurrPage ++ comsRest)
 
-app :: RIO App ()
-app = do
+downloadCategory :: RIO App ()
+downloadCategory = do
   let catId = 4634865 :: CategoryId -- men's sneakers
-  -- let catId = 2349092 :: CategoryId -- men's underwear
-  -- let catId = 4637799 :: CategoryId -- jeans
+    -- let catId = 2349092 :: CategoryId -- men's underwear
+    -- let catId = 4637799 :: CategoryId -- jeans
   logDebug $ display $ "Grabbing the category id: " <> tshow catId
   productIds <- getProductIds catId
   prodWithComms <-
@@ -153,6 +158,32 @@ app = do
   writeFileUtf8 "data/comments.json" (S.toText (J.encode prodWithComms))
   logDebug $ "Wrote data in data/comments.json"
   return ()
+
+getUkrainian :: [(ProductId, [Comment])] -> [Comment]
+getUkrainian pwc = concatMap f pwc
+  where
+    f (_, coms) = mapMaybe f2 coms
+    f2 com =
+      if detectLanguageSimple (cText com) == Cld2Language_UKRAINIAN
+        then Just com
+        else Nothing
+
+processComments :: RIO App ()
+processComments = do
+  commentsFile <- readFileUtf8 "data/comments_sneakers.json"
+  let prodWithComms :: [(ProductId, [Comment])]
+      prodWithComms = fromJust (J.decode (S.fromText commentsFile))
+      ukrainian = getUkrainian prodWithComms
+      withScore = filter (\c -> cScore c > 0) ukrainian
+  logDebug $ display $ "Number of ukrainian comments with score: " <>
+    tshow (length withScore)
+  return ()
+
+app :: RIO App ()
+app
+  -- downloadCategory
+ = do
+  processComments
 
 main :: IO ()
 main = do
