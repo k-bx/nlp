@@ -20,6 +20,8 @@ import qualified Data.Aeson as J
 import Data.Function (on)
 import Data.List (nub, sortBy)
 import Data.Maybe (fromJust)
+import qualified Data.String.Class as S
+import qualified Data.Text.IO as T
 import GHC.Generics (Generic)
 
 data Document cls word = Document
@@ -168,7 +170,9 @@ instance Newtype AnimalDoc (Document AnimalClass AnimalFeatures) where
   unpack (AnimalDoc x) = x
 
 loadAnimalDocs :: IO [AnimalDoc]
-loadAnimalDocs = fromJust <$> J.decodeFileStrict' "data/animal_dataset.json"
+loadAnimalDocs = do
+  t <- T.readFile "data/animal_dataset.json"
+  return . fromJust . J.decode . S.fromText $ t
 
 -- | Run this from your repl to see the example usage. See the source.
 animalsExample :: IO ()
