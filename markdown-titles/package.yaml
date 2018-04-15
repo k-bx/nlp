@@ -1,0 +1,25 @@
+name:                markdown-titles
+version:             0.1.0.0
+#synopsis:
+#description:
+homepage:            https://github.com/k-bx/markdown-titles#readme
+license:             BSD3
+author:              Kostiantyn Rybnikov
+maintainer:          k-bx@k-bx.com
+copyright:           Kostiantyn Rybnikov
+category:            Web
+extra-source-files:
+- README.md
+
+dependencies:
+  - base >= 4.7 && < 5
+  - text
+  - vector
+  - containers
+  - unordered-containers
+  - tokenize
+
+executables:
+  markdown-titles:
+    source-dirs:      src
+    main:             Main.hs

@@ -1,0 +1,1701 @@
+0.1.0
+0.1.0 (2013-02-02)
+0.1.10
+0.11.0 (2014-05-01)
+0.1.11
+0.1.12
+0.1.13
+0.1.14
+0.1.15
+0.1.16
+0.1.17
+0.1.18
+0.1.19
+0.1.20
+0.1.21
+0.1.22
+0.1.23
+0.1.24
+0.1.25
+0.1.26
+0.1.27
+0.1.28
+0.1.29
+0.1.30
+0.1.31
+0.1.32
+0.1.33
+0.1.34
+0.1.35
+0.1.36
+0.1.37
+0.1.38
+0.1.39
+0.1.40
+0.1.41
+0.1.42
+0.1.43
+0.2.0
+0.2.0 (2013-03-03)
+0.2.1
+0.3.0
+0.3.0 (2013-04-30)
+0.3.1
+0.3.2
+0.4.0
+0.4.0 (2013-06-24)
+0.4.1
+0.5.0
+0.5.1
+0.5.2
+0.6.0
+0.6.0 (2013-09-08)
+0.6.1
+0.7.0 (2013-11-22)
+0.8.0 (2013-12-28)
+0.9.0 (2013-12-28)
+0.9.5 Acknowledgments
+1.0.0
+1.0.1
+10.1 Locatives and References
+10.2 Adding New Object Types
+10.3 Reference Based Extensions
+10.4 Sections
+10 BLAS Operations
+10 Extension API
+1.1.0
+1.1.1 [See milestone](https://github.com/timrwood/moment/issues?milestone=5&state=closed)
+11.1 Transcribing with Emacs
+1.1.2 [See milestone](https://github.com/timrwood/moment/issues?milestone=6&state=closed)
+11.2 Transcript API
+11 Destructive API
+11 Transcripts
+1.2.0 [See milestone](https://github.com/timrwood/moment/issues?milestone=4&state=closed)
+12 Non-destructive API
+12 Utilities
+1.3.0 [See milestone](https://github.com/timrwood/moment/issues?milestone=7&state=closed)
+13 Mappings
+1.4.0 [See milestone](https://github.com/timrwood/moment/issues?milestone=8&state=closed)
+14 Random numbers
+1.5.0 [See milestone](https://github.com/timrwood/moment/issues?milestone=10&page=1&state=closed)
+15 I/O
+1.6.0 [See discussion](https://github.com/timrwood/moment/pull/268)
+16 Debugging
+1.7.0 [See discussion](https://github.com/timrwood/moment/issues/288)
+17.1 Facets
+1.7.1 [See discussion](https://github.com/timrwood/moment/issues/384)
+17.2 Foreign arrays
+1.7.2 [See discussion](https://github.com/timrwood/moment/issues/456)
+17.3.1 CUDA Memory Management
+17.3 CUDA
+17 Facet API
+18.1 Lisp Extensions
+18.2.1 CUBLAS
+18.2.2 CURAND
+18.2 CUDA Extensions
+18 Writing Extensions
+1. Create an Amazon Web Services (AWS) account.
+1. Create an AWS account.
+1 Introduction
+1 mgl ASDF System Details
+1 mgl-mat ASDF System Details
+1 mgl-pax ASDF System Details
+1 named-readtables ASDF System Details
+1. Pass a shared `std::mutex` into `gloo::CudaShared::setMutex()` before calling any other gloo functions.
+2.0.0 [See changelog](https://gist.github.com/timrwood/e72f2eef320ed9e37c51)
+2.1.0 [See changelog](https://gist.github.com/timrwood/b8c2d90d528eddb53ab5)
+2.1 Links
+2.1 What's MGL-MAT?
+2.2.0 [See changelog](https://gist.github.com/ichernev/00f837a9baf46a3565e4)
+2.2.1
+2.2 Acknowledgements
+2.2 What kind of matrices are supported?
+2.3.0 [See changelog](https://gist.github.com/ichernev/6864354)
+2.3.1
+2.3 Where to Get it?
+2.4.0
+2.5.0 [See changelog](https://gist.github.com/ichernev/8104451)
+2.5.1
+2.6.0 [See changelog](https://gist.github.com/ichernev/10544682)
+2.7.0 [See changelog](https://gist.github.com/ichernev/b0a3d456d5a84c9901d7)
+2.8.0 [See changelog](https://gist.github.com/ichernev/ac3899324a5fa6c8c9b4)
+2.8.1
+2. Always acquire the mutex before calling CUDA memory allocation functions.
+2 Basics
+2. Create an Identity & Access Management (IAM) user, and note their credentials.
+2 Introduction
+2 Links
+2. Login to the [AWS Management Console](https://console.aws.amazon.com).
+2 Overview
+3.1 Notes on the API
+3.2 Important API idiosyncrasies
+3.3 Preregistered Readtables
+3.4 Examples
+3 Background
+3. Create an S3 bucket.
+3. Go to the IAM Management Console.
+3 Links
+3 Overview
+3 Synchronization
+3 Tutorial
+4 Basics
+4. Create a new user (named e.g. `travis-ci`) and generate an access key for them. Note both the Access Key ID and the Secret Access Key.
+4 Documentation
+4 Facets
+4 Reference
+4. Set permissions on the bucket to grant the user read+write access.
+4 Tutorial
+5 Element types
+5 Emacs Integration
+5 Facet Extension API
+5. Note the user's ARN (Amazon Resource Name), which can be found in the "Summary" tab of the user browser. This will be of the form: `arn:aws:iam::XXXXXXXXXXXXXX:user/the-username-goes-here`
+5. Set the user credentials as secure Travis environment variables.
+6 Basics
+6. Note the user's access key, which can be found in the "Security Credentials" tab of the user browser.
+6 Printing
+6 The Default Implementation of CALL-WITH-FACET\*
+7.1 Comparison to Lisp Arrays
+7.1 Facet Barriers
+7.1 Indentation
+7.2 Functional Shaping
+7.2 Syntax highlighting
+7.3 Destructive Shaping
+7.3 MathJax
+7. Go to the S3 Management Console.
+7 Lifetime
+7 Markdown Support
+7 Shaping
+8 Assembling
+8. Create a new bucket. For a non-publicly-accessible bucket (like Bootstrap uses), it's recommended that the bucket name be random to increase security. On most *nix machines, you can easily generate a random UUID to use as the bucket name using Python:
+8 Documentation Printer Variables
+9 Caching
+9 Locative Types
+a batch as a query is in progress. This obviously requires that
+About
+About documentation-utils
+Abstract
+A Case for Mock Turtles #
+Access
+access, accesses , (setf access), (setf accesses)
+accesses, (setf accesses)
+Acknowledgements
+Acknowledgments
+Actions #
+Actions: What Should It Do? ##
+Adapters for Matchers ##
+Added extension system and `INLINE`, `EVAL` handling. Revamped base macros to be more stable and simple.
+Adding Traces to Assertions ##
+Add the `--coverage` option (e.g. `grunt test --coverage`, `grunt watch --coverage`) to see reports on the test coverage. These coverage reports are found in the coverage folder.
+Add the Framework to Your Project #
+adhere to the following rules to make the process as smooth as possible:
+Adoption
+Advanced usage
+Advanced Usages ##
+A helper to find you the class of a given thing
+algorithm
+Algorithm
+Algorithms
+All Expectations Are Sticky (Unless Said Otherwise) ##
+All Headers
+Allocation Limits and Security
+Allreduce
+allreduce_halving_doubling
+allreduce_ring
+allreduce_ring_chunked
+allreducube_bcube
+Also See
+Alternatives
+Alternative to Mocking Concrete Classes ##
+A mock object may have many methods, and not all of them are that interesting. For example, in some tests we may not care about how many times `GetX()` and `GetY()` get called.
+Analytics via Google
+An AngularJS module adapting underscore
+Anaphora
+And-Pattern
+angular-file-upload-bower
+AngularJS-Toaster is under MIT license - http://www.opensource.org/licenses/mit-license.php
+AngularUI Router &nbsp;[![Build Status](https://travis-ci.org/angular-ui/ui-router.png?branch=master)](https://travis-ci.org/angular-ui/ui-router)
+Angular-xeditable
+Animate.css is licensed under the MIT license. (http://opensource.org/licenses/MIT)
+Animate.css is powered by [Grunt](http://gruntjs.com), and you can create custom builds pretty easily. First of all, you’ll need Grunt and all other dependencies:
+Animations
+Announcing RADICAL-UTILS (a.k.a RUTILS 3.0)
+A note on Bootstrap dependencies
+Anything else?
+Apache 2.0 License
+Apache BCEL Notice
+Apache Byte Code Engineering Library (BCEL) v5.2
+Apache Santuario Notice
+Apache Santuario v1.5.4
+    Apache Software Foundation that were originally developed at iClick, Inc.,
+Apache Xalan Notice
+Apache Xalan v2.7.1
+    Apache Xerces Java
+Apache Xerces Notice
+Apache Xerces v2.11.0
+Apache XML Resolver Library v1.2
+Apache XML Resolver Notice
+A patch to SLIME to record interaction to a human-readable log
+API
+API definition
+API documentation
+Appendix A - Test Values
+Apple Computer CoreAudio License
+Apple Computer CoreAudio Notice
+Apple Computer: CoreAudio Utility Classes v2.0
+Apply one of power assert instrumentors to code above then run tests. See the power-assert output appears.
+appropriate context, may be able to recover or reconfigure the machine pool.
+|`_`|`argument` can be any value of the correct type.|
+article](https://help.github.com/articles/using-pull-requests) for details and
+A sample session
+As a Shared Library (DLL) ###
+A short history
+ASM Bytecode Manipulation Framework v5.1
+ASM License
+Asserting on Subroutines ###
+Assertion Placement ##
+assertions.
+Assertions
+Assertions #
+ASSOC
+Async.js
+Attribute Prefix
+|`A<type>()` or `An<type>()`|`argument` can be any value of type `type`.     |
+Author
+## Author
+Authorization Header
+Authors
+Author(s):
+Automated --help
+Available commands
+Available Grunt commands
+Avoiding Macro Name Clashes ###
+A word on performance
+Barrier
+barrier_all_to_all
+barrier_all_to_one
+Basename Matching
+Base Template Variables
+Basically it does not depend on any libraries except [AngularJS](http://angularjs.org) itself.    
+Basic anaphora
+Basic API
+Basic Assertions ##
+Basic Concepts #
+Basic processing
+Benchmarking
+Benchmarks
+Binary Comparison ##
+Binding a context to an iterator
+Biochat
+Biochat 2 - matching bioinformatics dataset for fun and profit
+Biochats filtering procedures
+Biochats relevance algorithms
+Biochats similarity measures
+BIT-SMASHER
+BOM handling
+Bootbox - Twitter Bootstrap powered alert, confirm and flexible dialog boxes
+bootstrap - [AngularJS](http://angularjs.org/) directives specific to [Bootstrap](http://getbootstrap.com)
+[Bootstrap](http://getbootstrap.com) [![Bower version](https://badge.fury.io/bo/bootstrap.png)](http://badge.fury.io/bo/bootstrap) [![Build Status](https://secure.travis-ci.org/twbs/bootstrap.png)](http://travis-ci.org/twbs/bootstrap) [![devDependency Status](https://david-dm.org/twbs/bootstrap/dev-status.png?theme=shields.io)](https://david-dm.org/twbs/bootstrap#info=devDependencies)
+Bower
+#### Bower
+bower-angular
+bower-angular-animate
+bower-angular-cookies
+bower-angular-mocks
+bower-angular-resource
+bower-angular-sanitize
+bower install angular-xeditable
+Breaking Changes
+Brief description
+Broadcast
+broadcast_one_to_all
+Browser support
+bt-semaphore
+buffer-crc32
+Buffers
+Bug fixes
+Bug Fixes
+Bugs
+Bugs and feature requests
+Build
+Build ####
+Build and Go #
+Build - `grunt`
+Building
+Building a minified release
+Building Documentation
+Building from Source (for everywhere else)
+Building Google Mock ###
+Build & run
+But I don't like calling my entire test case FOODeathTest when it contains both death tests and non-death tests. What do I do? ##
+By contributing to Gloo, you agree that your contributions will be licensed
+By default, an expectation can match a call even though an earlier expectation hasn't been satisfied. In other words, the calls don't have to occur in the order the expectations are specified.
+(C0) 'NIL'
+(C2) 'False'
+callers to handle them. `GLOO_ENFORCE` macros are defined in
+call-if-applicable, call-applicable-fns
+Can I derive a test fixture from another? ##
+Can I mock a variadic function? ##
+Can I use Google Test on MinGW? ##
+Cardinalities #
+Cardinalities: How Many Times Will It Be Called? ##
+Casting Matchers ##
+Catching Failures #
+Caveats ##
+ChangeLog
+Change Log
+[Changelog](CHANGELOG.md)
+Changes for 0.5 (2012-08-22):
+Changes for 0.6 (2012-08-29):
+Changes for 0.6.5 (2012-09-12):
+Changes for 0.7 (2012-09-20):
+Changes for 0.8 (2013-01-06):
+Changes for 0.9.1 (2013-04-10):
+Changes for 0.9 (2013-02-20):
+Changes for 0.9.2 (2013-05-11):
+Changes from darcs arnesi:
+Changes to this arrangement
+Changing a Mock Object's Behavior Based on the State ##
+Character-based classification
+Checking for Failures in the Current Test ###
+Checking Out the Source from Subversion ##
+Checklist
+.choose(list, fn)
+Choosing a TR1 Tuple Library ###
+Circularity and References
+Citation
+CLASS
+[Class] and-pattern
+[Class] assoc-pattern
+[Class] class-pattern
+[Class] complex-pattern
+[Class] cons-pattern
+[Class] constant-pattern
+[Class] constructor-pattern
+[Class] destructor
+Class: glob.Glob
+[Class] guard-pattern
+Classification
+[Class] match-error
+[Class] not-pattern
+class-of-object 
+[Class] or-pattern
+[Class] place-pattern
+[Class] property-pattern
+[Class] simple-vector-pattern
+class-slot-names, class-slot-readers, class-slot-writers
+[Class] structure-pattern
+[Class] variable-pattern
+[Class] vector-pattern
+cl-conspack
+CLDR License
+clear and has sufficient instructions to be able to reproduce the issue.
+CLI
+CL-JSON
+cl-libyaml
+CL Machine-Learning [![Build Status](https://travis-ci.org/mmaul/clml.svg?branch=master)](https://travis-ci.org/mmaul/clml)
+`CL-MESSAGEPACK`
+cl-mongo
+cl-nlp
+CL-NLP -- a Lisp NLP toolkit
+CL-NLP API
+Clock Skew
+CLOS and general objects
+Closer to MOP
+CL-PPCRE - Portable Perl-compatible regular expressions for Common Lisp
+CL-REDIS — A fast and robust Common Lisp client for Redis
+cl-strings
+cl-strings is a small, portable, dependency-free set of utilities that making it
+Cluster
+cl-yaml
+Code ##
+Code of conduct
+Code organization
+[![Codeship Status for ashtuchkin/iconv-lite](https://www.codeship.com/projects/81670840-fa72-0131-4520-4a01a6c01acc/status)](https://www.codeship.com/projects/29053)
+Code Style Guide
+Coding Style
+Coding Style ##
+Coercion
+coleslaw
+Collections
+Colored Terminal Output ###
+colorize
+Combining Actions ##
+Combining Matchers ##
+Coming soon!
+Commander.js
+Comments and Negation
+Comments via Disqus
+Common options
+Common Pitfalls
+Community
+Comparisons to other fnmatch/glob implementations
+compile-encoder
+Compiling CSS and JavaScript
+Compiling from Source ##
+Composite Actions ##
+Composite Matchers ##
+Conclusion
+Concrete example
+Configuration
+.confirm(msg, fn)
+Congratulations! You've learned enough about Google Mock to start using it. Now, you might want to join the [googlemock](http://groups.google.com/group/googlemock) discussion group and actually write some tests using Google Mock - it will be fun. Hey, it may even be addictive - you've been warned.
+CONS
+Constant-Pattern
+Constituency parsing
+Constructor-Pattern
+Constructs ##
+Const-table - a space-efficient variant of minimal perfect hash-tables for Common Lisp
+Consuming a source map
+Contact
+Container Matchers ##
+Contribute
+Contributing
+Contributing a Patch ####
+Contributing Code #
+Contributing Code ###
+[Contributing](CONTRIBUTING.md)
+Contributing to Clack
+Contributing to Gloo
+Contributing to the project
+Contributions are submitted, reviewed, and accepted using Github pull requests.
+Contributor Code of Conduct
+Contributor License Agreement ("CLA")
+Contributor License Agreements ##
+Contributors
+Contributors:
+Control Flow
+Controlling How Failures Are Reported ##
+Controlling How Much Information Google Mock Prints ##
+Controlling Test Output ##
+Controlling When an Expectation Retires ##
+Conventions
+Conventions for whether attributes/options should be watched/evaluated-once
+Cookie support
+Copyright
+    Copyright 1999-2010 The Apache Software Foundation
+Copyright 2005, 2013 jQuery Foundation, Inc. and other contributors
+Copyright © 2013 [Jiri Kavulak](https://twitter.com/jirikavi).
+Copyright and license
+Copyright and License
+ * Copyright (C) 1994-1998, Thomas G. Lane.
+Copyright (C) 1998-2012 Daniel Veillard.  All Rights Reserved.
+Copyright (C) 2014-2017 by Vitaly Puzrin and Andrei Tuputcyn
+Copyright Notice
+Core features
+CPU
+CRAWLIK DSL
+CRAWLIK is a Lisp web crawler and scrapper
+Creating a distribution
+Creating a Theme from Scratch (with code)
+Creating Mock Classes #
+Creating Value-Parameterized Abstract Tests ##
+Credits
+Cryptix AES v3.2.0
+Cryptix General License
+css directory
+Cube Manual
+cuda_allreduce_halving_doubling
+cuda_allreduce_halving_doubling_pipelined
+cuda_allreduce_ring
+cuda_allreduce_ring_chunked
+CUP Parser Generator for Java v 0.10k
+CUP Parser Generator License
+currentBackend()
+Current Branch Maintainer(s)/Authors(s):
+Current Version 0.4.7
+Custom Builds
+Custom help
+Customising Verbose
+Customizability
+Customize templates
+:CXML
+[CxxTest](http://cxxtest.tigris.org/)) as your testing framework, just change the `main()` function in the previous section to:
+Cygwin Requirements ###
+date directory
+Datepicker Settings ###
+Death Tests #
+Death Tests And Threads ##
+Death Test Styles ##
+debug
+Debugging and error recovery
+__declspec(dllexport) int PullInMyLibrary() { return 0; }
+Default
+Default Action ##
+Default parameterization
+Default Parameters
+Deficiencies
+Defining Actions ##
+Defining a Mock Class #
+Defining Event Listeners ##
+Defining Matchers ##
+Defining tests
+Delegating Calls to a Fake ##
+Delegating Calls to a Parent Class ##
+Delegating Calls to a Real Object ##
+deleteKey(key)
+Demo
+Demo and docs
+Dependencies
+Dependency parsing
+Derived-Pattern
+Description
+destroy-filter
+Developing
+Developing Google Mock ###
+Developing Google Test ##
+Development
+Development Plan
+Dictionary
+Directive Maintainers
+Disable ER (Early Retransmit) and TLP (Tail Loss Probe)
+Disabling Catching Test-Thrown Exceptions ###
+Disallowing Unexpected Calls ##
+Distance measurement
+Distributing Test Functions to Multiple Machines ##
+Djula
+do-access, do-set-access
+Docs
+Documentation
+Documentation for previous releases
+[Documentation](http://momentjs.com/docs/)
+Does Google Test support running tests in parallel? ##
+DOM Level 3 Core Specification v1.0
+Donate
+dot
+Dots
+DOT syntax
+Double-conversion License
+Double-conversion v1.1.5
+Download
+Download latest version from [project homepage](http://vitalets.github.io/angular-xeditable).
+DRAKMA - http client written in Common Lisp
+Dynalink License
+Dynalink v.5
+dynamic-mixins
+Earlier implementation of CL-MESSAGEPACK
+Eastman Kodak Company: Kodak Color Management System (kcms) and portions of color management and imaging software
+Eastman Kodak Notice
+easy to do.
+Edit distance
+Edit in place for AnguarJS
+Emitting
+Empty Sets
+Enable TSO (TCP segmentation offload)
+Encoding/decoding speed
+ENDIANNESS
+EQ, EQL, EQUAL, EQUALP
+equalper
+Error handling
+Errors
+even easier to manipulate text in Common Lisp.  
+Events
+Examining the distribution
+example
+Example
+Example Integrations
+Example Requests
+Examples
+Examples ##
+Examples:
+examples include IO errors, where a connected machine or network link is
+Exception Assertions ##
+Expectation Order #
+Expecting Ordered Calls ##
+Expecting Partially Ordered Calls ##
+Explaining
+Explicitly not supported
+Explicit Success and Failure ##
+Exported features
+Exported from package `ANAPHORA-BASIC`
+Exported from package `ANAPHORA-SYMBOL`
+Extended Types
+Extending Google Mock #
+Extending Google Test by Handling Test Events #
+Extending Plump
+Extending Verbose
+Extension Points
+extensions
+Extensions
+Extensions:
+Extensions to the Message Pack specification
+Failed to resolve libgtest.so.0 in tests when built against installed Google Test ##
+FAQ (imaginary)
+fast-io
+Features
+Features ##
+Features ###
+file: <java-home>/lib/security/public_suffix_list.dat. The terms of the
+FileStore
+Filters
+Final thoughts
+Finding collocations
+fitness for a particular purpose. This software is provided "AS IS", and you,
+Flags #
+Flash socket policy file
+flipNegate
+Floating-Point Comparison ##
+Floating-Point Macros ###
+Floating-Point Matchers ##
+Floating-Point Predicate-Format Functions ###
+flush()
+Fontconfig License
+Fontconfig v2.5
+For Bootstrap specifically
+Forcing a Verification ##
+ * For conditions of distribution and use, see the accompanying README file.
+Formatting
+For some extra controls (e.g. datepicker) you may need to include [angular-ui bootstrap](http://angular-ui.github.io/bootstrap/).
+For themes you may need to include [Twitter Bootstrap](http://getbootstrap.com) CSS.  
+freebxml: Copyright (c) 2001 freebxml.org. All rights reserved.
+freebXML License v1.1.5
+freebXML v3.1
+[From the README file]
+fs-watcher
+[Function] and-pattern-subpatterns
+[Function] %assoc
+[Function] assoc-pattern-item
+[Function] assoc-pattern-key
+[Function] assoc-pattern-test
+[Function] assoc-pattern-value-pattern
+[Function] check-patterns
+[Function] class-pattern-class-name
+[Function] class-pattern-slot-names
+[Function] class-pattern-subpatterns
+[Function] complex-pattern-subpatterns
+[Function] cons-pattern-car-pattern
+[Function] cons-pattern-cdr-pattern
+[Function] constant-pattern-value
+[Function] constructor-pattern-arity
+[Function] constructor-pattern-destructor-sharable-p
+[Function] constructor-pattern-make-destructor
+[Function] constructor-pattern-subpatterns
+[Function] destructor-accessor-forms
+[Function] %equal
+[Function] %get-property
+[Function] guard-pattern-subpattern
+[Function] guard-pattern-test-form
+[Function] lift-guard-patterns
+[Function] make-and-pattern
+[Function] make-assoc-pattern
+[Function] make-class-pattern
+[Function] make-cons-pattern
+[Function] make-constant-pattern
+[Function] make-destructor
+[Function] make-guard-pattern
+[Function] make-not-pattern
+[Function] make-or-pattern
+[Function] make-place-pattern
+[Function] make-property-pattern
+[Function] make-simple-vector-pattern
+[Function] make-structure-pattern
+[Function] make-variable-pattern
+[Function] make-vector-pattern
+[Function] match-error-patterns
+[Function] match-error-values
+[Function] not-pattern-subpattern
+[Function] or-pattern-subpatterns
+[Function] parse-constructor-pattern
+[Function] parse-pattern
+function passing in the object if it seems like that will work
+[Function] pattern-expand
+[Function] pattern-expand-1
+[Function] pattern-expand-all
+[Function] pattern-expand-function
+[Function] pattern-variables
+[Function] place-pattern-included-p
+[Function] place-pattern-name
+[Function] property-pattern-item
+[Function] property-pattern-value-pattern
+Function reference
+Functions
+[Function] simple-vector-pattern-subpatterns
+[Function] structure-pattern-conc-name
+[Function] structure-pattern-slot-names
+[Function] structure-pattern-subpatterns
+[Function] %svref
+[Function] unparse-pattern
+[Function] variable-pattern-name
+[Function] vector-pattern-subpatterns
+Fusing Google Mock Source Files ##
+Fusing Google Test Source Files #
+Future Features
+Future Improvements ##
+Gaining Super Vision into Mock Calls ##
+General Syntax ##
+General Use
+Generate usable Markdown documentation for Common Lisp systems
+Generating an XML Report ###
+Generating a source map
+Generating Failures in Listeners ##
+Generic Build Instructions ###
+Generic Comparison ##
+get(key[, default])
+Get Started
+Get the Source #
+Getting started
+Getting Started
+Getting Started #
+Getting Started ##
+Getting the Current Test's Name #
+getTTL(key)
+GIFLIB License
+GIFLIB v5.1.4
+Git workflow for SBCL
+Given an object and a function / funcation-name, this will call the
+Glib Notice
+Glob
+Global Set-Up and Tear-Down #
+glob.hasMagic(pattern, [options])
+glob(pattern, [options], cb)
+Glob Primer
+glob.sync(pattern, [options])
+Gloo
+Gloo asserts unexpected errors and logical invariants instead of expecting
+Gloo defines two groups of exceptions for raising errors: recoverable errors and
+Gloo documentation
+Gloo includes several collective algorithm implementations that work directly with NVIDIA GPU buffers. These take advantage of overlapping host and GPU operations to decrease overall latency.
+Gloo leverages CUDA streams to sequence operations on a single GPU device without blocking other concurrent activity. Before calling any of the gloo collective functions that operate on GPU buffers, the calling code should
+Gloo throws exceptions for potentially recoverable errors. The most common
+GNU Glib v2.42.1
+                  GNU LESSER GENERAL PUBLIC LICENSE
+Go
+Go (GOMAXPROCS=4)
+Goodies
+Google Mock ##
+Google Mock Committers ##
+Google Mock prints a warning when a function without EXPECT\_CALL is called, even if I have set its behavior using ON\_CALL.  Would it be reasonable not to show the warning in this case? ##
+Google Test #
+Google Test Committers ##
+Google Test defines a macro that clashes with one defined by another library. How do I deal with that? ##
+Google Test uses parts of the standard C++ library that SunStudio does not support.
+Grammar ##
+`grunt dist` creates the `/dist` directory with compiled files. **Uses [Less](http://lesscss.org/) and [UglifyJS](http://lisperator.net/uglifyjs/).**
+GStreamer Notice
+GStreamer v1.4.4
+Guard-Pattern
+Handling of numbers
+Harfbuzz License
+Harfbuzz v1.3.0
+HashStore
+has-slot?, has-reader?, has-writer?
+Have you read a
+Header List
+headers
+.help()
+Helper
+Helpful links:
+High level interface
+High-Level Overview
+Highlights ##
+History
+History of changes
+Hosting via Github Pages
+How am I supposed to make sense of these horrible template errors? ##
+How can I assert that a function is NEVER called? ##
+How can I delete the mock function's argument in an action? ##
+How can my code detect if it is running in a test? ##
+How do I build Google Testing Framework with Xcode 4? ##
+How do I generate 64-bit binaries on Windows (using Visual Studio 2008)? ##
+How do I jump to the line of a failure in Emacs directly? ##
+How do I suppress the memory leak messages on Windows? ##
+How do I test a file that defines main()? ##
+How do I test private class members without writing FRIEND\_TEST()s? ##
+How do I test private class static members without writing FRIEND\_TEST()s? ##
+How do i use it?
+How fast?
+How it works
+How It Works ##
+How To
+How to build WebSocketMain.swf
+How to Define It ##
+How to host HTML file and SWF file in different domains
+How to start working with CL-NLP
+How to try the sample
+How to use
+How to use it in your application
+How to use lisp-unit
+How to Write a Death Test ##
+How to Write Value-Parameterized Tests ##
+http://hassanjamilahmad.blogspot.com/2009/07/gtest-starters-help.html.
+http://jquery.com/
+http://jsfiddle.net/NfPcH/3  
+http://plnkr.co/edit/BjWwXIlYyyLvRnVwO8m8?p=preview
+Hunchentoot (Common Lisp)
+Hunchentoot (multi-threaded-taskmaster)
+HUNCH streamlines simple web apps deployment with HUNCHENTOOT
+IAIK (Institute for Applied Information Processing and Communication) PKCS#11 wrapper files v1
+IAIK License
+I am building my project with Google Test in Visual Studio and all I'm getting is a bunch of linker errors (or warnings). Help! ##
+I am seeing compile errors mentioning std::type\_traits when I try to use Google Test on Solaris. ##
+IBM International Components for Unicode (ICU4C) v51.2
+I can't figure out why Google Mock thinks my expectations are not satisfied.  What should I do? ##
+ICU4J License
+ICU License
+ICU License - ICU 1.8.1 and later
+IDNA - International Domain Name functions for Common Lisp.
+IEEE Floating Point Support
+If you are lucky, the mocks you need to use have already been implemented by some nice people. If, however, you find yourself in the position to write a mock class, relax - Google Mock turns this task into a fun game! (Well, almost.)
+If you do not wish to use the Public Suffix List, you may remove the
+If you put your tests in a static library (not DLL) then `__declspec(dllexport)` is not required. Now, in your main program, write a code that invokes that function:
+If you put your tests into a library and your `main()` function is in a different library or in your .exe file, those tests will not run. The reason is a [bug](https://connect.microsoft.com/feedback/viewfeedback.aspx?FeedbackID=244410&siteid=210) in Visual C++. When you define your tests, Google Test creates certain static objects to register them. These objects are not referenced from elsewhere but their constructors are still supposed to run. When Visual C++ linker sees that nothing in the library is referenced from other places it throws the library out. You have to reference your library with tests from your main program to keep the linker from discarding it. Here is how to do it. Somewhere in your library code declare a function:
+If you want to use something other than Google Test (e.g. [CppUnit](http://apps.sourceforge.net/mediawiki/cppunit/index.php?title=Main_Page) or
+If you want to use something other than Google Test (e.g. [CppUnit](http://sourceforge.net/projects/cppunit/) or
+I get a heap check failure when using a mock object, but using a real object is fine.  What can be wrong? ##
+Ignoring an Action's Result ##
+Ignoring Arguments in Action Functions ##
+Ignoring Uninteresting Calls ##
+I got a warning "Uninteresting function call encountered - default action taken.."  Should I panic? ##
+I have a failed test where Google Mock tells me TWICE that a particular expectation is not satisfied.  Isn't this redundant? ##
+I have a fixture class Foo, but TEST\_F(Foo, Bar) gives me error "no matching function for call to Foo::Foo()". Why? ##
+I have a huge mock class, and Microsoft Visual C++ runs out of memory when compiling it.  What can I do? ##
+I have an interface that has several implementations. Can I write a set of tests once and repeat them over all the implementations? ##
+I have several test cases which share the same test fixture logic, do I have to define a new test fixture class for each of them? This seems pretty tedious. ##
+IJG License
+I'm getting warnings when compiling Google Test.  Would you fix them? ##
+Implementation details
+Implementing the examples
+Important note for Visual C++ users ##
+I'm using the set-argument-pointee action, and the compiler complains about "conflicting return type specified".  What does it mean? ##
+in a bad state, but the local machine is operational. The caller, with
+In addition to the core functionality, pybind11 provides some extra goodies:
+Included in contrib (RUTILSX)
+Included in core
+Independent JPEG Group (IJG) JPEG v7
+Independent JPEG Group: JPEG release 6b
+In detail
+index()
+Index
+Indexes
+index.html
+Index Template Variables
+Informative References
+In general
+In Google Mock we use the `EXPECT_CALL()` macro to set an expectation on a mock method. The general syntax is:
+In order to accept your pull request, we need you to submit a CLA. You only need
+Insecure Transports
+Inspired by http://codeseven.github.io/toastr/demo.html.
+install
+Install
+Installasion
+Installation
+Installation Notes
+Install Grunt
+Installing
+Installing via Quicklisp
+Intermezzo II, Variables provided by Coleslaw
+Intermezzo I, The Templating Language
+Internals
+International Components for Unicode (ICU4J) v56.1
+In the Browser
+int main(int argc, char** argv) {
+int PullInMyLibrary();
+Intro
+Introduction
+Introduction #
+Introduction: Why Google C++ Testing Framework? #
+Invoking a Function/Method/Functor Without Arguments ##
+Invoking an Argument of the Mock Function ##
+Invoking the Tests #
+I put my tests in a library and Google Test doesn't run them. What's happening? ##
+Is it OK if I have two separate `TEST(Foo, Bar)` test methods defined in different namespaces? ##
+Issue description
+Issues
+It has 100% test coverage and works at least on sbcl, ecl, ccl, abcl and clisp.
+It is based on ideas of [x-editable](http://vitalets.github.io/x-editable) but was written from scratch
+its user, assume the entire risk as to its quality and accuracy.
+I want to define a custom action.  Should I use Invoke() or implement the action interface? ##
+I want to use Google Test with Visual Studio but don't know where to start. ##
+I would like to run a test several times with different parameters. Do I need to write several similar copies of it? ##
+I wrote some matchers.  After I upgraded to a new version of Google Mock, they no longer compile.  What's going on? ##
+JLine License
+JLine v2.12.1
+Jonathan
+jopt-simple v4.6
+JPEG License
+jQuery License
+jQuery v 1.10.2
+jQuery v1.20.2
+JRuby Joni v1.1.9
+JRuby License
+jsFiddle / Plunker
+json-streams
+jStorage
+JSZip v2.5.0
+Keyboard Support ###
+keyId
+Khronos Group License
+Khronos Group OpenGL Headers v2.1
+Knowing When to Expect ##
+Known Limitations #
+Known problems
+Language Modeling
+Latency optimization
+Latest Release: 4.2.0
+LaTeX via Mathjax
+LCMS License
+learn about it [here](https://www.quicklisp.org/beta/).
+Legacy Build Scripts ###
+Lemmatization
+Let's look at an example. Suppose you are developing a graphics program that relies on a LOGO-like API for drawing. How would you test that it does the right thing? Well, you can run it and compare the screen with a golden screen snapshot, but let's admit it: tests like this are expensive to run and fragile (What if you just upgraded to a shiny new graphics card that has better anti-aliasing? Suddenly you have to update all your golden images.). It would be too painful if all your tests are like this. Fortunately, you learned about Dependency Injection and know the right thing to do: instead of having your application talk to the drawing API directly, wrap the API in an interface (say, `Turtle`) and code to that interface:
+Letting Another Testing Framework Drive ###
+LEV
+LGPL 2.1
+LibFFI License
+LibFFI v3.2.1
+libpng License
+libpng v1.6.23
+libxml2 License
+libxslt License
+Licence
+license
+License
+License 
+licensed under the following license, separately from the Oracle programs
+Licensing ##
+LIFT - the LIsp Framework for Testing
+Like dissolves like
+Limitations
+Limitations/differences compared to native WebSocket
+Links
+Linux Requirements ###
+Linux Requirements ####
+Lisp code file structure
+lisp-unit
+LIST
+LIST*
+listenKeyChange(key, callback)
+Listing Test Names ###
+Little Color Management System (LCMS) v2.8
+Load angular-underscore
+Load API only
+Load filters only
+Load specific feature only
+Load whole stuff
+Local build
+Logging Additional Information #
+[`logging.h`](../gloo/common/logging.h)
+lparallel
+Mac OS X Requirements ###
+Mac OS X Requirements ####
+[Macro] cmatch
+[Macro] defpattern
+[Macro] ematch
+[Macro] %equals
+[Macro] fail
+[Macro] if-match
+[Macro] lambda-cmatch
+[Macro] lambda-cmatch1
+[Macro] lambda-ematch
+[Macro] lambda-ematch1
+[Macro] lambda-match
+[Macro] lambda-match1
+[Macro] let-match
+[Macro] let-match*
+[Macro] let-match1
+[Macro] match
+[Macro] multiple-value-cmatch
+[Macro] multiple-value-ematch
+[Macro] multiple-value-match
+Macros for Defining Actions #
+Macros for Defining Matchers #
+[Macro] unless-match
+[Macro] when-match
+Make a Test Target #
+Making a release (release.sh)
+Making the Compilation Faster ##
+Manual
+#### Manual
+Many people are in your position and one of the posted his solution to
+matchBase
+Matchers #
+Matchers as Predicates ##
+Matchers as Test Assertions ##
+Matchers: What Arguments Do We Expect? ##
+Matching Arguments that Are Not Copyable ##
+Matching Argument Values Exactly ##
+Matching Containers ##
+Matching Multiple Arguments as a Whole ##
+Matching the Result of a Function or Functor ##
+MAT Manual
+Member Matchers ##
+Merits
+Mesa 3-D Graphics Library v4.1
+Mesa License
+Methods
+MGL
+Millisecond diff
+minimatch
+Minimatch Class
+minimatch.filter(pattern, options)
+minimatch.makeRe(pattern, options)
+minimatch.match(list, pattern, options)
+minimatch(path, pattern, options)
+Misc Recipes on Using Google Mock #
+MIT
+MIT License
+mkdirp
+Mock Classes #
+Mocking a Class Template ##
+Mocking a Normal Class ##
+Mocking Class Templates ##
+Mocking Destructors ##
+Mocking Free Functions ##
+Mocking Methods That Use Move-Only Types ##
+Mocking Nonvirtual Methods ##
+Mocking Overloaded Methods ##
+Mocking Private or Protected Methods ##
+Mocking Side Effects ##
+MOCK\_METHODn()'s second argument looks funny.  Why don't you use the MOCK\_METHODn(Method, return\_type, arg\_1, ..., arg\_n) syntax? ##
+More Assertions #
+Morphology
+Motivation
+Mozilla ECC Notice
+Mozilla Elliptic Curve Cryptography (ECC)
+Mozilla Public License 2.0, separately from the Oracle programs you receive.
+Mozilla Public License Version 2.0
+Mozilla Public Suffix List
+MPL v2.0
+MSVC gives me warning C4301 or C4373 when I define a mock method with a const parameter.  Why? ##
+Multiargument Matchers ##
+Multi-byte and Endianness
+Multiple & Named Views
+Multi-threaded Tests ###
+multi-threading
+multi-threading is supported. I've found that as of now (2010-10-23)
+My code calls a static/global function.  Can I mock it? ##
+My compiler complains about "ignoring return value" when I call RUN\_ALL\_TESTS(). Why? ##
+My compiler complains that a constructor (or destructor) cannot return a value. What's going on? ##
+My compiler complains "void value not ignored as it ought to be." What does this mean? ##
+My death test hangs (or seg-faults). How do I fix it? ##
+My death test modifies some state, but the change seems lost after the death test finishes. Why? ##
+My mock object needs to do complex stuff.  It's a lot of pain to specify the actions.  Google Mock sucks! ##
+My question is not covered in your FAQ! ##
+My question is not in your FAQ! ##
+My set-up function is not called. Why? ##
+Naive Bayes classification
+Named Readtables Manual
+Namespace of elements and attributes
+Naming Convention
+Native, lightweight directives
+NB!
+NCCL
+Negation
+Nested States & Views
+New Build system
+new glob.Glob(pattern, [options], [cb])
+News
+new SourceMapConsumer(rawSourceMap)
+new SourceMapGenerator([startOfSourceMap])
+new SourceNode([line, column, source[, chunk[, name]]])
+Ngram-based classification
+Ngrams
+Nice Mocks and Strict Mocks ##
+NLTK 1.3 - Computing with Language: Simple Statistics
+NLTK 2.1 - Working with Text Corpora
+NLTK 2.2 - Conditional Frequency Distributions
+NLTK - Computing with Language: Texts and Words
+NLTK - Working with Wordnet
+nobrace
+nocase
+nocomment
+Node
+Node.js http module
+Node.js http module (4 cluster)
+node-uuid Benchmarks
+noext
+noglobstar
+Nonces
+nonegate
+Non-support of :external-format
+nonull
+Normative References
+Note on adding links
+Note on Style Sheets (css)
+Notes
+Notes on weird types
+Not implemented
+Not-Pattern
+Now let's do a quick quiz to see how well you can use this mock stuff already. How would you test that the turtle is asked to go to the origin _exactly twice_ (you want to ignore any other instructions it receives)?
+[![NPM](https://nodei.co/npm-dl/iconv-lite.png)](https://nodei.co/npm/iconv-lite/)
+NUMA locality
+Nutshell
+NVIDIA GPU support
+object code in the JavaFX runtime or JavaFX SDK. The terms of the
+Obtaining code
+Octets
+Once you have a mock class, using it is easy. The typical work flow is:
+Only compile CSS and JavaScript - `grunt dist`
+OPERATING SYSTEM
+Optional
+Option parsing
+Options
+Oracle license do NOT apply to the GNU Glib, Version: 2.42.1; it is
+Oracle license do NOT apply to the GStreamer, Version: 1.4.4; it is
+Oracle license do NOT apply to the WebKit; it is
+Oracle license do NOT apply to this file; it is licensed under the
+Order and Precedence
+Ordered vs Unordered Calls ##
+Organizational notes
+Original
+Or-Pattern
+Other corpora
+Other notes
+Other Options
+Other uses of ngrams
+Our Solution #
+Our users reported success using alternative implementations. Try running the build after runing this commad:
+Outline structure
+.outputHelp()
+Overall Structure
+Overlapping calls to `cudaMalloc()` or `cudaFree()` may result in deadlock. Gloo and any calling code must coordinate memory allocations. Calling code should
+Overloading Actions ###
+Overview
+Overview ###
+Pagebreak characters (^L)
+Pager Settings ###
+Pagination Settings ###
+pairwise_exchange
+Pako License
+Pako v1.0
+Parameterized actions ##
+Parsing
+Parsing and writing using an unambigious s-expression notation
+Parsing Arrays
+Parsing Objects
+Parting words
+.password(msg[, mask], fn)
+[Pattern] alist
+[Pattern] plist
+[Pattern] ppcre
+PAX Manual
+PC/SC Lite for Suse Linux v1.1.1
+PC/SC Lite License
+Performing Different Actions Based on the Arguments ##
+Permission is hereby granted, free of charge, to any person obtaining a copy of
+Philosophy
+Phonetics
+Pipelining
+PKCS #11 Cryptographic Token Interface License
+PKCS #11 Cryptographic Token Interface v2.20 Amendment 3 Header Files
+Place-Pattern
+Plain-text
+Plans:
+Platforms ##
+Please Be Friendly ###
+Please refer to [this
+Please use these live templates when creating issues:  
+plist-val, rem-plist-val, set-plist-val
+Plump's Lexer
+Pointer Matchers ##
+Popup Settings ###
+Portions Copyright Eastman Kodak Company 1991-2003
+    Portions of this software were originally based on the following:
+possible.
+POS tagging
+posts directory
+Post Template Variable
+Predicate Assertions for Better Error Messages ##
+#### Prepare your environment
+Prepare your environment
+Preparing to Build (Unix only) ####
+Private Class Members ##
+Problem ##
+Processing corpora
+Processing the NPS Chat corpus
+Processing the Penn Treebank
+Processing the Reuters corpus
+`<progressbar>` ####
+Project philosophy
+.prompt(msg, fn)
+Propagating Fatal Failures ##
+Properties
+PROPERTY
+Proxy support
+Public Suffix Notice
+publish(channel, payload)
+PubSub
+Pull requests
+Pull Requests
+Pull requests are the way to go here. I apologise in advance for the slow action on pull requests and issues. I only have two rules for submitting a pull request: match the naming convention (camelCase, categorised [fades, bounces, etc]) and let us see a demo of submitted animations in a [pen](http://codepen.io). That last one is important.
+pybind11 can map the following core C++ features to Python
+pybind11 — Seamless operability between C++11 and Python
+qs
+Quality and stability
+QUICKDEP gets ASDF systems from various places
+Quick Examples
+Quickstart
+Quick start
+Quick Start #
+Race Conditions
+`<rating>` ####
+Rationale for REASONABLE-UTILITIES
+Readability.js
+readable-stream
+Reading and Writing
+README contains outdated information on Google Mock's compatibility with other testing frameworks ##
+Read `s3_cache.py`'s source code and Bootstrap's `.travis.yml` for how to invoke and make use of `s3_cache.py`.
+Real Examples ##
+Recoverable errors
+RedisStore
+References
+Reformat
+Regenerating Source Files ##
+Regular Expression Syntax ##
+reInit()
+Related Open Source Projects ##
+Related Repositories
+Related Work ##
+RelaxNG Datatype
+RelaxNG Datatype License
+RelaxNG Object Model/Parser License
+RelaxNG Object Model/Parser v20061207
+Release
+Release Process #
+Releases
+Remarks on licensing
+Remember that a mock object doesn't really have a working implementation? We as users have to tell it what to do when a method is invoked. This is easy in Google Mock.
+Rendezvous
+Repeating the Tests ##
+Report an Issue
+Reporting bugs
+Reproducible example code
+Required Headers to Sign
+Requirements
+Requirements ##
+Requirements for Contributors ###
+Requirements for End Users ###
+Resources
+Restricting the Type of an Argument or Parameter ###
+Restricting the Type of an Argument or Parameter in an ACTION ##
+ReStructuredText
+Results
+Returning a Value ##
+Returning Live Values from Mock Methods ##
+Returning References from Mock Methods ##
+rimraf.sync
+Roadmap
+Rules
+Run `grunt` to run tests locally and compile the CSS and JavaScript into `/dist`. **Uses [Less](http://lesscss.org/) and [UglifyJS](http://lisperator.net/uglifyjs/).**
+Running
+Running as a Docker
+Running as a service
+Running a Subset of the Tests ###
+Running documentation locally
+Running NLTK's examples
+Running Test Programs: Advanced Options #
+Running tests
+Running Tests [![Build Status](https://api.travis-ci.org/makeusabrew/bootbox.png)](http://travis-ci.org/makeusabrew/bootbox)
+Running Tests in Emacs ##
+Runs [JSHint](http://jshint.com) and [QUnit](http://qunitjs.com/) tests headlessly in [PhantomJS](http://phantomjs.org/) (used for CI).
+Run them yourself
+RUTILS is a syntactic utilities package for Common Lisp
+`s3_cache.py` is used to cache the npm packages that our Grunt tasks depend on and the RubyGems that Jekyll depends on. (Jekyll is needed to compile our docs to HTML so that we can run them thru an HTML5 validator.)
+`s3_cache.py` is used to speed up Bootstrap's Travis builds. Installing npm packages and RubyGems used to take up a significant fraction of our total build times. Also, at the time that `s3_cache.py` was written, npm was occasionally unreliable.
+`s3_cache.py` maintains a cache, stored in an Amazon S3 (Simple Storage Service) bucket, of a given directory whose contents are considered non-critical and are completely & solely determined by (and should be able to be regenerated from) a single given file.
+S3 Hosting
+Sample Data
+SATISFIES
+sbcl on mac osx doesn't support multithreading out of the box. So
+Security Considerations
+see also
+See Also
+See Also:
+Selecting an Action's Arguments ##
+Selecting Between Overloaded Functions ##
+Selecting Tests ##
+[![Selenium Test Status](https://saucelabs.com/browser-matrix/bootstrap.svg)](https://saucelabs.com/u/bootstrap)
+Self-testing
+Sentence splitting
+Sequences ##
+Serializing GPU device operations
+Server side setup:
+set(key, value[, options])
+Setting Default Actions #
+Setting Expectations #
+Settings ###
+Setting the Default Actions for a Mock Method ##
+Setting the Default Value for a Return Type ##
+Setting up a New Test Project #
+Setting up texts for processing
+setTTL(key, ttl)
+Setup
+Setup ####
+Set Up the Executable Run Environment #
+Sharing Actions ##
+Sharing Matchers ##
+Sharing Resources Between Tests in the Same Test Case #
+Short history
+Should I use the constructor/destructor of the test fixture or the set-up/tear-down function? ##
+SHOULD-TEST - a Common Lisp Testing Library
+Shuffling the Tests ##
+Side Effects ##
+Signal handling
+signature
+Signature Authentication Scheme
+Signature Parameters
+Significance:
+Signing Algorithms
+Signing String Composition
+Similarity measures
+Simple Tests #
+SIMPLE-VECTOR
+Simplifying the Interface without Breaking Existing Code ##
+Sitemap generator
+Software
+Solution ##
+so, subject to the following conditions:
+Source Map
+SourceMapConsumer
+SourceMapConsumer.prototype.allGeneratedPositionsFor(originalPosition)
+SourceMapConsumer.prototype.computeColumnSpans()
+SourceMapConsumer.prototype.eachMapping(callback, context, order)
+SourceMapConsumer.prototype.generatedPositionFor(originalPosition)
+SourceMapConsumer.prototype.originalPositionFor(generatedPosition)
+SourceMapConsumer.prototype.sourceContentFor(source[, returnNullOnMissing])
+SourceMapGenerator
+SourceMapGenerator.fromSourceMap(sourceMapConsumer)
+SourceMapGenerator.prototype.addMapping(mapping)
+SourceMapGenerator.prototype.applySourceMap(sourceMapConsumer[, sourceFile[, sourceMapPath]])
+SourceMapGenerator.prototype.setSourceContent(sourceFile, sourceContent)
+SourceMapGenerator.prototype.toString()
+SourceNode
+SourceNode.fromStringWithSourceMap(code, sourceMapConsumer[, relativePath])
+SourceNode.prototype.add(chunk)
+SourceNode.prototype.join(sep)
+SourceNode.prototype.prepend(chunk)
+SourceNode.prototype.replaceRight(pattern, replacement)
+SourceNode.prototype.setSourceContent(sourceFile, sourceContent)
+SourceNode.prototype.toString()
+SourceNode.prototype.toStringWithSourceMap([startOfSourceMap])
+SourceNode.prototype.walk(fn)
+SourceNode.prototype.walkSourceContents(fn)
+Sources for custom types
+So, why `RUTILS`?
+Special features (on top of basic features)
+Specifying Calling Conventions for Mock Functions ##
+Speed
+Stacked ###
+Start a server
+Start with Clack
+static directory (optional)
+Static Functions ##
+static int dummy = PullInMyLibrary();
+Static Vectors
+Status
+Stemming
+Step 1. Create the directory.
+Step 2. Create the templates.
+Step 3. Use it in your config.
+Step 4. Include the content
+stopListening(key[, callback])
+storageAvailable()
+storageSize()
+Streaming interface for output
+Streams
+String Comparison ##
+Stringifying
+String Matchers ##
+STRUCTURE
+Submitting bug reports
+Submitting Patches ##
+Submitting Pull Requests
+subscribe(channel, callback)
+Such technique is also known as *click-to-edit* or *edit-in-place*.  
+Suggested replacements
+Summary #
+Support
+Supported browsers
+Supported compilers
+Supported encodings
+Supported environments
+Supported Platforms
+Supporting Wordnet interaction
+Suppressing Pop-ups Caused by Exceptions ###
+Suppressing the Elapsed Time ###
+SVM classification
+Switch to ngdocs
+Symbol-macro anaphora
+Synchronizing GPU memory allocation
+$ syntax
+Syntax
+`<tab>` ####
+Table of contents
+Table of Contents
+Tables - Immutable hash-tables with literal syntax
+`<tabset>` ####
+tag directory
+Take what you need and not more
+Target test code (using Mocha in this example)
+Target test code (using QUnit in this example)
+TBD
+TCP tuning
+TDD
+Teaching Google Mock How to Print Your Values ##
+Teaching Google Test How to Print Your Values #
+Technical notes
+Temporarily Disabling Tests ###
+Temporarily Enabling Disabled Tests ###
+Test coverage
+  (tested with Redis version 3.0.0 (2.9.104 to be precise))
+Test Fixtures: Using the Same Data Configuration for Multiple Tests #
+Testing
+Testing ##
+Testing a Certain Property of an Object ##
+Testing Google Mock Itself ####
+Testing Google Test Itself ###
+Testing Private Code #
+tests
+Tests
+Tests failing on machines using Power PC CPUs (e.g. some Macs) ##
+Tests - `grunt test`
+Test suite
+Test Suite
+Text language identification using Wikipedia data
+Thai Dictionary
+Thai Dictionary License
+The After Clause ##
+[The API](http://redlinernotes.com/docs/colorize.html) has three main entry points:
+The DOM
+The Google Mock Community ##
+The Google Test Community ##
+The Google Test output is buried in a whole bunch of log messages. What do I do? ##
+the Google Test Primer page?
+The library currently supports:
+Themes
+Theming
+The "newer expectations override older ones" rule makes writing expectations awkward.  Why does Google Mock do that? ##
+The Nice, the Strict, and the Naggy ##
+The Post Format
+The Problem #
+The Problem:
+The SLIME Hacker's Handbook
+the Software without restriction, including without limitation the rights to
+The Solution:
+The streaming interface
+The watch function
+This connects to the test database on the local mongo server listening on its default port.
+ * This file is part of the Independent JPEG Group's software.
+This is a convenience method for watching just Less files and automatically building them whenever you save.
+This is a fork of arnesi utilities suite
+this library:
+    This product includes software developed at
+This section assumes you use quicklisp. If you don't, you should! Download and
+this software and associated documentation files (the "Software"), to deal in
+This software is present only on Mac OS X systems.
+This will keep your tests referenced and will make them register themselves at startup.
+This will start Karma server and will continuously watch files in the project, executing tests upon every change.
+Tips ##
+TL;DR
+TODO
+to do this once to work on any of Facebook's open source projects.
+to-json
+Tokenization
+Tokenizer
+Tokens
+Tornado (PyPy)
+Tornado (Python)
+to use power of angular and support complex forms / editable grids.
+Transport structure
+trivial-ssh
+Troubleshooting
+Troubleshooting dependencies
+Turning Assertion Failures into Break-Points ###
+Tweaking Google Mock ###
+Tweaking Google Test ###
+Two types of pages
+TYPE
+[Type] and-pattern
+Type Assertions ##
+[Type] assoc-pattern
+[Type] class-pattern
+[Type] complex-pattern
+[Type] cons-pattern
+[Type] constant-pattern
+[Type] constructor-pattern
+[Type] destructor
+Typed Tests #
+[Type] guard-pattern
+Type Mapping
+[Type] match-error
+[Type] not-pattern
+[Type] or-pattern
+Type-Parameterized Tests #
+[Type] place-pattern
+[Type] property-pattern
+[Type] simple-vector-pattern
+[Type] structure-pattern
+[Type] variable-pattern
+[Type] vector-pattern
+Understanding Uninteresting vs Unexpected Calls ##
+under the LICENSE file in the root directory of this source tree.
+Unicode Common Local Data Repository (CLDR) v29
+Unicorn + nginx (Ruby, worker_processes=4)
+Uninteresting Calls ##
+Unix-opts 0.1.0
+Unix-opts 0.1.1
+Unix-opts 0.1.2
+Unix-opts 0.1.5
+Unix-style command line options parser
+Unlike toastr, this library relies on ngAnimate and CSS3 transformations for animations.
+Updating Generated Code ##
+Upgrading from 1.1.0 or Earlier ####
+Upgrading from 1.4.0 or Earlier ####
+Upgrading from an Earlier Version ###
+Upgrading from Verbose 1.x
+Upgrading to 2.0.0
+Usage
+Usage example
+Usage Notes and Limitations
+Usage patterns
+Usage (unicode -> punycode only at the moment):
+Use $animate
+Usecase
+use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
+User and API Documentation
+Using Actions #
+Using a Function or a Functor as an Action ##
+Using a Function That Returns an AssertionResult ###
+Using a key/value store
+Using an Existing Boolean Function ###
+Using a Predicate-Formatter ###
+Using Assertions in Sub-routines #
+Using Check Points ##
+Using CMake ###
+Using corpora
+Using different data sources
+using `espowerify`
+using `espower-loader`
+Using Event Listeners ##
+Using Functions/Methods/Functors as Actions ##
+Using Google Mock and Threads ##
+Using Google Mock is easy! Inside your C++ source file, just `#include` `<gtest/gtest.h>` and `<gmock/gmock.h>`, and you are ready to go.
+Using Google Mock is easy! Inside your C++ source file, just `#include` `"gtest/gtest.h"` and `"gmock/gmock.h"`, and you are ready to go.
+Using Google Mock with Any Testing Framework ##
+Using Google Mock Without Google Test ###
+using `grunt-espower`
+using `gulp-espower`
+Using Matchers #
+Using Matchers as Predicates ##
+Using Matchers in Google Test Assertions ##
+Using Mocks in Tests #
+Using MPI
+Using Multiple Expectations ##
+Using Predicates as Matchers ##
+Using Simple Matchers ##
+Using the ACTION Object's Type ##
+Using the ACTION Object's Type ###
+Using the `Turtle` interface as example, here are the simple steps you need to follow:
+UTF-16 Encodings
+Utilities
+Utils
+Validating a Member of an Object ##
+Validating the Value Pointed to by a Pointer Argument ##
+Value Parameterized Tests #
+Variable-Pattern
+Variant generation
+VECTOR
+Verifying and Resetting a Mock #
+Version
+Version 0.9.5 Features
+Version 1 Remaining Tasks
+Version 3.0. Radical?
+Versioning
+Version numbering
+W3C License
+Warning
+[warning](Primer.md#important-note-for-visual-c-users) on
+[warning](V1_5_Primer.md#important-note-for-visual-c-users) on
+[warning](V1_7_Primer.md#important-note-for-visual-c-users) on
+Watch - `grunt watch`
+We actively welcome your pull requests.
+WebKit Notice
+WebKit Open Source Project: WebKit v604.1
+WebSocket protocol versions
+We use GitHub issues to track public bugs. Please ensure your description is
+We want to make contributing to this project as easy and transparent as
+What?
+What can the statement argument in ASSERT\_DEATH() be? ##
+What does `s3_cache.py` do?
+What files are generated anyway?
+What happens when setting through nil?
+What Is Google C++ Mocking Framework? #
+What is Plump?
+What Now? #
+What's included
+What's inside
+What's missing
+What syntax does the regular expression in ASSERT\_DEATH use? ##
+When I call a method on my mock object, the method for the real object is invoked instead.  What's the problem? ##
+When to Use ##
+When using Google Mock, do I have to use Google Test as the testing framework?  I have my favorite testing framework and don't want to switch. ##
+Where to Discuss Google Mock ###
+Where to Go from Here #
+Where to Put It ##
+Who Is Using Google Test? ##
+Why are death tests implemented as assertions instead of using a test runner? ##
+Why aren't Google Test assertions implemented using exceptions? ##
+Why does ASSERT\_DEATH complain about previous threads that were already joined? ##
+Why does Google Test require the entire test case, instead of individual tests, to be named FOODeathTest when it uses ASSERT\_DEATH? ##
+Why does Google Test support EXPECT\_EQ(NULL, ptr) and ASSERT\_EQ(NULL, ptr) but not EXPECT\_NE(NULL, ptr) and ASSERT\_NE(NULL, ptr)? ##
+Why don't Google Test run the tests in different threads to speed things up? ##
+Why don't we use structs as test fixtures? ##
+Why do we use two different macros for tests with and without fixtures? ##
+Why Google Mock? #
+Why is it not recommended to install a pre-compiled copy of Google Test (for example, into /usr/local)? ##
+Why is `s3_cache.py` necessary?
+Why not cl-ev?
+Why should I prefer test fixtures over global variables? ##
+Why should I use Google Test instead of my favorite C++ testing framework? ##
+Why should not test case names and test names contain underscore? ##
+Wikinews-PP - a multi-language paraphrase DB
+Wildcard ##
+Wildcards
+Windows
+Windows ###
+Windows HRESULT assertions ##
+Windows Requirements ###
+Windows Requirements ####
+with-array
+with-object
+with-output
+with-output-to-string*
+with respect to this software, its quality, accuracy, merchantability, or
+With SourceMapGenerator (low level API)
+With SourceNode (high level API)
+Woo
+Woo (Common Lisp)
+Woo (Common Lisp, worker-num=4)
+Wookie (Common Lisp)
+Wordnet installation
+Wordnet relations
+Wordpress Importer
+Working with texts from various sources
+Working with the Code #
+Working with Wikipedia and Wiktionary
+Writing New Actions Quickly ##
+Writing New Action Templates Quickly ##
+Writing New Cardinalities ##
+Writing New Matchers Quickly ##
+Writing New Monomorphic Actions ##
+Writing New Monomorphic Matchers ##
+Writing New Parameterized Actions Quickly ##
+Writing New Parameterized Matchers Quickly ##
+Writing New Polymorphic Actions ##
+Writing New Polymorphic Matchers ##
+Writing the main() Function #
+Writing the Mock Class #
+Written Offer for Source Code
+xmlsoft.org: libxml2 v2.7.2
+xmlsoft.org: libxslt v1.1.28
+:XMLS or (:XMLS &key namespace comments)
+X Windows System License
+X Windows System v6.8.2
+You are receiving a copy of GNU Glib, Version: 2.42.1 in either source or
+You are receiving a copy of GStreamer, Version: 1.4.4 in either source or
+You are receiving a copy of the Mozilla Public Suffix List in the following
+you'd need to compile a new sbcl with multithreading enabled, which is
+YourCustomStore
+you receive. If you do not wish to install this library, you may delete
+ZeroMQ 4.0 bindings
+zlib License
+zlib v1.2.11
