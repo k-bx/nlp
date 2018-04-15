@@ -14,13 +14,19 @@ extra-source-files:
 dependencies:
   - aeson
   - base >= 4.7 && < 5
+  - cld2
   - rio
+  - http-client
+  - lens
   - optparse-simple
+  - safe
   - scalpel-core
   - string-class
   - text
   - lens-aeson
   - wreq
+  - naiveml
+  - hashable
 
 executables:
   rozetka:
@@ -33,4 +39,6 @@ executables:
       - TemplateHaskell
       - TypeApplications
       - DeriveGeneric
-    ghc-options: -Wall
+      - Strict
+      - ScopedTypeVariables
+    ghc-options: -Wall -O -funbox-strict-fields
